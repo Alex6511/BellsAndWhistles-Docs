@@ -58,7 +58,7 @@ Without the mod, your cars still load, but each car with a [carrier](/BellsAndWh
 
 You don't need a carrier. Without one, the tender bell mirrors the locomotive bell, unless a [legacy marker](#legacy-routing-markers) selects headlight routing.
 
-To choose the routing explicitly, add a `Script` carrier to the tender. A [carrier](/BellsAndWhistles-Docs/authors/#what-a-carrier-is) is a `Script` component whose `scriptAsset` is `alex6511/FlexibleConnector`, `alex6511/TenderBell` or `alex6511/HornSelector`. Its `parameters` hold the settings.
+To choose the routing explicitly, add a `Script` carrier to the tender. The [carrier](/BellsAndWhistles-Docs/authors/#what-a-carrier-is) uses `scriptAsset: "alex6511/TenderBell"`, with its settings under `parameters`.
 
 Put the carrier in the tender's `components`, next to the bell:
 

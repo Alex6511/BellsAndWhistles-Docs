@@ -40,7 +40,7 @@ The tint fades toward the normal brake colour as its brakes apply. Derailed and 
 ## How water moves
 
 - The aux car feeds the car on the locomotive side: the locomotive's tender, or a locomotive that carries the load itself.
-- Several aux cars in a row pass water forward toward the locomotive, never back.
+- Aux cars pass water forward toward the locomotive, never back. The current search checks at most eight cars toward the engine.
 - Transfer continues while the train is out of view.
 - In multiplayer, only the host moves water.
 
@@ -73,7 +73,7 @@ In `Definitions.json`, add this to the aux car's `components`:
 
 It must stay `"enabled": false` here. The game never builds a disabled component, so it never looks for the Bells and Whistles script and never warns when that mod is absent.
 
-`load` is optional and defaults to `rr/water`; any load that your aux car and the receiving tender or locomotive both carry works.
+`load` is optional and defaults to `rr/water`. The script can transfer another shared load, but its Customize panel labels rates in gallons per minute; the quantity arithmetic uses that load's native units. Both cars need compatible slots.
 
 The aux car itself needs a load slot for that load, for example:
 
@@ -103,7 +103,7 @@ In your pack's `Info.json`, add:
 }
 ```
 
-This is only an ordering hint. When Bells and Whistles is not installed, the game skips it silently. Do not list Bells and Whistles under `dependencies`.
+This is only an ordering hint. When Bells and Whistles is not installed, the game skips it silently. This standalone optional water-car pattern needs no B&W dependency. If the same pack imports B&W modules or uses features that require it, declare the required dependency as shown in [For content authors](/BellsAndWhistles-Docs/authors/#set-up-your-packs-infojson).
 
 ### 3. Turn the component on from Data.rl
 
@@ -136,9 +136,9 @@ Replace `your-domain/your-aux-car` with your aux car's identifier. Repeat the `d
 
 For a complete example for one car, see [the Virginian AE aux tender example](/BellsAndWhistles-Docs/aux-tender/example/).
 
-## Compatibility promise
+## Version 1 contract
 
-The contract above is version 1: the script name `alex6511/AuxTender`, the marker `alex6511/aux-tender-api-v1`, and the `load` parameter. A future change that would break opted-in cars will use a new marker and script name, so cars made for version 1 keep working.
+The current contract consists of the script name `alex6511/AuxTender`, the marker `alex6511/aux-tender-api-v1`, and the `load` parameter. Keep this marker check tied to that script contract. Use the [versioned docs](/BellsAndWhistles-Docs/versions/) when targeting a particular release.
 
 ## Limitations
 

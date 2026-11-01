@@ -6,7 +6,7 @@
   "description": "Shows how a pack declares its own component kind for Bells and Whistles to register.",
   "dependencies": {
     "required": [
-      "rr/game",
+      "rr/game >=0.6.2",
       "alex6511/bells-and-whistles >=0.3.0"
     ]
   },

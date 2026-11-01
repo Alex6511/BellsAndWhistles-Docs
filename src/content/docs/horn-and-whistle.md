@@ -21,7 +21,7 @@ On a locomotive with both instruments, the **Customize** window gets a **Horn an
 - If the instrument you picked is switched off, for example by a paint scheme, the other one plays. The section then says so.
 - The game's own **Whistle** and **Horn** sections still choose what each instrument sounds like.
 
-The choice is stored on the locomotive, so it's saved with your game. In multiplayer, it's shared with the other players. Changing it needs the same permission as the game's own horn and whistle settings.
+The choice is stored on the locomotive, so it's saved with your game. In multiplayer, it's shared with the other players. It uses the game's car-property system and its permissions.
 
 ## Give a locomotive both instruments
 
@@ -44,9 +44,9 @@ Add a `Whistle` component and a `Horn` component to the locomotive's definition.
 
 This example uses the 0.6.0 object form of `components`. [Object and array forms of components](/BellsAndWhistles-Docs/authors/#object-and-array-forms-of-components) explains both.
 
-`defaultWhistleIdentifier` and `defaultHornIdentifier` set the sound each instrument starts with. If you leave one empty, the game uses the sound shown in the example. Players can pick other sounds in **Customize**.
+`defaultWhistleIdentifier` and `defaultHornIdentifier` set the sound each instrument starts with. Set both explicitly to the sounds your pack needs. Players can pick other sounds in **Customize**.
 
-Either component can start switched off with `"enabled": false`. A Relay script can switch it on or off later, for example with `car.components["horn"].enabled = true`. A paint scheme can switch off an instrument that starts enabled, but it can't switch on one that starts disabled.
+Either component can start switched off with `"enabled": false`. A Relay script can switch it on or off later, for example with `car.components["horn"].enabled = true`. Paint-scheme visibility follows the game's normal component rules.
 
 The locomotive still gets the **Horn and Whistle** section. While the chosen instrument is switched off, the other one plays.
 

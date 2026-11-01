@@ -60,12 +60,12 @@ This plays the lubricator clip at normal speed at 30 mph and twice as fast at 60
 | `velocity` | 1 | Speed in mph, positive when the car moves toward its F end and negative toward its R end. |
 | `throttle` | 2 | Throttle from 0 to 1. On a steam engine this is the regulator; on a diesel, the notch divided by 8. |
 | `reverser` | 3 | Reverser from -1 to 1. |
-| `fuelConsumption` | 4 | How fast the locomotive is using coal (steam) or fuel (diesel). |
+| `fuelConsumption` | 4 | The steam engine's coal-equivalent demand rate, or the diesel prime mover's fuel rate. This is not an oil/wood load debit. |
 | `waterConsumption` | 5 | How fast a steam engine is using water. |
 
 `throttle`, `reverser`, `fuelConsumption` and `waterConsumption` read 0 when the source car isn't a locomotive. For a part on a tender, set `source` to `locomotive`.
 
-The game doesn't document the units of the fuel and water rates. On a steam engine, the game smooths the coal and water rates over about a second.
+The component reads the engine's native consumption-rate values directly, before B&W's alternative-fuel conversion and fuel-consumption multiplier. Use the firing API when you need oil/wood load units consumed per second; animation keyframes should be tuned for the input actually read.
 
 Start with a keyframe at input 0, such as `{ "input": 0, "output": 0 }`. Then adjust the keyframes by eye in the game.
 
@@ -78,7 +78,7 @@ Start with a keyframe at input 0, such as `{ "input": 0, "output": 0 }`. Then ad
 
 ## Performance and multiplayer
 
-The animation only updates while the car is on screen. Everything it reads is already shared between players, so it adds no network traffic. It hasn't been tested in multiplayer yet.
+The driver reads inputs and adjusts playback while the car is visible. It reads existing game state and introduces no separate animation-state network messages.
 
 ## Examples
 

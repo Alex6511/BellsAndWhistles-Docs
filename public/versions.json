@@ -5,7 +5,7 @@
     "label": "0.3.0 (development)",
     "status": "development",
     "path": "/BellsAndWhistles-Docs/",
-    "railroader": "0.6.0",
+    "railroader": ">=0.6.2 (combined 0.3.0 integration target)",
     "validation": "Tested in-game; confirmed by the maintainer on 2026-11-01."
   },
   "releases": [

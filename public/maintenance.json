@@ -3,14 +3,17 @@
   "reviewedOn": "2026-11-01",
   "maxAgeDays": 30,
   "scope": [
-    "All 13 migrated guides and six downloadable examples checked for content preservation",
-    "Released tag documentation audited separately from development docs",
-    "Navigation, version archives, examples, internal links and search checked in the site build",
-    "Corrected obsolete testing-status claims using the maintainer confirmation; preserved the Railroader 2025.1 and UMM compatibility note."
+    "Reviewed all current guides against the native B&W implementation and the active geared, firing, fuel-service and Relay integrations.",
+    "Retained the maintainer's confirmed in-game testing of 0.3.0 and the exact Railroader 2025.1/UMM compatibility note; removed an unsupported multiplayer-testing statement.",
+    "Corrected dependency scope, carrier coverage, consumption inputs, aux-tender contract wording and the distinction between visual simulation and synchronized controls.",
+    "Documented 0.3.0 development interfaces for geared profiles/audio, oil and wood firing, finite/infinite fuel facilities, authoring helpers, runtime results, observers, units, defaults, authority and persistence.",
+    "Kept historical release content separate from current APIs; checked existing downloadable examples and version navigation."
   ],
-  "runtimeStatus": "B&W 0.3.0 has been tested in-game, as confirmed by the maintainer on 2026-11-01.",
+  "runtimeStatus": "B&W 0.3.0 has been tested in-game, as confirmed by the maintainer on 2026-11-01. This audit does not assign invented per-feature test coverage.",
   "followUp": [
-    "Audit development guides alongside the active mod port before the next release; do not infer support for later Railroader builds."
+    "Before freezing 0.3.0, reconcile the completed package's version, exports and Railroader >=0.6.2 requirement with these development guides.",
+    "Re-audit the new interfaces when integration changes; retain Driven Animation and Horn/Whistle in the combined release.",
+    "Review historical documentation corrections separately as explicit archive errata."
   ],
-  "reviewType": "Source and documentation maintenance audit"
+  "reviewType": "Behavioral source audit, maintainer corrections and active integration review"
 }

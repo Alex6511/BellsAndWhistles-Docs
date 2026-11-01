@@ -17,7 +17,7 @@ Bells and Whistles does the registering. The game itself has no way for a pack t
 A plain `Script` component can do everything a custom kind can do. Choose a custom kind only if the nicer editing is worth these costs:
 
 - **Your pack needs Bells and Whistles.** Without it, the game can't read your `Definitions.json`, so none of your pack's definitions load. A `Script` component, by contrast, loads anywhere and only logs a script error.
-- **No new abilities.** The script can do only what any Relay script can do. It can't create meshes, for example, or drive tender bells.
+- **Same script capabilities.** A custom kind runs a Relay script; registering it does not grant new engine access. Runtime scripts can use the [B&W Relay APIs](/BellsAndWhistles-Docs/relay-api/) for their supported controls, including connectors and locomotive bells.
 - **It may break after a game update.** The game has no public way to add kinds. Bells and Whistles changes some of the game's private lists instead, and a game update can change those. After an update, the mod's maintainers need to check compatibility again.
 - **Kind names are shared by every loaded pack.** Each name must start with your pack's domain, so names from different authors can't clash.
 
@@ -36,7 +36,7 @@ In your pack's `Info.json`, list Bells and Whistles as `required`. Players who d
 
 ```json
 "dependencies": {
-  "required": ["rr/game", "alex6511/bells-and-whistles >=0.3.0"]
+  "required": ["rr/game >=0.6.2", "alex6511/bells-and-whistles >=0.3.0"]
 },
 "exports": {
   "./CarGreeting": "Scripts/CarGreeting.rl"
@@ -183,4 +183,4 @@ You get a warning, but the kind still works, when:
 - Values in a definition must match the setting's type, as with the game's own kinds. For example, `"repeat": 2.5` for a `wholeNumber` setting stops the whole `Definitions.json` from loading.
 - If you remove or rename a setting, existing definitions keep the old value. Saving in the editor keeps it too, but the script no longer receives it.
 - Changes to `ComponentKinds.json` apply the next time the game loads the mod set, for example after a restart.
-- Bells and Whistles' own features read real `Script` components only. A custom kind whose `script` is `alex6511/FlexibleConnector`, for example, does not draw a connector.
+- B&W's native carrier readers require real `Script` components. Giving a custom kind the script `alex6511/FlexibleConnector` does not make it a connector declaration. Use the real carrier, and use the runtime APIs from a separate script when needed.

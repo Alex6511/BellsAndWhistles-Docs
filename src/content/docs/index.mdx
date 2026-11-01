@@ -4,38 +4,44 @@ title: "Bells and Whistles"
 
 import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-Bells and Whistles is a Railroader mod for rolling-stock authors, the people who make locomotives and cars. It rings tender bells, draws hoses and pipes, tops up tenders from auxiliary water cars and animates moving parts. It also lets a locomotive use both a horn and a whistle.
+Bells and Whistles adds rolling-stock features to Railroader: tender bells, flexible hoses and pipes, driven animations, horn/whistle selection and auxiliary water tenders. The combined 0.3.0 release also brings together geared locomotive behavior, oil and wood firing, fuel services and Relay APIs for content authors.
 
-Players install it so that cars which use these features work in their game.
+Players install it for content packs that use these features.
 
 :::note[Version and compatibility]
 
+**These are the development docs for Bells and Whistles 0.3.0.** This version has been tested in-game. Geared Steam, firing, fuel services and the new Relay APIs are being integrated into this release; their guides describe the current development interfaces.
 
-**Bells and Whistles 0.3.0 targets Railroader 0.6.0** and uses the game's native mod system. This version has been tested in-game.
+The combined package is being prepared for **Railroader 0.6.2 or later**, using the game's native mod system.
 
 If you play Railroader 2025.1, this version isn't for you. Bells and Whistles 0.3.0 has no Unity Mod Manager build.
 
-[See what changed in 0.3.0](/BellsAndWhistles-Docs/whats-new/)
+[See what changed in 0.3.0](/BellsAndWhistles-Docs/whats-new/) or choose an older release from the version selector.
 
 :::
 
 ## Get started
 
-1. **Install it.** [Installing Bells and Whistles](/BellsAndWhistles-Docs/installing/) takes three steps.
-2. **Pick a feature.** [For content authors](/BellsAndWhistles-Docs/authors/) lists the features and the `Info.json` entry that each one needs.
-3. **Set it up.** Use [the in-game editor](/BellsAndWhistles-Docs/editor-authoring/), or edit `Definitions.json` as the feature's page shows.
+1. [Install Bells and Whistles](/BellsAndWhistles-Docs/installing/).
+2. [Pick a feature and declare its dependencies](/BellsAndWhistles-Docs/authors/).
+3. Use the feature's examples, [the in-game editor](/BellsAndWhistles-Docs/editor-authoring/) or [Relay authoring helpers](/BellsAndWhistles-Docs/relay-api/).
+4. For existing content, follow [Migrating to 0.3.0](/BellsAndWhistles-Docs/migration/).
 
 ## Features
 
 <CardGrid>
-<LinkCard title="Tender Bells" href="/BellsAndWhistles-Docs/tender-bells/" description="Rings the Bell component on a steam locomotive&#x27;s tender together with the locomotive&#x27;s bell. Optionally, the locomotive&#x27;s headlights pick one bell to ring. With only the rear headlight on, the tender bell rings alone. Otherwise, the locomotive bell rings alone." />
-<LinkCard title="Flexible Connectors" href="/BellsAndWhistles-Docs/flexible-connectors/" description="Draws simulated hoses, cables and semi-rigid pipes between named transforms (named objects in a car&#x27;s model). The two ends can be on the same car or on coupled cars." />
-<LinkCard title="Driven Animation" href="/BellsAndWhistles-Docs/driven-animation/" description="Plays an animation clip driven by a car&#x27;s speed or a locomotive&#x27;s throttle, reverser, fuel use or water use. Use it for parts such as a lubricator arm or a stoker screw." />
-<LinkCard title="Horn and Whistle" href="/BellsAndWhistles-Docs/horn-and-whistle/" description="Lets players choose whether the horn control plays the whistle or the horn on a locomotive that has both, such as a steam engine with an air horn." />
-<LinkCard title="Auxiliary Tenders" href="/BellsAndWhistles-Docs/aux-tender/" description="Keeps a locomotive&#x27;s tender topped up with water from a coupled auxiliary car. Your pack needs no dependency on Bells and Whistles. For players without it, the car works as a plain water car." />
-<LinkCard title="Your own component kinds" href="/BellsAndWhistles-Docs/component-kinds/" description="This prototype lets your pack declare its own component kinds (new values for a component&#x27;s kind, such as acme.SignalLamp) in a ComponentKinds.json file. They work like the game&#x27;s own kinds, but your pack then can&#x27;t load without Bells and Whistles." />
+<LinkCard title="Tender Bells" href="/BellsAndWhistles-Docs/tender-bells/" description="Connect tender-mounted bells to the locomotive's bell control, with optional headlight-based routing." />
+<LinkCard title="Flexible Connectors" href="/BellsAndWhistles-Docs/flexible-connectors/" description="Draw simulated hoses, cables and pipes between transforms on one car or coupled cars." />
+<LinkCard title="Driven Animation" href="/BellsAndWhistles-Docs/driven-animation/" description="Drive animation clips from speed, throttle, reverser or engine consumption rates." />
+<LinkCard title="Horn and Whistle" href="/BellsAndWhistles-Docs/horn-and-whistle/" description="Let players select which instrument the horn control plays on a locomotive with both." />
+<LinkCard title="Auxiliary Tenders" href="/BellsAndWhistles-Docs/aux-tender/" description="Transfer water toward the locomotive from an opted-in auxiliary car." />
+<LinkCard title="Geared Steam" href="/BellsAndWhistles-Docs/geared-steam/" description="Configure geared performance, chuff timing and author-supplied mechanical audio. Being integrated for 0.3.0." />
+<LinkCard title="Oil and wood firing" href="/BellsAndWhistles-Docs/alternative-firing/" description="Declare Bunker-C or wood fuel and compatible fuel/water slots. Being integrated for 0.3.0." />
+<LinkCard title="Fuel storage and outlets" href="/BellsAndWhistles-Docs/fuel-services/" description="Supply authored outlets from native industry stock or an explicitly infinite source. Being integrated for 0.3.0." />
+<LinkCard title="Relay APIs" href="/BellsAndWhistles-Docs/relay-api/" description="Build declarations, inspect feature state, observe changes and use supported controls. Being integrated for 0.3.0." />
+<LinkCard title="Your own component kinds" href="/BellsAndWhistles-Docs/component-kinds/" description="Declare typed component settings and expose your Relay scripts in the editor." />
 </CardGrid>
 
-Tender Bells, Flexible Connectors, Driven Animation and Horn and Whistle only change what you see and hear. They add no brake, steam, water or electrical simulation. Auxiliary Tenders does move water between cars.
+Bells, connectors and driven animations provide sound or visuals. Auxiliary tenders move water; the geared, firing and service integrations also affect gameplay. The combined B&W package participates in multiplayer package/version matching.
 
-Every feature acts only on cars whose definitions opt in.
+Features use the declarations and prerequisites in their guides. Tender bells can follow existing Bell components automatically, and horn/whistle selection applies to locomotives with both instruments.
