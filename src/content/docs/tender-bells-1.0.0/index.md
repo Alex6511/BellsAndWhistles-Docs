@@ -5,7 +5,7 @@ editUrl: false
 
 :::caution[Archived release documentation]
 
-This is the documentation from **v1.0.0** (2026-05-12). Tender Bells is the legacy predecessor, not a newer Bells and Whistles release. These guides use the older loader and component APIs. They are not the native Railroader 0.6.0 development guides. The archive has not been retested in a running game.
+This is the documentation from **v1.0.0** (2026-05-12). Tender Bells is the legacy predecessor, not a newer Bells and Whistles release. These guides use the older loader and component APIs. They are not the native Railroader 0.6.0 development guides.
 
 [Read current development docs](/BellsAndWhistles-Docs/) or use the version selector.
 

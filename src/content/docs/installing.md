@@ -7,7 +7,7 @@ Bells and Whistles 0.3.0 is a mod pack for Railroader 0.6.0, with the identifier
 :::note[About this version]
 
 
-These pages describe the experimental 0.3.0 rework, which has not been tested in a running game yet. Follow the steps below if you have a 0.3.0 build. This documentation repository does not distribute mod binaries.
+These pages describe Bells and Whistles 0.3.0, which has been tested in-game. Follow the steps below if you have a 0.3.0 build. This documentation repository does not distribute mod binaries.
 
 :::
 

@@ -2,7 +2,7 @@
 title: "What's new in 0.3.0"
 ---
 
-Version 0.3.0 is an experimental rework of Bells and Whistles for Railroader 0.6.0. It has not been tested in a running game yet.
+Version 0.3.0 brings Bells and Whistles to Railroader 0.6.0's native mod system. It has been tested in-game.
 
 To upgrade the mod, follow [Installing Bells and Whistles](/BellsAndWhistles-Docs/installing/).
 

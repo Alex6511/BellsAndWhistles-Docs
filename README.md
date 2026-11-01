@@ -26,7 +26,7 @@ The build verifies frozen archive hashes, internal links and anchors, version na
 
 ## Versions and maintenance
 
-Current guides describe **0.3.0 development**, with Railroader compatibility and runtime limitations stated separately. The version selector includes B&W 0.2.1 and 0.2.0 prereleases and the legacy Tender Bells 1.0.0 predecessor. Archives were recovered from each release tag; their examples retain the APIs of that release.
+Current guides describe **0.3.0 development**, with the B&W version and Railroader compatibility identified separately. The maintainer has confirmed in-game testing of 0.3.0. The version selector includes B&W 0.2.1 and 0.2.0 prereleases and the legacy Tender Bells 1.0.0 predecessor. Archives were recovered from each release tag; their examples retain the APIs of that release.
 
 - [Maintenance and versioning guide](src/content/docs/versions.md)
 - [Contributor guide](src/content/docs/development.md)

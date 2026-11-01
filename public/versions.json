@@ -6,7 +6,7 @@
     "status": "development",
     "path": "/BellsAndWhistles-Docs/",
     "railroader": "0.6.0",
-    "validation": "offline only; in-game acceptance pending"
+    "validation": "Tested in-game; confirmed by the maintainer on 2026-11-01."
   },
   "releases": [
     {
@@ -19,10 +19,18 @@
       "path": "/BellsAndWhistles-Docs/0.2.1/",
       "releasedAt": "2026-05-25",
       "railroader": "2025.1 (legacy UMM generation; not revalidated)",
-      "validation": "Archived documentation from the release tag; no new runtime verification",
+      "validation": "Documentation recovered from the v0.2.1 release tag.",
       "frozen": true,
-      "revision": 1,
-      "sha256": "2f90e5e77157875c4f0827f256989c7579af19f8beb3634a25ca78e63eff6487"
+      "revision": 2,
+      "sha256": "585a7b456ca49b8bd6b68ae4254cb318a7416790603a8e31f84296c20b026088",
+      "errata": [
+        {
+          "revision": 2,
+          "date": "2026-11-01",
+          "reason": "Remove the unsupported testing-status statement added to the archive notice.",
+          "previousSha256": "2f90e5e77157875c4f0827f256989c7579af19f8beb3634a25ca78e63eff6487"
+        }
+      ]
     },
     {
       "version": "0.2.0",
@@ -34,10 +42,18 @@
       "path": "/BellsAndWhistles-Docs/0.2.0/",
       "releasedAt": "2026-05-25",
       "railroader": "2025.1 (legacy loader generation; not revalidated)",
-      "validation": "Archived documentation from the release tag; no new runtime verification",
+      "validation": "Documentation recovered from the v0.2.0 release tag.",
       "frozen": true,
-      "revision": 1,
-      "sha256": "fb7ce02e73d5cfd071dec22a3960ea2b7b34a9947753fc4d0fc05c2a4955ffb1"
+      "revision": 2,
+      "sha256": "cca4700385c68674620b1a0bb484383182597bf884a03fd773d569edb9665b58",
+      "errata": [
+        {
+          "revision": 2,
+          "date": "2026-11-01",
+          "reason": "Remove the unsupported testing-status statement added to the archive notice.",
+          "previousSha256": "fb7ce02e73d5cfd071dec22a3960ea2b7b34a9947753fc4d0fc05c2a4955ffb1"
+        }
+      ]
     },
     {
       "version": "1.0.0",
@@ -49,10 +65,18 @@
       "path": "/BellsAndWhistles-Docs/tender-bells-1.0.0/",
       "releasedAt": "2026-05-12",
       "railroader": "Legacy loader generation; exact game build not recorded",
-      "validation": "Archived predecessor documentation from the release tag; no new runtime verification",
+      "validation": "Documentation recovered from the v1.0.0 release tag.",
       "frozen": true,
-      "revision": 1,
-      "sha256": "8b5b83fdeabe2261eb14e962084b4fa430e9e0ca4772248f8f0ccd3caa7c1159"
+      "revision": 2,
+      "sha256": "25f283764698e7d500041a172e1c23b37f0da42f0d87b14887ae45a9a9fa22d7",
+      "errata": [
+        {
+          "revision": 2,
+          "date": "2026-11-01",
+          "reason": "Remove the unsupported testing-status statement added to the archive notice.",
+          "previousSha256": "8b5b83fdeabe2261eb14e962084b4fa430e9e0ca4772248f8f0ccd3caa7c1159"
+        }
+      ]
     }
   ]
 }
