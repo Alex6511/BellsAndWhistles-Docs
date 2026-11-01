@@ -1,0 +1,16 @@
+import { readFile, writeFile } from 'node:fs/promises';
+import { snapshotDigest } from './versions-lib.mjs';
+const [slug, reason] = process.argv.slice(2);
+if (!slug || !reason?.trim()) throw new Error('Usage: npm run version:erratum -- <slug> "<reviewable correction reason>"');
+const file = 'public/versions.json';
+const manifest = JSON.parse(await readFile(file, 'utf8'));
+const release = manifest.releases.find((entry) => entry.slug === slug);
+if (!release) throw new Error('Unknown archive');
+const digest = await snapshotDigest(process.cwd(), slug);
+if (digest === release.sha256) throw new Error('Archive has not changed');
+release.revision++;
+release.errata ??= [];
+release.errata.push({ revision: release.revision, date: new Date().toISOString().slice(0, 10), reason, previousSha256: release.sha256 });
+release.sha256 = digest;
+await writeFile(file, JSON.stringify(manifest, null, 2) + '\n');
+console.log('Recorded archive revision ' + release.revision + '; requires an explicit erratum review.');

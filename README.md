@@ -1,38 +1,37 @@
 # Bells and Whistles documentation
 
-Public documentation for the Bells and Whistles Railroader mod.
+[Read the documentation](https://alex6511.github.io/BellsAndWhistles-Docs/).
 
-**Read the site:** <https://alex6511.github.io/BellsAndWhistles-Docs/>
+This public repository contains the versioned player and content-author guides, examples, and site configuration. The mod implementation is maintained in a separate private repository.
 
-This repository contains the documentation, small content-author examples, and the site build configuration. The mod implementation and its history are maintained separately in a private repository.
+The site uses **Astro and Starlight**, matching the framework used by the official Railroader documentation. Starlight Versions adds release-specific navigation and search.
 
-The pages currently describe the experimental 0.3.0 rework for Railroader 0.6.0. Publishing these docs does not mark that build as tested in a running game or publish mod binaries.
+## Development
 
-## Preview and check
-
-Use Python 3.12 and run these commands from this repository:
+Use Node 24 (or Node 22.23.4+):
 
 ```sh
-python -m pip install -r requirements-docs.txt
-python -m mkdocs serve
+npm ci
+npm run dev
 ```
 
-Open <http://127.0.0.1:8000/>. Before committing changes, run:
+Before opening a pull request:
 
 ```sh
-python -m mkdocs build --strict
+npm run check:audit
+npm run build
 ```
 
-Generated files go in `site/` and are ignored by Git.
+The build verifies frozen archive hashes, internal links and anchors, version navigation, and search assets. GitHub Actions builds every PR, publishes `main` to GitHub Pages, and audits the site weekly.
 
-## Publish
+## Versions and maintenance
 
-The Docs workflow builds pull requests without publishing them. Changes to the site on `main` build and deploy to GitHub Pages automatically. You can also run Docs manually from the Actions tab; only `main` deploys.
+Current guides describe **0.3.0 development**, with Railroader compatibility and runtime limitations stated separately. The version selector includes B&W 0.2.1 and 0.2.0 prereleases and the legacy Tender Bells 1.0.0 predecessor. Archives were recovered from each release tag; their examples retain the APIs of that release.
 
-GitHub Pages uses **GitHub Actions** as its publishing source. The workflow needs no credentials for the private mod repository.
+- [Maintenance and versioning guide](src/content/docs/versions.md)
+- [Contributor guide](src/content/docs/development.md)
+- [Repository instructions](AGENTS.md)
+- [Machine-readable versions](public/versions.json)
+- [Latest maintenance audit](public/maintenance.json)
 
-## Update the documentation
-
-Edit the Markdown pages in `docs/` and navigation in `mkdocs.yml`. Keep examples beside the pages that explain them. See [Contributing to the documentation](docs/development.md).
-
-When bringing in updates from the mod project, copy only the reviewed documentation and its examples. Do not copy the mod's source tree, binaries, Git history, local build settings, or internal work records.
+Every release gets a frozen snapshot before the mod is tagged. Routine updates affect development docs; archive corrections require an explicit, recorded erratum. A documented review is due at least every 30 days and after relevant mod or game changes.
