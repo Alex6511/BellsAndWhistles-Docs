@@ -7,13 +7,13 @@
     "Retained the maintainer's confirmed in-game testing of 0.3.0 and the exact Railroader 2025.1/UMM compatibility note; removed an unsupported multiplayer-testing statement.",
     "Corrected dependency scope, carrier coverage, consumption inputs, aux-tender contract wording and the distinction between visual simulation and synchronized controls.",
     "Documented 0.3.0 development interfaces for geared profiles/audio, oil and wood firing, finite/infinite fuel facilities, authoring helpers, runtime results, observers, units, defaults, authority and persistence.",
-    "Kept historical release content separate from current APIs; checked existing downloadable examples and version navigation."
+    "Kept historical release content separate from current APIs; checked existing downloadable examples and version navigation.",
+    "Audited the historical 0.2.0/0.2.1 loader manifests and endpoint implementation; recorded explicit errata for the Library of Stuff requirement, endpoint rotation and Windows editor path. Removed unsupported historical revalidation wording."
   ],
   "runtimeStatus": "B&W 0.3.0 has been tested in-game, as confirmed by the maintainer on 2026-11-01. This audit does not assign invented per-feature test coverage.",
   "followUp": [
     "Before freezing 0.3.0, reconcile the completed package's version, exports and Railroader >=0.6.2 requirement with these development guides.",
-    "Re-audit the new interfaces when integration changes; retain Driven Animation and Horn/Whistle in the combined release.",
-    "Review historical documentation corrections separately as explicit archive errata."
+    "Re-audit the new interfaces when integration changes; retain Driven Animation and Horn/Whistle in the combined release."
   ],
   "reviewType": "Behavioral source audit, maintainer corrections and active integration review"
 }

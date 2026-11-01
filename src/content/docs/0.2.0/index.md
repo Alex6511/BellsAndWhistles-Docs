@@ -5,7 +5,7 @@ editUrl: false
 
 :::caution[Archived release documentation]
 
-This is the documentation from **v0.2.0** (2026-05-25). This B&W version was published as a prerelease. These guides use the older loader and component APIs. They are not the native Railroader 0.6.0 development guides.
+This is the documentation from **v0.2.0** (2026-05-25). This B&W version was published as a prerelease. These guides use the older loader and component APIs. Use the current development guides for the native mod system.
 
 [Read current development docs](/BellsAndWhistles-Docs/) or use the version selector.
 
@@ -113,7 +113,7 @@ Target use cases:
 
 - A `FlexibleConnector` entry is read from a car object's `Definitions.json`.
 - When [Legotrainman's Library of Stuff](https://www.nexusmods.com/railroader) is installed, `FlexibleConnector` is registered as a first-class editor component. Authors can add it from the in-game editor's Add Component dropdown, edit its fields in the inspector, and **save** — the editor's save call round-trips through Newtonsoft + Library of Stuff's JsonSubType registry, so the modified `Definitions.json` keeps the `"kind": "FlexibleConnector"` entry intact.
-- Without that library, the mod still loads existing `FlexibleConnector` entries at runtime — it strips them from the JSON text before Railroader's stock parser sees them, parks the config in a sidecar registry, then attaches the connector after the car body loads. End-users can use mods that ship `FlexibleConnector` configs without installing the Library of Stuff, but **the in-game editor's save path requires the Library of Stuff** — without it, editing and saving a definition silently drops the `FlexibleConnector` entry from the file.
+- The runtime contains a fallback that strips FlexibleConnector entries before the stock parser reads the definitions. However, this release’s UMM manifest requires **Library of Stuff 1.4.0 or later**. Install that dependency for the UMM package; the fallback code does not remove the manifest requirement. The editor also needs the library to preserve connector entries on save.
 - When the matching car body loads, the mod resolves the configured start and end transforms.
 - A generated tube mesh is simulated between those transforms every frame. For Bézier-curved presets, mesh rings are sampled along a Catmull-Rom path through the simulated control points so the tube looks smooth instead of facet-kinked.
 
@@ -196,7 +196,7 @@ Or an object:
 
 Supported `car` values: `self`, `front`/`f`, `rear`/`r`, `a`/`logicalA`, `b`/`logicalB`, `tender`, `locomotive`.
 
-Endpoint rotations are optional. When supplied, the endpoint's local +Z axis is treated as the direction the connector leaves that endpoint. For the end endpoint, +Z should usually point back toward the connector. Set `"useTransformRotation": true` to honor the transform's own rotation instead.
+Endpoint rotations are optional. When supplied, the endpoint's local +Z axis is treated as the direction the connector leaves that endpoint. For the end endpoint, +Z should usually point back toward the connector. With `useTransformRotation: true`, the transform’s rotation is combined with the optional Euler `rotation` offset. The default is true when an offset is supplied and false otherwise; false disables endpoint orientation.
 
 ### Tuning Fields
 
@@ -225,7 +225,7 @@ The recommended authoring loop uses Railroader's built-in editor together with L
 
 1. Install [Legotrainman's Library of Stuff](https://www.nexusmods.com/railroader) (1.4.0 or later). With it loaded, `FlexibleConnector` is registered as a JSON subtype on `Model.Definition.Component`, added to the editor's Add Component dropdown, and given a builder in `ComponentFactory`. Without it, the steps below silently lose your edits on save.
 2. Launch Railroader with `/editor` in the Steam launch options.
-3. Copy the rolling stock you want to author from `Railroader_Data\StreamingAssets\AssetPacks` into `%appdata%\LocalLow\Giraffe Lab LLC\Railroader\AssetPacks` so the editor can write changes back.
+3. Copy the rolling stock you want to author from `Railroader_Data\StreamingAssets\AssetPacks` into `%USERPROFILE%\AppData\LocalLow\Giraffe Lab LLC\Railroader\AssetPacks` so the editor can write changes back.
 4. Open the editor, select your locomotive or car, open the components list, and pick `FlexibleConnector` from the Add Component dropdown.
 5. Edit fields in the inspector. The editor reflects over public properties, so you'll see cells for `name`, `transform`, `enabled`, `start`, `end`, `preset`, `curve`, `smoothing`, `radius`, `length`, `slack`, `segments`, `axialSegments`, `stiffness`, `damping`, `gravity`, `maxBendDegrees`, `solverIterations`, and `color`. A few quirks to expect:
     - Integer fields fall back to a generic cell (the editor doesn't ship a dedicated int cell), the same way Lego's own `Priority` field does.
