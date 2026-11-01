@@ -172,7 +172,9 @@ These also go in `parameters`, next to `start` and `end`.
 
 ## Turn a connector off
 
-To turn a connector off, set `"enabled": false` on the `Script` component itself, not inside `parameters`.
+To leave a connector out of the definition, set `"enabled": false` on the `Script` component itself, not inside `parameters`.
+
+At runtime, `BWConnectors.setEnabled(car, enabled)` controls all attached B&W connectors on that car through the `alex6511.bw.connectors.enabled` property. It does not edit the declaration. See [Relay APIs](/BellsAndWhistles-Docs/relay-api/).
 
 ## Legacy `FlexibleConnector` components
 
@@ -236,4 +238,4 @@ If the game ever rejects the registration, Bells and Whistles uses a fallback. I
 - **No collision.** Connectors don't collide with anything.
 - **No end caps or collars.** Bells and Whistles adds no end caps or collar prefabs.
 - **Two kinds of material.** A material is either generated or borrowed from the stock air hose. Asset-pack textures aren't supported.
-- **Visual and local.** A connector doesn't synchronise any gameplay state.
+- **Visual simulation.** Mesh motion is local. The optional runtime enabled toggle uses a synchronized car property; the connector still transfers no water, air, steam or electricity.

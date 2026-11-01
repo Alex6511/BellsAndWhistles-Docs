@@ -2,31 +2,35 @@
 title: "What's new in 0.3.0"
 ---
 
-Version 0.3.0 brings Bells and Whistles to Railroader 0.6.0's native mod system. It has been tested in-game.
+Bells and Whistles 0.3.0 uses Railroader's native mod system and has been tested in-game. The combined release is being prepared for **Railroader 0.6.2 or later**. These development notes include the integrations still being completed for 0.3.0.
 
-To upgrade the mod, follow [Installing Bells and Whistles](/BellsAndWhistles-Docs/installing/).
+If you play Railroader 2025.1, this version isn't for you. Bells and Whistles 0.3.0 has no Unity Mod Manager build.
 
-## If you made content for an earlier version
+## Native authoring
 
-- **Legacy `FlexibleConnector` entries** still load, but a pack that uses them can't load its cars without Bells and Whistles. List Bells and Whistles as `required`, or convert the entries to `Script` carriers. [Legacy `FlexibleConnector` components](/BellsAndWhistles-Docs/flexible-connectors/#legacy-flexibleconnector-components) shows both forms.
-- **Packs with [carriers](/BellsAndWhistles-Docs/authors/#what-a-carrier-is)** list Bells and Whistles as `optional`. [Set up your pack's `Info.json`](/BellsAndWhistles-Docs/authors/#set-up-your-packs-infojson) shows the entry that each feature needs.
+- **Native pack:** the package ID is `alex6511/bells-and-whistles`. B&W no longer uses Unity Mod Manager or requires Library of Stuff.
+- **Script carriers:** connectors, tender-bell settings and other feature declarations use the game's native Script component and its parameters.
+- **Legacy connector kind:** `kind: "FlexibleConnector"` remains supported, including older array-form component data. Packs using that custom kind must require B&W.
+- **Legacy bell routing:** the `[BellsAndWhistles:HeadlightDirection]` and `[TenderBells:HeadlightDirection]` tokens remain recognized.
 
-## Loading and compatibility
+## Features in 0.3.0
 
-- **Native 0.6.0 mod.** Bells and Whistles is now a 0.6.0 mod pack that the game loads itself. Its `Info.json` has the identifier `alex6511/bells-and-whistles`. Bells and Whistles no longer uses Unity Mod Manager.
-- **Native `Script` carriers.** You declare [connectors](/BellsAndWhistles-Docs/flexible-connectors/) and [tender-bell settings](/BellsAndWhistles-Docs/tender-bells/) with the game's own `"kind": "Script"` component. Point its `scriptAsset` at `alex6511/FlexibleConnector` or `alex6511/TenderBell`, and put the settings in `parameters`. Such a component is a [carrier](/BellsAndWhistles-Docs/authors/#what-a-carrier-is). The game's own parser accepts carriers, so your cars still load for players who don't have Bells and Whistles. Each car with a carrier then logs a script-resolution error. Your `Data.rl` can also add connectors to other packs' cars.
-- **No Library of Stuff dependency.** Bells and Whistles registers the [legacy `"kind": "FlexibleConnector"` component](/BellsAndWhistles-Docs/flexible-connectors/#legacy-flexibleconnector-components) with the game itself. That kind parses, appears in the in-game editor and works in `Data.rl` without any other mod.
-- **Legacy content keeps working.** `"kind": "FlexibleConnector"` entries load in both the [2025.1 array form and the 0.6.0 object form](/BellsAndWhistles-Docs/authors/#object-and-array-forms-of-components) of `components`. Bells and Whistles still honours the `[BellsAndWhistles:HeadlightDirection]` and `[TenderBells:HeadlightDirection]` tokens.
+- [Driven Animation](/BellsAndWhistles-Docs/driven-animation/) drives clips from car speed or locomotive controls and native demand rates. Its guide includes the Better Rolling Stock field mapping.
+- [Horn and Whistle](/BellsAndWhistles-Docs/horn-and-whistle/) lets a locomotive carry both instruments, choose one in Customize and use that selection for Auto Engineer crossing signals.
+- [Auxiliary Tenders](/BellsAndWhistles-Docs/aux-tender/) transfer water toward the locomotive, with host-owned transfers, player controls and train-strip status colors.
+- [Custom component kinds](/BellsAndWhistles-Docs/component-kinds/) give pack-owned Relay scripts typed fields and editor entries.
 
-## New features
+## Integrations being completed for this release
 
-- **Driven Animation.** The `alex6511.DrivenAnimation` component plays an animation clip driven by a car's speed or a locomotive's throttle, reverser, fuel use or water use. It does the same job as Better Rolling Stock's `CustomAnimationControllerComponent`. Without Bells and Whistles, the game can't read a `Definitions.json` that uses this kind, so none of that pack's definitions load. See [Driven Animation](/BellsAndWhistles-Docs/driven-animation/), including [how to convert Better Rolling Stock entries](/BellsAndWhistles-Docs/driven-animation/#converting-from-better-rolling-stock).
-- **Horn and Whistle.** A locomotive can have both a `Whistle` and a `Horn` component, as the Southern Pacific GS-4 did. Players choose in **Customize** which one the Whistle/Horn control plays, and Auto Engineer's crossing signals follow that choice. Without Bells and Whistles, only one of them sounds. An optional `alex6511/HornSelector` carrier sets which instrument the locomotive starts on. See [Horn and Whistle](/BellsAndWhistles-Docs/horn-and-whistle/).
-- **Auxiliary Tenders.** Bells and Whistles keeps a locomotive's tender topped up with water from a coupled auxiliary car. The feature is written in Relay, Railroader's scripting language. See [Auxiliary Tenders](/BellsAndWhistles-Docs/aux-tender/).
-- **Your own component kinds (prototype).** Your pack can declare its own component kinds, such as `"kind": "acme.SignalLamp"`, in a `ComponentKinds.json` file. Bells and Whistles registers them, so they load and appear in the editor like the game's own kinds. Each one runs a Relay script from your pack, and your pack can't load without Bells and Whistles. See [Your own component kinds](/BellsAndWhistles-Docs/component-kinds/).
+- [Geared Steam](/BellsAndWhistles-Docs/geared-steam/) adds definition-bound geared profiles, performance and response tuning, chuff timing, native mechanical-audio references and per-car local volume. Retained but inactive settings are identified in the guide.
+- [Oil and wood firing](/BellsAndWhistles-Docs/alternative-firing/) adds fixed Bunker-C or wood declarations, distinct fuel/water accounting and guarded migration of known compatible legacy load IDs.
+- [Fuel storage and outlets](/BellsAndWhistles-Docs/fuel-services/) connect authored props to finite industry stock or explicitly infinite supplies. They respect stock, target capacity, rate, reach, speed and ownership settings.
+- [Relay APIs](/BellsAndWhistles-Docs/relay-api/) provide definition helpers, state queries, disposable observers, local audio volume and supported car/facility controls.
 
-## Connector and bell improvements
+The mechanical loop uses an author-supplied AudioClip; the original Geared Steam recording is not bundled. Coal towers do not become oil or wood outlets. Runtime APIs do not switch profiles or firing types.
 
-- **Culling.** Connectors use the game's air-hose culling. Bells and Whistles doesn't simulate or draw a connector while it is off screen or far away.
-- **Air-hose material.** Set `"material": "airHose"` on a connector to borrow the car's stock air-hose material instead of a flat generated colour.
-- **Cheaper tender bells.** Finding the coupled locomotive no longer allocates memory every frame.
+## Upgrade content
+
+Follow [Migrating to 0.3.0](/BellsAndWhistles-Docs/migration/) for provider replacement, dependencies, saved loads and audio references. A native Script carrier may still require B&W for its intended gameplay behavior. Unconditional imports of B&W modules require it too.
+
+Use [Installing](/BellsAndWhistles-Docs/installing/) for player setup and [Versions and audits](/BellsAndWhistles-Docs/versions/) for the frozen documentation attached to a release.

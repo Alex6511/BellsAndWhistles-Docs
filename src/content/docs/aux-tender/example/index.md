@@ -2,13 +2,13 @@
 title: "Example: Virginian AE aux tender"
 ---
 
-These are the exact changes for the aux tender in the Virginian AE 2-10-10-2 pack (`eilelwen/vng-ae-210102`, version 1.0.0), whose aux car is `eilelwen/vgn-ae-at`. The car already has the 20,000-gallon `rr/water` slot it needs.
+This worked example targets the aux tender in the Virginian AE 2-10-10-2 pack (`eilelwen/vng-ae-210102`, version 1.0.0), whose aux car is `eilelwen/vgn-ae-at`. The example assumes a single 20,000-gallon `rr/water` slot at index 0. Check your installed pack's definition before applying it; later pack revisions may already include the fix or use different IDs and slots.
 
 ## Make the changes
 
 1. **Fix the water slot index.** Set `slotIndex` to `0` on the `lt-water` LoadTarget and the `la-water` LoadAnimation. You can do this in the editor or in `Definitions.json`.
 
-    Both components have `"slotIndex": 1`, copied from the tenders, where water comes after coal. But the aux car's only load slot is water, at index 0.
+    If these components have `"slotIndex": 1` while the aux car has only one water slot, they point past the end of its slot list. Set both to 0 for that layout.
 
     Water columns skip a target whose slot index is past the last slot, so the car can't be filled. The game logs `target LoadTarget Water index 1 is out of range`.
 

@@ -3,6 +3,7 @@ export default [
     { label: 'Welcome', slug: '' },
     { label: 'Installing', slug: 'installing' },
     { label: "What's new", slug: 'whats-new' },
+    { label: 'Migrating to 0.3.0', slug: 'migration' },
   ] },
   { label: 'Authoring guides', items: [
     { label: 'For content authors', slug: 'authors' },
@@ -14,6 +15,10 @@ export default [
       { label: 'Overview', slug: 'aux-tender' },
       { label: 'Virginian AE example', slug: 'aux-tender/example' },
     ] },
+    { label: 'Geared Steam', slug: 'geared-steam' },
+    { label: 'Oil and wood firing', slug: 'alternative-firing' },
+    { label: 'Fuel storage and outlets', slug: 'fuel-services' },
+    { label: 'Relay APIs', slug: 'relay-api' },
     { label: 'Your own component kinds', slug: 'component-kinds' },
     { label: 'In-game editor', slug: 'editor-authoring' },
   ] },

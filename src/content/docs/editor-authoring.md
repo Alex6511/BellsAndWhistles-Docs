@@ -2,7 +2,7 @@
 title: "Set up Bells and Whistles features in the in-game editor"
 ---
 
-You can set up Bells and Whistles features in Railroader's car editor, without editing `Definitions.json` by hand. The features in the table below use the game's own **Script** component. The editor can't create the small `Data.rl` file that the aux tender uses, so this page gives it below.
+You can set up the bell, connector, horn and auxiliary-tender features below in Railroader's car editor, without editing `Definitions.json` by hand. The features in the table below use the game's own **Script** component. The editor can't create the small `Data.rl` file that the aux tender uses, so this page gives it below.
 
 | Feature | Goes on | Script Asset |
 | --- | --- | --- |
@@ -14,6 +14,8 @@ You can set up Bells and Whistles features in Railroader's car editor, without e
 Driven Animation isn't a Script component. It plays an animation clip driven by a car's speed or a locomotive's throttle, reverser, fuel use or water use.
 
 Add Driven Animation with **Add Component → Driven Animation**. [Driven Animation](/BellsAndWhistles-Docs/driven-animation/) explains its settings.
+
+The new 0.3.0 integrations use additional enabled Script carriers: [GearedSteam](/BellsAndWhistles-Docs/geared-steam/) and [AlternativeFiring](/BellsAndWhistles-Docs/alternative-firing/) on locomotives, and [FuelStorage/FuelOutlet](/BellsAndWhistles-Docs/fuel-services/) on props. Their guides give the nested parameters and prerequisites. [BWAuthoring](/BellsAndWhistles-Docs/relay-api/#definition-time-helpers) can construct these declarations in Data.rl.
 
 ## Before you start
 
