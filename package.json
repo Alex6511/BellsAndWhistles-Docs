@@ -1,0 +1,26 @@
+{
+  "name": "bells-and-whistles-docs",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "node scripts/check-versions.mjs && astro build && node scripts/check-site.mjs",
+    "preview": "astro preview",
+    "check:versions": "node scripts/check-versions.mjs",
+    "check:audit": "node scripts/check-audit.mjs",
+    "version:snapshot": "node scripts/snapshot-version.mjs",
+    "version:erratum": "node scripts/refresh-archive.mjs",
+    "test": "node scripts/versions.test.mjs"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "0.38.2",
+    "astro": "6.1.3",
+    "starlight-versions": "0.8.0"
+  },
+  "devDependencies": {
+    "parse5": "8.1.0"
+  }
+}

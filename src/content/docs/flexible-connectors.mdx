@@ -1,0 +1,239 @@
+---
+title: "Flexible Connectors"
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Flexible Connectors draws hoses, cables and semi-rigid pipes as simulated tube meshes. Each connector runs between two named transforms, on the same car or on coupled cars. A transform is a named object in the car's model, such as `BranchPipeSocket_L` in the examples below.
+
+Connectors are visual only. They add no brake, steam, water or electrical simulation.
+
+## How a connector works
+
+When the car model loads, Bells and Whistles generates the connector between its two transforms. Then it simulates the connector as a chain of points, in every frame where the connector is in view.
+
+Connectors use the game's air-hose culling. Bells and Whistles doesn't simulate or draw a connector while it is off screen or far away.
+
+With the `bezier` curve, Bells and Whistles samples the mesh along a Catmull-Rom path through the simulated points. This makes the tube look smooth. The rigid presets use this curve by default.
+
+## Add a connector
+
+1. Add `alex6511/bells-and-whistles` under `dependencies.optional` in your pack's `Info.json`. A pack that still uses the [legacy kind](#legacy-flexibleconnector-components) needs `required` instead, as [For content authors](/BellsAndWhistles-Docs/authors/#set-up-your-packs-infojson) explains.
+2. Add a `Script` component to one of the cars that the connector joins. Set its `scriptAsset` to `alex6511/FlexibleConnector`.
+3. In the component's `parameters`, set `start`, `end` and any other [parameters](#parameters) you need.
+
+This `Script` component is a [carrier](/BellsAndWhistles-Docs/authors/#what-a-carrier-is). The game's own parser accepts carriers, so your cars still load for players who don't have Bells and Whistles. In that case, each car with a carrier logs a script-resolution error.
+
+You can also set up connectors in Railroader's in-game car editor. The [in-game editor guide](/BellsAndWhistles-Docs/editor-authoring/#flexible-connector) shows which type to choose for each parameter.
+
+The examples on this page use the 0.6.0 object form of `components`. [Object and array forms of components](/BellsAndWhistles-Docs/authors/#object-and-array-forms-of-components) explains both.
+
+## Examples
+
+### Articulated branch pipe
+
+Add this carrier to the locomotive definition. It runs a rigid steam pipe from `BranchPipeSocket_L` under `Boiler` to `SteamChestSocket_L` under `FrontEngine`. Neither endpoint names a `car`, so both ends are on the locomotive itself.
+
+```json
+"left-branch-pipe": {
+  "kind": "Script",
+  "name": "Left Branch Pipe",
+  "scriptAsset": "alex6511/FlexibleConnector",
+  "parameters": {
+    "start": { "path": ["Boiler", "BranchPipeSocket_L"], "rotation": [0.0, 0.0, 0.0] },
+    "end": { "path": ["FrontEngine", "SteamChestSocket_L"], "rotation": [0.0, 180.0, 0.0] },
+    "preset": "RigidSteamPipe",
+    "curve": "bezier",
+    "smoothing": 4,
+    "radius": 0.055,
+    "segments": 10,
+    "stiffness": 0.98,
+    "damping": 0.68,
+    "gravity": 0.15,
+    "maxBendDegrees": 12,
+    "solverIterations": 18,
+    "color": "#55524d"
+  }
+}
+```
+
+### Tender-to-locomotive line
+
+Add this carrier to the tender definition.
+
+```json
+"tender-water-line-left": {
+  "kind": "Script",
+  "name": "Tender Water Line Left",
+  "scriptAsset": "alex6511/FlexibleConnector",
+  "parameters": {
+    "start": { "car": "self", "path": ["WaterLineSocket_L"] },
+    "end": { "car": "locomotive", "path": ["TenderWaterLineSocket_L"] },
+    "preset": "AirLine",
+    "material": "airHose",
+    "radius": 0.025,
+    "slack": 1.12,
+    "segments": 12
+  }
+}
+```
+
+The start is on the tender itself. The end is on the locomotive, which Bells and Whistles finds through the coupled tender chain.
+
+## Add connectors to another pack's cars
+
+Your pack's `Scripts/Data.rl` can add a carrier to a car that your pack doesn't own. You don't need to edit the other pack.
+
+```
+func modifyDefinitions(definitions) {
+    definitions.merge("someone/their-tender", {
+        "definition": {
+            "components": {
+                "bw-water-line-left": {
+                    "kind": "Script",
+                    "name": "Water Line Left",
+                    "scriptAsset": "alex6511/FlexibleConnector",
+                    "parameters": {
+                        "start": { "car": "self", "path": ["WaterLineSocket_L"] },
+                        "end": { "car": "locomotive", "path": ["TenderWaterLineSocket_L"] },
+                        "preset": "AirLine"
+                    }
+                }
+            }
+        }
+    })
+}
+```
+
+Replace `someone/their-tender` with the identifier of the car you want to change.
+
+## Parameters
+
+Every parameter except `start` and `end` is optional. The preset fills in the rest.
+
+### Endpoints
+
+`start` and `end` are the two endpoints. Each endpoint is either a path string, such as `"Boiler/BranchPipeSocket_L"`, or an object. These two forms point to the same transform:
+
+<Tabs>
+
+<TabItem label="Path string">
+
+
+```json
+"start": "Boiler/BranchPipeSocket_L"
+```
+
+</TabItem>
+
+
+<TabItem label="Object">
+
+
+```json
+"start": { "car": "self", "path": ["Boiler", "BranchPipeSocket_L"] }
+```
+
+</TabItem>
+
+</Tabs>
+
+A path string always names a transform on the car that has the component. To reach another car, use the object form. An object has these fields:
+
+| Field | Meaning |
+| --- | --- |
+| `car` | Which car the transform is on, relative to the car that has the component. Use `self` (default), `front`/`f`, `rear`/`r`, `a`/`logicalA`, `b`/`logicalB`, `tender` or `locomotive`. |
+| `path` | Transform names from the car body, as an array or a `/`-separated string. A single name is also searched for anywhere under the body. |
+| `rotation` | Optional Euler angles, in degrees. The endpoint's local +Z is the direction in which the connector leaves it. For the end endpoint, +Z usually points back toward the connector. |
+| `useTransformRotation` | `true` honours the transform's own rotation: the connector leaves the endpoint along the transform's own +Z, turned by `rotation`. It is `true` by default when you set `rotation`, and `false` otherwise. With `false`, `rotation` has no effect. |
+
+### Other parameters
+
+These also go in `parameters`, next to `start` and `end`.
+
+| Parameter | Meaning |
+| --- | --- |
+| `name` | Display name. Defaults to the component's `name`, then its id. |
+| `preset` | Base tuning: `Hose`, `AirLine`, `Cable`, `RigidPipe`, `RigidSteamPipe` or `Chain`. Bells and Whistles uses `Hose` when you leave `preset` out or give a name it doesn't know. |
+| `curve` | `linear` (faceted), `bezier`/`catmull` (smooth), or `none` (no mesh). Rigid presets default to `bezier`, the rest to `linear`. |
+| `smoothing` | Render subdivisions per simulated segment for `bezier`, from `1` to `16`. |
+| `radius` | Tube radius in metres. |
+| `length` | Fixed length. Without it, the length is the distance between the endpoints times `slack`. |
+| `slack` | Length multiplier when you leave out `length`, at least `1.0`. |
+| `segments` | Number of simulated segments along the connector. |
+| `axialSegments` | Number of faces around the tube's circumference. |
+| `stiffness` | Constraint strength, from `0.0` to `1.0`. |
+| `damping` | Motion damping, from `0.0` to `1.0`. A lower value settles faster. |
+| `gravity` | Downward pull. Use low values for rigid steam pipes. |
+| `maxBendDegrees` | How sharply adjacent segments may bend, in degrees. |
+| `solverIterations` | Constraint passes per frame. A higher value is stiffer and costs more. |
+| `color` | `"#rrggbb"`, `"#rrggbbaa"` or `[r, g, b, a]`. With `material: "airHose"`, it tints the borrowed material. |
+| `material` | `generated` (the default, a flat lit colour) or `airHose` (the car's stock air-hose material). |
+
+## Turn a connector off
+
+To turn a connector off, set `"enabled": false` on the `Script` component itself, not inside `parameters`.
+
+## Legacy `FlexibleConnector` components
+
+Entries written before 0.3.0 use `"kind": "FlexibleConnector"`, with the same fields at the top level of the component. They still load, in both the 2025.1 array form and the 0.6.0 object form of `components`. The older spellings `startPath`, `endPath`, `startRotation`, `endRotation`, `segmentCount` and `sides` still work too.
+
+The tabs below show the same connector in both forms.
+
+<Tabs>
+
+<TabItem label="Script carrier">
+
+
+```json
+"left-branch-pipe": {
+  "kind": "Script",
+  "name": "Left Branch Pipe",
+  "scriptAsset": "alex6511/FlexibleConnector",
+  "parameters": {
+    "start": "Boiler/BranchPipeSocket_L",
+    "end": "FrontEngine/SteamChestSocket_L",
+    "preset": "RigidSteamPipe"
+  }
+}
+```
+
+</TabItem>
+
+
+<TabItem label="Legacy FlexibleConnector">
+
+
+```json
+"left-branch-pipe": {
+  "kind": "FlexibleConnector",
+  "name": "Left Branch Pipe",
+  "start": "Boiler/BranchPipeSocket_L",
+  "end": "FrontEngine/SteamChestSocket_L",
+  "preset": "RigidSteamPipe"
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+:::caution[This kind makes your pack depend on Bells and Whistles]
+
+
+A pack that uses this kind can't load its cars without Bells and Whistles. List Bells and Whistles as `required` in your `Info.json`. For new content, prefer the `Script` carrier.
+
+:::
+
+Bells and Whistles registers this kind with the game's own component parser. These entries therefore also work from another pack's `Data.rl`. You don't need Library of Stuff or any other mod.
+
+The in-game editor lists **Flexible Connector** under **Add Component**. It can edit and save these entries.
+
+If the game ever rejects the registration, Bells and Whistles uses a fallback. It removes these entries from the `Definitions.json` text before the game's own parser reads it. The connectors still draw, but the editor and `Data.rl` can't use them in that case.
+
+## Current limitations
+
+- **No collision.** Connectors don't collide with anything.
+- **No end caps or collars.** Bells and Whistles adds no end caps or collar prefabs.
+- **Two kinds of material.** A material is either generated or borrowed from the stock air hose. Asset-pack textures aren't supported.
+- **Visual and local.** A connector doesn't synchronise any gameplay state.

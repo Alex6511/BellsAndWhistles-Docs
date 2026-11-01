@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-11-01",
+  "maxAgeDays": 30,
+  "scope": [
+    "All 13 migrated guides and six downloadable examples checked for content preservation",
+    "Released tag documentation audited separately from development docs",
+    "Navigation, version archives, examples, internal links and search checked in the site build"
+  ],
+  "runtimeStatus": "Current 0.3.0 guides retain their original Railroader 0.6.0 offline validation claim. No game launch or 0.6.2 runtime acceptance was performed.",
+  "followUp": [
+    "Audit development guides alongside the active mod port before the next release; do not infer support for later Railroader builds."
+  ],
+  "reviewType": "Source and documentation maintenance audit"
+}

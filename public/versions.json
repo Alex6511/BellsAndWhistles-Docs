@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "current": {
+    "version": "0.3.0",
+    "label": "0.3.0 (development)",
+    "status": "development",
+    "path": "/BellsAndWhistles-Docs/",
+    "railroader": "0.6.0",
+    "validation": "offline only; in-game acceptance pending"
+  },
+  "releases": [
+    {
+      "version": "0.2.1",
+      "tag": "v0.2.1",
+      "product": "BellsAndWhistles",
+      "slug": "0.2.1",
+      "label": "0.2.1 (prerelease)",
+      "channel": "prerelease",
+      "path": "/BellsAndWhistles-Docs/0.2.1/",
+      "releasedAt": "2026-05-25",
+      "railroader": "2025.1 (legacy UMM generation; not revalidated)",
+      "validation": "Archived documentation from the release tag; no new runtime verification",
+      "frozen": true,
+      "revision": 1,
+      "sha256": "2f90e5e77157875c4f0827f256989c7579af19f8beb3634a25ca78e63eff6487"
+    },
+    {
+      "version": "0.2.0",
+      "tag": "v0.2.0",
+      "product": "BellsAndWhistles",
+      "slug": "0.2.0",
+      "label": "0.2.0 (prerelease)",
+      "channel": "prerelease",
+      "path": "/BellsAndWhistles-Docs/0.2.0/",
+      "releasedAt": "2026-05-25",
+      "railroader": "2025.1 (legacy loader generation; not revalidated)",
+      "validation": "Archived documentation from the release tag; no new runtime verification",
+      "frozen": true,
+      "revision": 1,
+      "sha256": "fb7ce02e73d5cfd071dec22a3960ea2b7b34a9947753fc4d0fc05c2a4955ffb1"
+    },
+    {
+      "version": "1.0.0",
+      "tag": "v1.0.0",
+      "product": "TenderBells",
+      "slug": "tender-bells-1.0.0",
+      "label": "Tender Bells 1.0.0 (legacy)",
+      "channel": "stable",
+      "path": "/BellsAndWhistles-Docs/tender-bells-1.0.0/",
+      "releasedAt": "2026-05-12",
+      "railroader": "Legacy loader generation; exact game build not recorded",
+      "validation": "Archived predecessor documentation from the release tag; no new runtime verification",
+      "frozen": true,
+      "revision": 1,
+      "sha256": "8b5b83fdeabe2261eb14e962084b4fa430e9e0ca4772248f8f0ccd3caa7c1159"
+    }
+  ]
+}
