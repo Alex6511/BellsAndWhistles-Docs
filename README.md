@@ -4,11 +4,11 @@
 
 This public repository contains the versioned player and content-author guides, examples, and site configuration. The mod implementation is maintained in a separate private repository.
 
-The site uses **Astro 6.1.3 and Starlight 0.38.2**, matching the framework used by the official Railroader documentation. Starlight Versions adds release-specific navigation and search.
+The site uses **Astro and Starlight**, matching the framework used by the official Railroader documentation. Starlight Versions adds release-specific navigation and search.
 
 ## Development
 
-Use Node 24 (or Node 22.12+):
+Use Node 24 (or Node 22.23.4+):
 
 ```sh
 npm ci

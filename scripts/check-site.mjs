@@ -48,7 +48,8 @@ for (const release of manifest.releases) {
 }
 if (!fileSet.has('pagefind/pagefind.js')) failures.push('Search index is missing');
 const home = pages.get('index.html')?.html ?? '';
-if (!home.includes('Astro v6.1.3') || !home.includes('Starlight v0.38.2')) failures.push('Unexpected framework metadata');
+const packages = JSON.parse(await readFile('package.json', 'utf8')).dependencies;
+if (!home.includes('Astro v' + packages.astro) || !home.includes('Starlight v' + packages['@astrojs/starlight'])) failures.push('Unexpected framework metadata');
 for (const text of [manifest.current.label, ...manifest.releases.map((release) => release.label)]) {
   if (!home.includes(text)) failures.push('Version selector missing: ' + text);
 }

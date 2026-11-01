@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile, copyFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, copyFile, access } from 'node:fs/promises';
 import path from 'node:path';
 import sidebar from '../config/sidebar.mjs';
 import { base, walk, verifyVersions, snapshotDigest } from './versions-lib.mjs';
@@ -14,6 +14,13 @@ if (version !== manifest.current.version) throw new Error('Version must match th
 if (manifest.releases.some((release) => release.slug === version)) throw new Error('Refusing to overwrite an existing snapshot.');
 const excluded = new Set(manifest.releases.map((release) => release.slug));
 const docsRoot = path.join(root, 'src/content/docs');
+for (const existing of [path.join(docsRoot, version), path.join(root, 'public', version), path.join(root, 'src/content/versions', version + '.json')]) {
+  const exists = await access(existing).then(() => true, (error) => {
+    if (error.code === 'ENOENT') return false;
+    throw error;
+  });
+  if (exists) throw new Error('Refusing to overwrite existing snapshot files: ' + existing);
+}
 const files = (await walk(docsRoot)).filter((file) => !excluded.has(path.relative(docsRoot, file).split(path.sep)[0]));
 for (const file of files) {
   const relative = path.relative(docsRoot, file);

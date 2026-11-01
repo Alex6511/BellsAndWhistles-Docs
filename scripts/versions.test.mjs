@@ -36,6 +36,10 @@ test('release snapshots preserve old versions and assets, reject overwrite, and 
     assert.equal(corrected.releases[0].revision, 2);
     assert.equal(corrected.releases[0].errata[0].previousSha256, after.releases[0].sha256);
   } finally {
+    const parent = path.resolve(tmpdir()) + path.sep;
+    if (!path.resolve(fixture).startsWith(parent) || !path.basename(fixture).startsWith('bw-docs-version-test-')) {
+      throw new Error('Refusing cleanup outside the owned temporary fixture.');
+    }
     await rm(fixture, { recursive: true, force: true });
   }
 });
