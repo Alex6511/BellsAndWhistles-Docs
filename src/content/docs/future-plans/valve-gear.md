@@ -24,17 +24,23 @@ The proposed feature would let you animate valve gear from both **driver rotatio
 
 ## What the three cycles mean
 
-Each clip would describe **one complete driver revolution** at a fixed reverser setting:
+### Bake drivers and valve gear together
 
-| Clip | Reverser setting | What to bake |
+**Each of the three exported clips would contain both the driver rotation and the valve gear motion for one complete revolution.** You would reuse the same driver rotation in all three, with the reverser held at a different setting for each bake.
+
+The wheels, rods, and valve gear can remain separate meshes or bones in your source rig. “Together” means their motion is recorded in the same clip; you do not need to join the objects, build three rigs, or hand-animate the wheel rotation three times. Separate actions or controls in your source project are fine if each final bake contains the complete assembly.
+
+| Exported clip | Driver motion to include | Valve gear motion to include |
 | --- | --- | --- |
-| Forward | Full forward | The complete driver assembly and valve gear through one revolution |
-| Neutral | Centered | A complete revolution with the gear in its neutral setting |
-| Reverse | Full reverse | A complete revolution with the gear in its reverse setting |
+| Forward | One complete revolution | Motion with the reverser held at full forward |
+| Neutral | The same complete revolution | Motion with the reverser held centered |
+| Reverse | The same complete revolution | Motion with the reverser held at full reverse |
 
-**Neutral is still a moving cycle.** Wheels and connected rods must turn when the locomotive rolls in neutral.
+For example, at 25% of the cycle, each driver must be at the **same crank angle in all three clips**, preserving the model's left/right quartering. The reverser-dependent valve gear poses would differ. That alignment lets the blend change the gear setting while keeping the wheels aligned.
 
-All three clips must use the same crank position at the same point in their cycles. Reverse describes the gear setting: bake it with the same reference direction of wheel rotation as the other clips. The locomotive's actual wheel motion would determine whether the cycles are sampled forwards or backwards.
+**Neutral is still a moving cycle.** Wheels and connected rods must turn when the locomotive rolls in neutral. Forward, neutral, and reverse name the **reverser setting**, not the direction or speed of clip playback. Bake all three with the same reference direction of wheel rotation; the locomotive's actual wheel motion would determine whether they are sampled forwards or backwards.
+
+### How the cycles would be used
 
 For example, with the reverser halfway toward forward, the proposal blends neutral and forward equally. All clips are sampled at the same wheel phase:
 
@@ -46,7 +52,9 @@ For example, with the reverser halfway toward forward, the proposal blends neutr
 | 0.5 | 0 | 0.5 | 0.5 |
 | 1 | 0 | 0 | 1 |
 
-Wheel phase and reverser position are independent inputs. Moving the reverser while stopped should reposition the gear at the current wheel angle. Rolling backwards with the reverser forward should follow the wheels' actual motion.
+Wheel phase and reverser position are independent inputs: **wheel motion chooses the point in the cycle; the reverser chooses the blend between cycles**. Moving the reverser while stopped should reposition the gear at the current wheel angle. Rolling backwards with the reverser forward should follow the wheels' actual motion.
+
+While the feature is active, the blended cycles would animate the complete driver assembly. The existing ordinary driver clip would be retained for fallback, rather than playing over the same bones at the same time. You would not set up a drivers-only animation and a separate valve-gear animation to compete over those bones.
 
 ## 1. Prepare and bake your model
 
@@ -54,12 +62,12 @@ Keep your source rig and existing driver animation. That existing clip would rem
 
 For each engine section:
 
-1. Choose a repeatable starting crank position and retain the model's left/right quartering.
-2. Set the reverser to full forward and bake one complete revolution.
-3. Repeat at neutral and full reverse, using the same starting angle, rotation direction, and hierarchy.
-4. Bake the evaluated bone or transform motion so playback does not depend on the source application's constraints.
-5. Include the complete driver assembly animated by the ordinary driver clip, together with the valve gear. Use matching animated properties in all three clips, including properties that remain constant in one setting.
-6. Check that each cycle closes without a visible jump. Keep the wheels in phase across all three settings before exporting.
+1. Start with the existing driver rotation. Choose a repeatable starting crank position and retain the model's left/right quartering.
+2. Hold the reverser at full forward, run one complete driver revolution, and bake **the drivers, rods, and valve gear together** into the forward clip.
+3. Reuse that same driver rotation with the reverser held centered and bake the complete assembly into the neutral clip.
+4. Repeat with the reverser held at full reverse for the reverse clip. Keep the same starting angle, rotation direction, timing, and hierarchy across all three.
+5. In each clip, bake the evaluated bone or transform motion so playback does not depend on the source application's constraints. Cover every animated property from the ordinary driver clip, together with the valve gear. Use matching animated properties in all three clips, including properties that remain constant in one setting.
+6. Check that each cycle closes without a visible jump. Compare the same phase across all three clips to confirm that the wheels stay aligned while the gear setting changes.
 
 If you use Blender, follow Railroader's [Blender workflow](https://docs.railroadergame.com/modding/blender-workflow/) for the model export. The proposed tool would consume baked animation; it would not build a mechanism rig or derive the missing neutral/reverse cycles from a single forward clip.
 
@@ -90,7 +98,7 @@ The ordinary wheel animation reference would remain `Drivers`; adding this featu
 
 ### Articulated locomotives
 
-Prepare a set of three cycles for **each independently animated engine section**. A locomotive with a rear engine in the main body and one additional front engine would normally have six cycles, plus its ordinary driver animations.
+Prepare a set of three cycles for **each independently animated engine section**. Each set includes that section's drivers and valve gear together. A locomotive with a rear engine in the main body and one additional front engine would normally have six cycles, plus its ordinary driver animations.
 
 The proposed setup would identify the main body with an empty `engineSetIdentifier`. An additional section would use the exact identifier from the definition's `engineSets` list, such as `front`. This is a definition identifier, not an arbitrary display name or bone path.
 
