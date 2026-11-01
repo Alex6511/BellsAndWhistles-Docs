@@ -1,4 +1,9 @@
-export default [
+const futurePlans = { label: 'Future plans', items: [
+  { label: 'Overview', slug: 'future-plans' },
+  { label: 'Valve gear (planned for 0.4.0)', slug: 'future-plans/valve-gear' },
+] };
+
+const sidebar = [
   { label: 'Bells and Whistles', items: [
     { label: 'Welcome', slug: '' },
     { label: 'Installing', slug: 'installing' },
@@ -22,8 +27,13 @@ export default [
     { label: 'Your own component kinds', slug: 'component-kinds' },
     { label: 'In-game editor', slug: 'editor-authoring' },
   ] },
+  futurePlans,
   { label: 'Maintaining the docs', items: [
     { label: 'Contributing', slug: 'development' },
     { label: 'Versions and audits', slug: 'versions' },
   ] },
 ];
+
+// Proposals remain in development navigation, outside frozen release guides.
+export const releaseSidebar = sidebar.filter((group) => group !== futurePlans);
+export default sidebar;

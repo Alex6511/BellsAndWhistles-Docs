@@ -17,6 +17,12 @@ Review affected guides, release notes, installation steps, compatibility stateme
 
 The weekly Docs workflow checks the build, archive integrity, local links, search output, and review age. A maintainer must investigate failed runs and perform the substantive content review; automated link checks cannot establish behavioral accuracy. Record the date, scope, evidence, and remaining limitations in `public/maintenance.json`. Do not advance the date without doing the review. GitHub can disable scheduled workflows in inactive public repositories; maintainers must keep the weekly schedule enabled and use the manual workflow after inactivity.
 
+## Future plans
+
+The **Future plans** category contains author-review proposals. All future plans are always subject to change, including their scope, interfaces, timing, and target B&W version. A proposal planned for 0.4.0 does not become a 0.3.0 feature because it appears alongside the current development guides.
+
+The snapshot command excludes `future-plans/` content and its navigation from release archives. Before documenting a delivered feature, review its implemented behavior and validation evidence, then move the accepted guide into the appropriate authoring documentation. Preserve existing archived versions.
+
 ## Prepare a release snapshot
 
 1. Finish the current guides and examples for the intended B&W version. Review compatibility and testing evidence, including maintainer reports; retain confirmed limitations. Check the actual release package's version, minimum game version and exported APIs against the docs, and finish the integrations described as development before freezing them.
