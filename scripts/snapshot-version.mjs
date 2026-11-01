@@ -27,7 +27,12 @@ for (const file of files) {
   const dest = path.join(docsRoot, version, relative);
   await mkdir(path.dirname(dest), { recursive: true });
   const content = await readFile(file, 'utf8');
-  await writeFile(dest, content.replaceAll(base, base + version + '/'));
+  const archived = content.replaceAll(base, base + version + '/')
+    .replaceAll(base + version + '/versions.json', base + 'versions.json')
+    .replaceAll(base + version + '/maintenance.json', base + 'maintenance.json')
+    .replace(/^---\r?\n([\s\S]*?)\r?\n---/, (_, header) =>
+      '---\n' + header.replace(/^editUrl:.*\r?\n?/gm, '') + '\neditUrl: false\n---');
+  await writeFile(dest, archived);
 }
 const publicRoot = path.join(root, 'public');
 for (const file of await walk(publicRoot)) {

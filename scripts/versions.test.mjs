@@ -26,6 +26,10 @@ test('release snapshots preserve old versions and assets, reject overwrite, and 
       await readFile(path.join(fixture, 'public/0.3.0', example)));
     const index = await readFile(path.join(fixture, 'src/content/docs/0.3.0/index.mdx'), 'utf8');
     assert.ok(index.includes('/BellsAndWhistles-Docs/0.3.0/installing/'));
+    assert.ok(index.includes('editUrl: false'));
+    const versionGuide = await readFile(path.join(fixture, 'src/content/docs/0.3.0/versions.md'), 'utf8');
+    assert.ok(versionGuide.includes('/BellsAndWhistles-Docs/versions.json'));
+    assert.ok(!versionGuide.includes('/BellsAndWhistles-Docs/0.3.0/versions.json'));
     assert.notEqual(run('snapshot-version.mjs', ['0.3.0', 'prerelease', 'Railroader 0.6.0', 'Offline only']).status, 0);
     const target = path.join(fixture, 'src/content/docs/0.3.0/index.mdx');
     await writeFile(target, index + '\nCorrection for this release.\n');

@@ -10,7 +10,7 @@ export const collections = {
       // Preserve semver dots in archive paths instead of slugifying them away.
       generateId: ({ entry, data }) => typeof data.slug === 'string'
         ? data.slug
-        : entry.replaceAll('\\', '/').replace(/\.(md|mdx)$/, ''),
+        : entry.replaceAll('\\', '/').replace(/\.(md|mdx)$/, '').replace(/\/index$/, ''),
     }),
     schema: docsSchema(),
   }),
