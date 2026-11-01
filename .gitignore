@@ -1,0 +1,5 @@
+/site/
+/.venv/
+/_local/
+__pycache__/
+*.pyc

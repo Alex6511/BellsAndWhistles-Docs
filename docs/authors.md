@@ -1,0 +1,64 @@
+# For content authors
+
+Bells and Whistles adds features that you can turn on for the cars in your content pack. Each feature acts only on cars whose definitions opt in.
+
+## Pick a feature
+
+- [Tender Bells](tender-bells.md): ring the `Bell` component on a steam locomotive's tender together with the locomotive's bell. Optionally, the locomotive's headlights pick one bell to ring.
+- [Flexible Connectors](flexible-connectors.md): draw simulated hoses, cables and semi-rigid pipes between named transforms on one car or on coupled cars.
+- [Driven Animation](driven-animation.md): play an animation clip driven by a car's speed or a locomotive's throttle, reverser, fuel use or water use.
+- [Horn and Whistle](horn-and-whistle.md): let players choose whether the horn control plays the whistle or the horn on a locomotive that has both.
+- [Auxiliary Tenders](aux-tender/README.md): keep a locomotive's tender topped up with water from a coupled auxiliary car.
+- [Your own component kinds](component-kinds/README.md): declare new component kinds, which the editor shows with a field for each setting (prototype).
+
+To set up features in Railroader's in-game car editor instead of editing `Definitions.json`, see the [In-game editor guide](editor-authoring.md).
+
+## What a carrier is
+
+A *carrier* is a `Script` component whose `scriptAsset` is `alex6511/FlexibleConnector`, `alex6511/TenderBell` or `alex6511/HornSelector`. Its `parameters` hold the settings.
+
+## Set up your pack's `Info.json`
+
+Add `alex6511/bells-and-whistles` to your pack's `Info.json`. The entry you need depends on the features your pack uses:
+
+| Your pack uses | In `Info.json` | Without Bells and Whistles |
+| --- | --- | --- |
+| Tender Bells (with or without a carrier) or Flexible Connectors | `optional` (recommended) | Your cars still load. Each car with a carrier logs a script-resolution error. |
+| Horn and Whistle (with or without a carrier) | `optional` (recommended) | Your locomotive still loads, but only one of its two instruments sounds. A `HornSelector` carrier shipped disabled logs nothing. |
+| The legacy `"kind": "FlexibleConnector"` | `required` | The game can't read your pack's `Definitions.json`, so none of its definitions load. Listing Bells and Whistles as `required` shows players a clear missing-mod message instead. |
+| Driven Animation | `required` | The game can't read your pack's `Definitions.json`, so none of its definitions load. Listing Bells and Whistles as `required` shows players a clear missing-mod message instead. |
+| Your own component kinds | `required` | The game can't read your pack's `Definitions.json`, so none of its definitions load. Listing Bells and Whistles as `required` shows players a clear missing-mod message instead. [Before you choose this](component-kinds/README.md#before-you-choose-this) lists the costs. |
+| An aux tender | No dependency. Add a load-order hint instead. | The car loads as a plain water car, with no warnings. [Auxiliary Tenders](aux-tender/README.md) shows the full setup. |
+
+Tender Bells works with just a `Bell` component on the tender. You need a carrier only to change the routing, or to stop Bells and Whistles from driving that tender's bells.
+
+Copy the entry that matches your pack:
+
+=== "Optional"
+
+    ```json title="Info.json"
+    "dependencies": {
+      "required": ["rr/game"],
+      "optional": ["alex6511/bells-and-whistles >=0.3.0"]
+    }
+    ```
+
+=== "Required"
+
+    ```json title="Info.json"
+    "dependencies": {
+      "required": ["rr/game", "alex6511/bells-and-whistles >=0.3.0"]
+    }
+    ```
+
+=== "Aux tender load-order hint"
+
+    ```json title="Info.json"
+    "load": {
+      "after": ["alex6511/bells-and-whistles"]
+    }
+    ```
+
+## Object and array forms of components
+
+Most component examples on this site use the Railroader 0.6.0 object form of `definition.components`. In that form, `components` is an object, and each key is a component id, such as `"tender-bell"`. The 2025.1 array form also works.
