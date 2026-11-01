@@ -5,7 +5,7 @@ editUrl: false
 
 :::caution[Archived release documentation]
 
-This is the documentation from **v0.2.0** (2026-05-25). This B&W version was published as a prerelease. These guides use the older loader and component APIs. They are not the native Railroader 0.6.0 development guides. The archive has not been retested in a running game.
+This is the documentation from **v0.2.0** (2026-05-25). This B&W version was published as a prerelease. These guides use the older loader and component APIs. They are not the native Railroader 0.6.0 development guides.
 
 [Read current development docs](/BellsAndWhistles-Docs/) or use the version selector.
 

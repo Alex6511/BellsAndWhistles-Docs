@@ -2,13 +2,6 @@
 title: "Your own component kinds"
 ---
 
-:::caution[Prototype: not yet tried in a running game]
-
-
-This feature has been checked offline against the game's own parser, editor lists and serializer (the public 0.6.0 release). It has not been tried in a running game yet.
-
-:::
-
 A content pack can add its own component kinds, such as `"kind": "acme.SignalLamp"`. They work like the game's built-in kinds:
 
 - `Definitions.json` and `Data.rl` accept them.

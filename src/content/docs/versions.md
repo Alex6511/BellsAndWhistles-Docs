@@ -2,9 +2,9 @@
 title: Versions and documentation audits
 ---
 
-Choose a version from the header to read guides for that B&W release. **B&W versions and Railroader versions are separate.** The development channel currently documents B&W 0.3.0 against Railroader 0.6.0 with in-game acceptance still pending.
+Choose a version from the header to read guides for that B&W release. **B&W versions and Railroader versions are separate.** The development channel currently documents B&W 0.3.0 for Railroader 0.6.0. The maintainer has confirmed that 0.3.0 has been tested in-game.
 
-B&W 0.2.1 and 0.2.0 were published as prereleases. Tender Bells 1.0.0 is a legacy predecessor, not a newer B&W release. The initial archives reproduce the player and author documentation available at each release tag; they do not invent missing historical pages or claim new runtime validation.
+B&W 0.2.1 and 0.2.0 were published as prereleases. Tender Bells 1.0.0 is a legacy predecessor, not a newer B&W release. The initial archives reproduce the player and author documentation available at each release tag; they preserve the documentation available for each historical release.
 
 ## When to audit
 
@@ -19,12 +19,12 @@ The weekly Docs workflow checks the build, archive integrity, local links, searc
 
 ## Prepare a release snapshot
 
-1. Finish the current guides and examples for the intended B&W version. Review compatibility and runtime acceptance evidence; retain any limitations.
+1. Finish the current guides and examples for the intended B&W version. Review compatibility and testing evidence, including maintainer reports; retain confirmed limitations.
 2. Set `current.version` and its development label in `public/versions.json` to the version being prepared. Update the maintenance audit with actual evidence.
 3. Freeze the reviewed content. For example:
 
 ```sh
-npm run version:snapshot -- 0.3.0 prerelease "Railroader 0.6.0" "Offline checks passed; in-game acceptance pending"
+npm run version:snapshot -- 0.3.0 prerelease "Railroader 0.6.0" "Tested in-game; confirmed by the maintainer"
 ```
 
 This creates a separate content tree, sidebar, and copy of downloadable assets. Internal links point into that version. It refuses to overwrite an existing archive and records a SHA-256 digest of the snapshot. Use the actual compatibility and validation evidence, not the example text blindly.

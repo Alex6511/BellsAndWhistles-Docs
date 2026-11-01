@@ -23,8 +23,6 @@ On a locomotive with both instruments, the **Customize** window gets a **Horn an
 
 The choice is stored on the locomotive, so it's saved with your game. In multiplayer, it's shared with the other players. Changing it needs the same permission as the game's own horn and whistle settings.
 
-Like the rest of 0.3.0, this feature hasn't been tested in a running game yet.
-
 ## Give a locomotive both instruments
 
 Add a `Whistle` component and a `Horn` component to the locomotive's definition. Both are the game's own component kinds.

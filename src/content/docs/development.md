@@ -26,7 +26,7 @@ npm run build
 
 The build verifies frozen version hashes, all local page and asset links, section anchors, version navigation, and search output. Generated files go in `dist/`. The maintenance check fails when a substantive review is overdue.
 
-Distinguish offline validation from testing in a running game. The current guides describe the 0.3.0 development rework for Railroader 0.6.0; they do not claim runtime acceptance or support for later game builds.
+Base testing statements on maintainer reports and recorded test evidence. The maintainer has confirmed in-game testing of B&W 0.3.0. These guides describe its Railroader 0.6.0 native mod APIs.
 
 ## Publish
 
