@@ -1,6 +1,7 @@
 const futurePlans = { label: 'Future plans', items: [
   { label: 'Overview', slug: 'future-plans' },
   { label: 'Valve gear (planned for 0.4.0)', slug: 'future-plans/valve-gear' },
+  { label: 'Steam plants and simpling (planned for 0.4.0)', slug: 'future-plans/steam-plants' },
 ] };
 
 const sidebar = [
