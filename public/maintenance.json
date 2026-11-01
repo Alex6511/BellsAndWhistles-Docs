@@ -10,13 +10,15 @@
     "Kept historical release content separate from current APIs; checked existing downloadable examples and version navigation.",
     "Audited the historical 0.2.0/0.2.1 loader manifests and endpoint implementation; recorded explicit errata for the Library of Stuff requirement, endpoint rotation and Windows editor path. Removed unsupported historical revalidation wording.",
     "Reviewed the valve gear authoring proposal planned for B&W 0.4.0: three-cycle preparation, section mapping, preview, proposed Script configuration, optional activation, export and reviewer feedback. Marked every future plan as subject to change and separated proposal status from existing release validation.",
-    "Kept future-plan pages and navigation outside new release snapshots; added coverage to the snapshot/erratum regression test while preserving published archive metadata and digests."
+    "Kept future-plan pages and navigation outside new release snapshots; added coverage to the snapshot/erratum regression test while preserving published archive metadata and digests.",
+    "Reviewed the proposed 0.4.0 steam-plant authoring workflow, profile/circuit sketches, AE calibration references, optional activation and cab bindings. Marked the target, APIs and examples as subject to change and distinguished missing physical inputs from supported defaults."
   ],
-  "runtimeStatus": "B&W 0.3.0 has been tested in-game, as confirmed by the maintainer on 2026-11-01. This audit does not assign invented per-feature test coverage. The valve gear proposal planned for 0.4.0 makes no claim of implemented runtime behavior, ADK acceptance or in-game validation.",
+  "runtimeStatus": "B&W 0.3.0 has been tested in-game, as confirmed by the maintainer on 2026-11-01. This audit does not assign invented per-feature test coverage. The valve gear proposal planned for 0.4.0 makes no claim of implemented runtime behavior, ADK acceptance or in-game validation. The steam-plant proposal planned for 0.4.0 is an author-review document, not a working example pack or a gameplay-validation claim.",
   "followUp": [
     "Before freezing 0.3.0, reconcile the completed package's version, exports and Railroader >=0.6.2 requirement with these development guides.",
     "Re-audit the new interfaces when integration changes; retain Driven Animation and Horn/Whistle in the combined release.",
-    "Reconcile the valve gear proposal with implemented behavior and author feedback before promoting it to release authoring documentation; the 0.4.0 target and interfaces remain subject to change."
+    "Reconcile the valve gear proposal with implemented behavior and author feedback before promoting it to release authoring documentation; the 0.4.0 target and interfaces remain subject to change.",
+    "Reconcile the steam-plant proposal with modder feedback and the eventual implementation before publishing supported authoring examples or Railroader compatibility claims."
   ],
   "reviewType": "Behavioral source audit, maintainer corrections and active integration review; future-plan authoring and snapshot boundary review"
 }
