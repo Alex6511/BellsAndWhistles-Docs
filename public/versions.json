@@ -18,17 +18,23 @@
       "channel": "prerelease",
       "path": "/BellsAndWhistles-Docs/0.2.1/",
       "releasedAt": "2026-05-25",
-      "railroader": "2025.1 (legacy UMM generation; not revalidated)",
+      "railroader": "2025.1 (legacy UMM generation)",
       "validation": "Documentation recovered from the v0.2.1 release tag.",
       "frozen": true,
-      "revision": 2,
-      "sha256": "585a7b456ca49b8bd6b68ae4254cb318a7416790603a8e31f84296c20b026088",
+      "revision": 3,
+      "sha256": "bae85928792b0fbd5b4a0ec9400005cf439d75b1165aaea81ee236cf56d04329",
       "errata": [
         {
           "revision": 2,
           "date": "2026-11-01",
           "reason": "Remove the unsupported testing-status statement added to the archive notice.",
           "previousSha256": "2f90e5e77157875c4f0827f256989c7579af19f8beb3634a25ca78e63eff6487"
+        },
+        {
+          "revision": 3,
+          "date": "2026-11-01",
+          "reason": "Correct the UMM Library of Stuff requirement, endpoint rotation explanation and Windows editor path against this release; clarify the current-docs pointer.",
+          "previousSha256": "585a7b456ca49b8bd6b68ae4254cb318a7416790603a8e31f84296c20b026088"
         }
       ]
     },
@@ -41,17 +47,23 @@
       "channel": "prerelease",
       "path": "/BellsAndWhistles-Docs/0.2.0/",
       "releasedAt": "2026-05-25",
-      "railroader": "2025.1 (legacy loader generation; not revalidated)",
+      "railroader": "2025.1 (legacy loader generation)",
       "validation": "Documentation recovered from the v0.2.0 release tag.",
       "frozen": true,
-      "revision": 2,
-      "sha256": "cca4700385c68674620b1a0bb484383182597bf884a03fd773d569edb9665b58",
+      "revision": 3,
+      "sha256": "311c6a21faf6ca651649f32abb23ca42ded71ff932b251756b7d7c66efa6e9dd",
       "errata": [
         {
           "revision": 2,
           "date": "2026-11-01",
           "reason": "Remove the unsupported testing-status statement added to the archive notice.",
           "previousSha256": "fb7ce02e73d5cfd071dec22a3960ea2b7b34a9947753fc4d0fc05c2a4955ffb1"
+        },
+        {
+          "revision": 3,
+          "date": "2026-11-01",
+          "reason": "Correct the UMM Library of Stuff requirement, endpoint rotation explanation and Windows editor path against this release; clarify the current-docs pointer.",
+          "previousSha256": "cca4700385c68674620b1a0bb484383182597bf884a03fd773d569edb9665b58"
         }
       ]
     },
