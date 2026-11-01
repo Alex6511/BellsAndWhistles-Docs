@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { cp, mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
+import { access, cp, mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -27,6 +27,12 @@ test('release snapshots preserve old versions and assets, reject overwrite, and 
     const index = await readFile(path.join(fixture, 'src/content/docs/0.3.0/index.mdx'), 'utf8');
     assert.ok(index.includes('/BellsAndWhistles-Docs/0.3.0/installing/'));
     assert.ok(index.includes('editUrl: false'));
+    // Review proposals stay available at the development root, not in a release.
+    await access(path.join(fixture, 'src/content/docs/future-plans/valve-gear.md'));
+    await assert.rejects(access(path.join(fixture, 'src/content/docs/0.3.0/future-plans')), { code: 'ENOENT' });
+    const archivedSidebar = JSON.parse(await readFile(path.join(fixture, 'src/content/versions/0.3.0.json'), 'utf8'));
+    assert.ok(!JSON.stringify(archivedSidebar).includes('future-plans'));
+    assert.ok(JSON.stringify(archivedSidebar).includes('driven-animation'));
     const versionGuide = await readFile(path.join(fixture, 'src/content/docs/0.3.0/versions.md'), 'utf8');
     assert.ok(versionGuide.includes('/BellsAndWhistles-Docs/versions.json'));
     assert.ok(!versionGuide.includes('/BellsAndWhistles-Docs/0.3.0/versions.json'));

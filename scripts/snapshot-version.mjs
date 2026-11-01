@@ -1,6 +1,6 @@
 import { mkdir, readFile, writeFile, copyFile, access } from 'node:fs/promises';
 import path from 'node:path';
-import sidebar from '../config/sidebar.mjs';
+import { releaseSidebar as sidebar } from '../config/sidebar.mjs';
 import { base, walk, verifyVersions, snapshotDigest } from './versions-lib.mjs';
 
 const [version, channel, railroader, validation] = process.argv.slice(2);
@@ -12,7 +12,7 @@ const root = process.cwd();
 const manifest = await verifyVersions(root);
 if (version !== manifest.current.version) throw new Error('Version must match the reviewed current development version.');
 if (manifest.releases.some((release) => release.slug === version)) throw new Error('Refusing to overwrite an existing snapshot.');
-const excluded = new Set(manifest.releases.map((release) => release.slug));
+const excluded = new Set([...manifest.releases.map((release) => release.slug), 'future-plans']);
 const docsRoot = path.join(root, 'src/content/docs');
 for (const existing of [path.join(docsRoot, version), path.join(root, 'public', version), path.join(root, 'src/content/versions', version + '.json')]) {
   const exists = await access(existing).then(() => true, (error) => {
