@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/check-versions.mjs && astro build && node scripts/check-site.mjs",
+    "build": "node scripts/check-versions.mjs && node scripts/check-archive-history.mjs && astro build && node scripts/check-site.mjs",
     "preview": "astro preview",
     "check:versions": "node scripts/check-versions.mjs",
     "check:audit": "node scripts/check-audit.mjs",

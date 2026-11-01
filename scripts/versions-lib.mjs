@@ -56,3 +56,26 @@ export async function verifyVersions(root) {
   }
   return manifest;
 }
+
+export function assertArchiveHistory(previous, current) {
+  for (const before of previous.releases) {
+    const after = current.releases.find((release) => release.slug === before.slug);
+    if (!after) throw new Error('Published archive removed: ' + before.slug);
+    for (const key of ['product', 'version', 'tag', 'slug', 'path', 'channel']) {
+      if (before[key] !== after[key]) throw new Error('Published release identity changed: ' + before.slug);
+    }
+    if (before.sha256 === after.sha256) {
+      if (before.revision !== after.revision || JSON.stringify(before.errata ?? []) !== JSON.stringify(after.errata ?? [])) {
+        throw new Error('Archive history changed without a content correction: ' + before.slug);
+      }
+      continue;
+    }
+    const last = after.errata?.at(-1);
+    if (after.revision !== before.revision + 1 || last?.revision !== after.revision ||
+        last?.previousSha256 !== before.sha256 || !last?.reason?.trim() ||
+        !/^\d{4}-\d{2}-\d{2}$/.test(last?.date ?? '') ||
+        JSON.stringify(after.errata.slice(0, -1)) !== JSON.stringify(before.errata ?? [])) {
+      throw new Error('Archive change requires a recorded erratum: ' + before.slug);
+    }
+  }
+}

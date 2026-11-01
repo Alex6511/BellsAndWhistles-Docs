@@ -4,7 +4,7 @@ import { cp, mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { verifyVersions } from './versions-lib.mjs';
+import { verifyVersions, assertArchiveHistory } from './versions-lib.mjs';
 
 test('release snapshots preserve old versions and assets, reject overwrite, and require recorded errata', async () => {
   const fixture = await mkdtemp(path.join(tmpdir(), 'bw-docs-version-test-'));
@@ -37,6 +37,12 @@ test('release snapshots preserve old versions and assets, reject overwrite, and 
     const erratum = run('refresh-archive.mjs', ['0.3.0', 'Correct the frozen release description']);
     assert.equal(erratum.status, 0, erratum.stderr);
     const corrected = await verifyVersions(fixture);
+    assertArchiveHistory(after, corrected);
+    assert.throws(() => assertArchiveHistory(after, { ...corrected, releases: corrected.releases.slice(1) }), /removed/);
+    const silent = structuredClone(corrected);
+    silent.releases[0].revision = 1;
+    delete silent.releases[0].errata;
+    assert.throws(() => assertArchiveHistory(after, silent), /recorded erratum/);
     assert.equal(corrected.releases[0].revision, 2);
     assert.equal(corrected.releases[0].errata[0].previousSha256, after.releases[0].sha256);
   } finally {

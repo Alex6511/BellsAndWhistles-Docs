@@ -22,6 +22,8 @@ for (const file of files.filter((file) => file.endsWith('.html'))) {
   visit(tree, (node) => {
     const attrs = Object.fromEntries((node.attrs ?? []).map(({ name, value }) => [name, value]));
     if (attrs.id) ids.add(attrs.id);
+    // Astro emits /404/ as metadata while GitHub Pages serves the error document as 404.html.
+    if (relative === '404.html' && node.tagName === 'link' && attrs.rel === 'canonical') return;
     for (const name of ['href', 'src']) if (attrs[name]) links.push(attrs[name]);
   });
   pages.set(relative, { ids, links, html });

@@ -17,6 +17,8 @@ concurrency:
 
 jobs:
   build:
+    env:
+      DOCS_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
     permissions:
       contents: read
       pages: read
@@ -25,6 +27,8 @@ jobs:
     steps:
       - name: Checkout documentation
         uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
       - name: Set up Node
         uses: actions/setup-node@v7.1.0
         with:
