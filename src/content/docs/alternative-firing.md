@@ -4,7 +4,7 @@ title: Oil and wood firing
 
 Bunker-C oil and wood firing are being integrated into **Bells and Whistles 0.3.0**. Authors choose the fuel in the locomotive definition. B&W uses the game's steam demand to consume that fuel and water from the appropriate car.
 
-This page describes the current development interface. Require `alex6511/bells-and-whistles >=0.3.0` and `rr/game >=0.6.2`. See [migration](/BellsAndWhistles-Docs/migration/) for existing provider dependencies and saved loads.
+This page describes the 0.3.0 interface. Require `alex6511/bells-and-whistles >=0.3.0` and `rr/game >=0.6.2`. See [migration](/BellsAndWhistles-Docs/migration/) for existing provider dependencies and saved loads.
 
 ## Declare the firing type
 

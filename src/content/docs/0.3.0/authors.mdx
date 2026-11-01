@@ -1,0 +1,97 @@
+---
+title: "For content authors"
+editUrl: false
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Bells and Whistles provides rolling-stock features, fuel services and Relay APIs. Most features use explicit declarations; tender bells can follow an existing Bell component automatically, and horn/whistle selection applies to locomotives with both instruments. Legacy geared profiles and firing bindings can also select locomotives.
+
+These are the development guides for **0.3.0**, including the geared, firing, service and API integrations being prepared for that release.
+
+## Pick a feature
+
+- [Tender Bells](/BellsAndWhistles-Docs/0.3.0/tender-bells/): ring the `Bell` component on a steam locomotive's tender together with the locomotive's bell. Optionally, the locomotive's headlights pick one bell to ring.
+- [Flexible Connectors](/BellsAndWhistles-Docs/0.3.0/flexible-connectors/): draw simulated hoses, cables and semi-rigid pipes between named transforms on one car or on coupled cars.
+- [Driven Animation](/BellsAndWhistles-Docs/0.3.0/driven-animation/): play an animation clip driven by a car's speed or a locomotive's throttle, reverser, fuel use or water use.
+- [Horn and Whistle](/BellsAndWhistles-Docs/0.3.0/horn-and-whistle/): let players choose whether the horn control plays the whistle or the horn on a locomotive that has both.
+- [Auxiliary Tenders](/BellsAndWhistles-Docs/0.3.0/aux-tender/): keep a locomotive's tender topped up with water from a coupled auxiliary car.
+- [Geared Steam](/BellsAndWhistles-Docs/0.3.0/geared-steam/): configure geared locomotive performance, chuff timing and author-supplied mechanical audio.
+- [Oil and wood firing](/BellsAndWhistles-Docs/0.3.0/alternative-firing/): give a steam locomotive a fixed Bunker-C or wood fuel type.
+- [Fuel storage and outlets](/BellsAndWhistles-Docs/0.3.0/fuel-services/): connect finite industry stock or an explicitly infinite source to authored refueling outlets.
+- [Relay APIs](/BellsAndWhistles-Docs/0.3.0/relay-api/): construct declarations, inspect feature state and use the supported runtime controls.
+- [Your own component kinds](/BellsAndWhistles-Docs/0.3.0/component-kinds/): declare new component kinds, which the editor shows with a field for each setting.
+
+To set up features in Railroader's in-game car editor instead of editing `Definitions.json`, see the [In-game editor guide](/BellsAndWhistles-Docs/0.3.0/editor-authoring/).
+
+## What a carrier is
+
+A *carrier* is a native `Script` component pointing to a B&W export, with settings under `parameters`. The feature exports are `alex6511/FlexibleConnector`, `alex6511/TenderBell`, `alex6511/HornSelector`, `alex6511/AuxTender`, `alex6511/GearedSteam`, `alex6511/AlternativeFiring`, `alex6511/FuelStorage` and `alex6511/FuelOutlet`.
+
+Use the feature's enabled/disabled rule: HornSelector is read even when disabled; optional AuxTender declarations are enabled by a marker check; the other carriers need to be enabled. A carrier's native JSON syntax alone does not mean its behavior is optional.
+
+## Set up your pack's `Info.json`
+
+Add `alex6511/bells-and-whistles` to your pack's `Info.json`. The entry you need depends on the features your pack uses:
+
+| Your pack uses | In `Info.json` | Without Bells and Whistles |
+| --- | --- | --- |
+| Tender Bells (with or without a carrier) or Flexible Connectors | `optional` (recommended) | Your cars still load. Each car with a carrier logs a script-resolution error. |
+| Horn and Whistle (with or without a carrier) | `optional` (recommended) | Your locomotive still loads, but only one of its two instruments sounds. A `HornSelector` carrier shipped disabled logs nothing. |
+| The legacy `"kind": "FlexibleConnector"` | `required` | The game can't read your pack's `Definitions.json`, so none of its definitions load. Listing Bells and Whistles as `required` shows players a clear missing-mod message instead. |
+| Driven Animation | `required` | The game can't read your pack's `Definitions.json`, so none of its definitions load. Listing Bells and Whistles as `required` shows players a clear missing-mod message instead. |
+| Your own component kinds | `required` | The game can't read your pack's `Definitions.json`, so none of its definitions load. Listing Bells and Whistles as `required` shows players a clear missing-mod message instead. [Before you choose this](/BellsAndWhistles-Docs/0.3.0/component-kinds/#before-you-choose-this) lists the costs. |
+| Geared Steam, Alternative Firing, fuel facilities or B&W Relay module imports | `required` | The intended gameplay behavior or imported module is unavailable. |
+| An aux tender using only the optional marker pattern | No B&W dependency. Add a load-order hint instead. | The car loads as a plain water car, with no warnings. [Auxiliary Tenders](/BellsAndWhistles-Docs/0.3.0/aux-tender/) shows the full setup. |
+
+Tender Bells works with just a `Bell` component on the tender. You need a carrier only to change the routing, or to stop Bells and Whistles from driving that tender's bells.
+
+If your pack combines features, satisfy the strongest requirement: a pack importing B&W APIs or using its gameplay features must require B&W even if its aux-water-car component could work alone.
+
+The combined B&W package uses `scope: "unscoped"` and participates in multiplayer package/version matching. This is separate from whether your content pack declares B&W as optional. See [migration](/BellsAndWhistles-Docs/0.3.0/migration/).
+
+Copy the entry that matches your pack:
+
+<Tabs>
+
+<TabItem label="Optional">
+
+
+```json title="Info.json"
+"dependencies": {
+  "required": ["rr/game >=0.6.2"],
+  "optional": ["alex6511/bells-and-whistles >=0.3.0"]
+}
+```
+
+</TabItem>
+
+
+<TabItem label="Required">
+
+
+```json title="Info.json"
+"dependencies": {
+  "required": ["rr/game >=0.6.2", "alex6511/bells-and-whistles >=0.3.0"]
+}
+```
+
+</TabItem>
+
+
+<TabItem label="Aux tender load-order hint">
+
+
+```json title="Info.json"
+"load": {
+  "after": ["alex6511/bells-and-whistles"]
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+## Object and array forms of components
+
+Most component examples on this site use the Railroader 0.6.0 object form of `definition.components`. In that form, `components` is an object, and each key is a component id, such as `"tender-bell"`. The older array form is still accepted by the component reader; that is data-format compatibility, not support for running B&W 0.3.0 on Railroader 2025.1. `BWAuthoring.add` expects object-form components.

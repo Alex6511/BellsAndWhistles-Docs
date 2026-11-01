@@ -2,7 +2,7 @@
 title: Geared Steam
 ---
 
-Geared Steam support is being integrated into **Bells and Whistles 0.3.0**. It gives opted-in steam locomotives a geared tractive-effort profile, response tuning, speed limits, chuff timing and author-supplied mechanical audio. This page documents the current development interface; the [release snapshot](/BellsAndWhistles-Docs/versions/) will freeze it when integration is complete.
+Geared Steam is included in **Bells and Whistles 0.3.0**. It gives opted-in steam locomotives a geared tractive-effort profile, response tuning, speed limits, chuff timing and author-supplied mechanical audio. Select the [frozen version](/BellsAndWhistles-Docs/versions/) matching your installed release.
 
 This changes locomotive behavior. Require `alex6511/bells-and-whistles >=0.3.0` and `rr/game >=0.6.2` in your pack. See [migration](/BellsAndWhistles-Docs/migration/) before replacing a standalone Geared Steam provider.
 

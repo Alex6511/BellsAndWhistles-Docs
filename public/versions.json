@@ -10,6 +10,20 @@
   },
   "releases": [
     {
+      "version": "0.3.0",
+      "tag": "v0.3.0",
+      "product": "BellsAndWhistles",
+      "slug": "0.3.0",
+      "label": "0.3.0 (prerelease)",
+      "channel": "prerelease",
+      "path": "/BellsAndWhistles-Docs/0.3.0/",
+      "railroader": "Railroader >=0.6.2; qualified against build 26335745",
+      "validation": "Earlier 0.3.0 in-game testing confirmed by the maintainer. Combined offline/native curve, reload and author-audio checks passed; fresh combined gameplay, editor, save/reload and multiplayer acceptance remain separate.",
+      "frozen": true,
+      "revision": 1,
+      "sha256": "a2fb4ba91dee3df037fd59ca5b7cee868dc1e3f94888d8d26cda53c63232a891"
+    },
+    {
       "version": "0.2.1",
       "tag": "v0.2.1",
       "product": "BellsAndWhistles",

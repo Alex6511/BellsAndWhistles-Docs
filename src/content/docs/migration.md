@@ -2,7 +2,7 @@
 title: Migrating content to 0.3.0
 ---
 
-The combined **0.3.0** release is being prepared for Railroader **0.6.2 or later**. It brings native B&W authoring together with Geared Steam, oil/wood firing, fuel services and Relay APIs. These pages track development; the release snapshot will identify the completed package.
+The combined **0.3.0** release targets Railroader **0.6.2 or later**. It brings native B&W authoring together with Geared Steam, oil/wood firing, fuel services and Relay APIs. Use the frozen 0.3.0 snapshot for this package's authoring contract and recorded validation limits.
 
 If you play Railroader 2025.1, this version isn't for you. Bells and Whistles 0.3.0 has no Unity Mod Manager build.
 
@@ -33,7 +33,7 @@ Keep fuel and water in distinct slots, and keep the load IDs, slot indexes and u
 
 Geared preferences move to B&W's own settings file when it does not already exist. The original `geared-steam.json` is retained. Per-car gear volume remains local to each player.
 
-B&W's finite fuel outlets use native industry stock. They do not refill storage when a carrier or world reloads. Outlet enabled state and a requested target are transient runtime settings; stock persistence is separate.
+B&W's finite fuel outlets use native industry stock. They do not refill storage when a carrier or world reloads. Outlet enabled state and requested target persist in the bound industry's native properties. Every storage binding, including infinite supply, therefore needs an industry ID.
 
 ## Multiplayer and release checks
 

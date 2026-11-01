@@ -1,0 +1,9 @@
+{
+  "greeting": {
+    "kind": "example.CarGreeting",
+    "name": "Greeting",
+    "greeting": "Good morning from",
+    "repeat": 2,
+    "tags": ["flatcar", "demo"]
+  }
+}

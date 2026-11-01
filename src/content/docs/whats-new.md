@@ -2,7 +2,7 @@
 title: "What's new in 0.3.0"
 ---
 
-Bells and Whistles 0.3.0 uses Railroader's native mod system and has been tested in-game. The combined release is being prepared for **Railroader 0.6.2 or later**. These development notes include the integrations still being completed for 0.3.0.
+Bells and Whistles 0.3.0 uses Railroader's native mod system for **Railroader 0.6.2 or later**. The maintainer has confirmed earlier in-game testing of 0.3.0. The combined build additionally passed offline and native engine fixtures; fresh combined gameplay, editor, save/reload and multiplayer acceptance remain separate.
 
 If you play Railroader 2025.1, this version isn't for you. Bells and Whistles 0.3.0 has no Unity Mod Manager build.
 

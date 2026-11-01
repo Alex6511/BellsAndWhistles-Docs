@@ -25,6 +25,8 @@ const sidebar = [
     { label: 'Oil and wood firing', slug: 'alternative-firing' },
     { label: 'Fuel storage and outlets', slug: 'fuel-services' },
     { label: 'Relay APIs', slug: 'relay-api' },
+    { label: 'Settings and API coverage', slug: 'settings-api-coverage' },
+    { label: 'Feature examples', slug: 'feature-examples' },
     { label: 'Your own component kinds', slug: 'component-kinds' },
     { label: 'In-game editor', slug: 'editor-authoring' },
   ] },

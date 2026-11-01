@@ -12,6 +12,8 @@ Without Bells and Whistles, the game can't read a `Definitions.json` that uses t
 
 ## What the model needs
 
+The standard Script authoring surface is also available: use `"kind": "Script"`, `"scriptAsset": "alex6511/DrivenAnimation"` and place the settings below in `parameters`. `BWAuthoring.drivenAnimation(parameters)` constructs that declaration in `Data.rl`. Both surfaces use the same model builder. `BWAnimation.snapshot(car)` reads effective declarations and loaded instances; `setEnabled(car, enabled)` controls presentation through a normal car property.
+
 - The clip must be in the **AnimationMap** of the model part the component is on, the same as for the game's PropertyAnimation and ToggleAnimation components.
 - For continuous motion (Speed mode), set the clip to loop in Unity. Bells and Whistles only sets how fast the clip plays; a clip that doesn't loop stops at its last frame.
 
