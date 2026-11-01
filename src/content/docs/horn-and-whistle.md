@@ -4,6 +4,8 @@ title: "Horn and Whistle"
 
 Some locomotives carried both a steam whistle and an air horn. The Southern Pacific GS-4 is one example.
 
+Relay consumers can import `alex6511/BWHornWhistle`: `snapshot(car)` reports selected and currently playing instruments, `select(car, "horn")` or `select(car, "whistle")` uses the native selection property, and `setControl(car, value)` uses the native horn control (0–1). These property writes retain the game's permissions. Dispose observers returned by `observe(car, callback)` when finished.
+
 A Railroader locomotive's definition can have both a `Whistle` and a `Horn` component. The game's **Customize** window then shows a sound section for each.
 
 However, the game gives each locomotive only one **Whistle/Horn** control. Without Bells and Whistles, only one instrument ever sounds: whichever finished loading last.

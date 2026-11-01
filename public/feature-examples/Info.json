@@ -1,0 +1,10 @@
+{
+  "identifier": "bwexample/native-features",
+  "version": "1.0.0",
+  "name": "B&W native declaration templates",
+  "author": "Bells and Whistles contributors",
+  "description": "Author templates requiring models and native industry setup; not playable equipment.",
+  "scope": "unscoped",
+  "dependencies": { "required": ["rr/game >=0.6.2", "alex6511/bells-and-whistles >=0.3.0"] },
+  "exports": { "./Inspector": "Scripts/Inspector.rl" }
+}

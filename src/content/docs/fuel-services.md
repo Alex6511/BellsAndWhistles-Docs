@@ -49,12 +49,12 @@ IDs are unique across loaded facilities. Placing two instances that declare the 
 | --- | --- | --- |
 | `id` | Required | Namespaced storage ID containing `/`. |
 | `fuel` | Required | `bunker-c` (`toolshed/bunker-c`) or `wood` (`rr/pulpwood`). |
-| `industry` | Required for finite storage | Native industry ID whose stored load supplies the outlet. |
+| `industry` | Required | Native industry ID for persistent controls and, with finite supply, stored fuel. |
 | `infinite` | `false` | Explicitly allows unlimited supply. Do not use this for a finite facility. |
 
 Finite stock and its persistence belong to the game's industry storage. Multiple outlets bound to the same storage draw from that same balance. Registering B&W's carrier does not reset or refill it.
 
-B&W suppresses freight-delivery receivables only for explicitly bound storage-only unloaders with ordering off and negligible consumption. This does not disable revenue for every industry using the same load.
+B&W suppresses freight-delivery receivables only for explicitly bound finite storage-only unloaders with ordering off, negligible consumption and no active formula consuming that fuel. This does not disable revenue for every industry using the same load. A facility containing a Toolshed universal-service component is diagnosed as a provider conflict and B&W does not transfer from it or claim its accounting.
 
 ## Outlet settings
 
@@ -86,9 +86,9 @@ Import `alex6511/BWFuelService` in a runtime Relay script:
 - `start(outletId, car)` checks eligibility, then enables it and restricts it to that car.
 - `stop(outletId)` disables it and clears the requested car.
 
-Commands require the host. Enabling an outlet again after `start` keeps its requested car until `stop` clears it. These commands change the current runtime outlet; enabled state and requested-car selection are not written back to the definition or saved by this service. On reconstruction, the authored defaults apply. The industry's stock persists independently. B&W does not replicate the outlet's transient enabled/target/state fields to client registries; query the host for authoritative service status.
+Commands require the host. Enabling an outlet again after `start` keeps its requested car until `stop` clears it. Enabled state, requested car and service state use the bound industry's native persistent properties. Clients can read the replicated properties; only the host runs transfers and writes service state. Authored defaults apply only before a stored property exists. All storage, including explicitly infinite supply, requires an industry binding for these controls. Infinite supply does not debit that industry's stock. Facility reconstruction never seeds or replenishes inventory.
 
-Snapshots include `id`, `config`, `enabled`, `state`, `requestedCar`, `fuelId`, `units`, `infinite`, `stock`, `capacity` and `industry`. Infinite or unavailable stock/capacity can be `null`; do not treat it as zero.
+Snapshots include `id`, `config`, `enabled`, `state`, `requestedCar`, `fuelId`, `units`, `infinite`, `stock`, `capacity`, `industry` and `providerConflict`. Infinite or unavailable stock/capacity can be `null`; do not treat it as zero. `provider-conflict` is also a service state and eligibility failure.
 
 An eligibility result contains `eligible`, `reason`, `slot`, `enabled`, `carId` and `outletId`. Reasons include missing storage/industry/model, `not-owned`, `moving`, `incompatible-slot`, `incompatible-saved-load`, `full`, `empty` and `out-of-reach`. Eligibility does not require the outlet to be enabled; `start` can enable an eligible outlet. An eligible result does not promise a transfer while the prop is inactive or a provider conflict disables services.
 

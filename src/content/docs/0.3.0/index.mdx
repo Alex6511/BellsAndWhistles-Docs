@@ -1,0 +1,48 @@
+---
+title: "Bells and Whistles"
+editUrl: false
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+Bells and Whistles adds rolling-stock features to Railroader: tender bells, flexible hoses and pipes, driven animations, horn/whistle selection and auxiliary water tenders. The combined 0.3.0 release also brings together geared locomotive behavior, oil and wood firing, fuel services and Relay APIs for content authors.
+
+Players install it for content packs that use these features.
+
+:::note[Version and compatibility]
+
+**These are the development docs for Bells and Whistles 0.3.0.** Choose the matching frozen release in the version menu. The maintainer has confirmed earlier in-game testing of 0.3.0. The combined geared, firing, fuel-service and Relay artifact has additional offline/native fixture qualification; fresh combined gameplay acceptance remains separate.
+
+The combined package is being prepared for **Railroader 0.6.2 or later**, using the game's native mod system.
+
+If you play Railroader 2025.1, this version isn't for you. Bells and Whistles 0.3.0 has no Unity Mod Manager build.
+
+[See what changed in 0.3.0](/BellsAndWhistles-Docs/0.3.0/whats-new/) or choose an older release from the version selector.
+
+:::
+
+## Get started
+
+1. [Install Bells and Whistles](/BellsAndWhistles-Docs/0.3.0/installing/).
+2. [Pick a feature and declare its dependencies](/BellsAndWhistles-Docs/0.3.0/authors/).
+3. Use the feature's examples, [the in-game editor](/BellsAndWhistles-Docs/0.3.0/editor-authoring/) or [Relay authoring helpers](/BellsAndWhistles-Docs/0.3.0/relay-api/).
+4. For existing content, follow [Migrating to 0.3.0](/BellsAndWhistles-Docs/0.3.0/migration/).
+
+## Features
+
+<CardGrid>
+<LinkCard title="Tender Bells" href="/BellsAndWhistles-Docs/0.3.0/tender-bells/" description="Connect tender-mounted bells to the locomotive's bell control, with optional headlight-based routing." />
+<LinkCard title="Flexible Connectors" href="/BellsAndWhistles-Docs/0.3.0/flexible-connectors/" description="Draw simulated hoses, cables and pipes between transforms on one car or coupled cars." />
+<LinkCard title="Driven Animation" href="/BellsAndWhistles-Docs/0.3.0/driven-animation/" description="Drive animation clips from speed, throttle, reverser or engine consumption rates." />
+<LinkCard title="Horn and Whistle" href="/BellsAndWhistles-Docs/0.3.0/horn-and-whistle/" description="Let players select which instrument the horn control plays on a locomotive with both." />
+<LinkCard title="Auxiliary Tenders" href="/BellsAndWhistles-Docs/0.3.0/aux-tender/" description="Transfer water toward the locomotive from an opted-in auxiliary car." />
+<LinkCard title="Geared Steam" href="/BellsAndWhistles-Docs/0.3.0/geared-steam/" description="Configure geared performance, chuff timing and author-supplied mechanical audio. Being integrated for 0.3.0." />
+<LinkCard title="Oil and wood firing" href="/BellsAndWhistles-Docs/0.3.0/alternative-firing/" description="Declare Bunker-C or wood fuel and compatible fuel/water slots. Being integrated for 0.3.0." />
+<LinkCard title="Fuel storage and outlets" href="/BellsAndWhistles-Docs/0.3.0/fuel-services/" description="Supply authored outlets from native industry stock or an explicitly infinite source. Being integrated for 0.3.0." />
+<LinkCard title="Relay APIs" href="/BellsAndWhistles-Docs/0.3.0/relay-api/" description="Build declarations, inspect feature state, observe changes and use supported controls. Being integrated for 0.3.0." />
+<LinkCard title="Your own component kinds" href="/BellsAndWhistles-Docs/0.3.0/component-kinds/" description="Declare typed component settings and expose your Relay scripts in the editor." />
+</CardGrid>
+
+Bells, connectors and driven animations provide sound or visuals. Auxiliary tenders move water; the geared, firing and service integrations also affect gameplay. The combined B&W package participates in multiplayer package/version matching.
+
+Features use the declarations and prerequisites in their guides. Tender bells can follow existing Bell components automatically, and horn/whistle selection applies to locomotives with both instruments.

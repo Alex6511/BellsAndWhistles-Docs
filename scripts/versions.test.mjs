@@ -14,33 +14,41 @@ test('release snapshots preserve old versions and assets, reject overwrite, and 
     }
     await writeFile(path.join(fixture, 'package.json'), '{"type":"module"}');
     const before = await verifyVersions(fixture);
+    // Exercise a new version even when the current development version already
+    // has its release snapshot. Never remove or rewrite a copied real archive.
+    let major = 999;
+    while (before.releases.some((release) => release.version === `${major}.0.0`)) major++;
+    const version = `${major}.0.0`;
+    before.current.version = version;
+    before.current.label = version + ' (development)';
+    await writeFile(path.join(fixture, 'public/versions.json'), JSON.stringify(before));
     const run = (script, args) => spawnSync(process.execPath, [path.join(fixture, 'scripts', script), ...args], {
       cwd: fixture, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'], encoding: 'utf8',
     });
-    const snapshot = run('snapshot-version.mjs', ['0.3.0', 'prerelease', 'Railroader 0.6.0', 'Offline only']);
+    const snapshot = run('snapshot-version.mjs', [version, 'prerelease', 'Railroader 0.6.0', 'Offline only']);
     assert.equal(snapshot.status, 0, snapshot.stderr);
     const after = await verifyVersions(fixture);
     assert.deepEqual(after.releases.slice(1), before.releases, 'Historical version metadata changed');
     const example = 'component-kinds/example/ComponentKinds.json';
     assert.deepEqual(await readFile(path.join(fixture, 'public', example)),
-      await readFile(path.join(fixture, 'public/0.3.0', example)));
-    const index = await readFile(path.join(fixture, 'src/content/docs/0.3.0/index.mdx'), 'utf8');
-    assert.ok(index.includes('/BellsAndWhistles-Docs/0.3.0/installing/'));
+      await readFile(path.join(fixture, 'public', version, example)));
+    const index = await readFile(path.join(fixture, 'src/content/docs', version, 'index.mdx'), 'utf8');
+    assert.ok(index.includes(`/BellsAndWhistles-Docs/${version}/installing/`));
     assert.ok(index.includes('editUrl: false'));
     // Review proposals stay available at the development root, not in a release.
     await access(path.join(fixture, 'src/content/docs/future-plans/valve-gear.md'));
-    await assert.rejects(access(path.join(fixture, 'src/content/docs/0.3.0/future-plans')), { code: 'ENOENT' });
-    const archivedSidebar = JSON.parse(await readFile(path.join(fixture, 'src/content/versions/0.3.0.json'), 'utf8'));
+    await assert.rejects(access(path.join(fixture, 'src/content/docs', version, 'future-plans')), { code: 'ENOENT' });
+    const archivedSidebar = JSON.parse(await readFile(path.join(fixture, 'src/content/versions', version + '.json'), 'utf8'));
     assert.ok(!JSON.stringify(archivedSidebar).includes('future-plans'));
     assert.ok(JSON.stringify(archivedSidebar).includes('driven-animation'));
-    const versionGuide = await readFile(path.join(fixture, 'src/content/docs/0.3.0/versions.md'), 'utf8');
+    const versionGuide = await readFile(path.join(fixture, 'src/content/docs', version, 'versions.md'), 'utf8');
     assert.ok(versionGuide.includes('/BellsAndWhistles-Docs/versions.json'));
-    assert.ok(!versionGuide.includes('/BellsAndWhistles-Docs/0.3.0/versions.json'));
-    assert.notEqual(run('snapshot-version.mjs', ['0.3.0', 'prerelease', 'Railroader 0.6.0', 'Offline only']).status, 0);
-    const target = path.join(fixture, 'src/content/docs/0.3.0/index.mdx');
+    assert.ok(!versionGuide.includes(`/BellsAndWhistles-Docs/${version}/versions.json`));
+    assert.notEqual(run('snapshot-version.mjs', [version, 'prerelease', 'Railroader 0.6.0', 'Offline only']).status, 0);
+    const target = path.join(fixture, 'src/content/docs', version, 'index.mdx');
     await writeFile(target, index + '\nCorrection for this release.\n');
     await assert.rejects(verifyVersions(fixture), /Frozen archive changed/);
-    const erratum = run('refresh-archive.mjs', ['0.3.0', 'Correct the frozen release description']);
+    const erratum = run('refresh-archive.mjs', [version, 'Correct the frozen release description']);
     assert.equal(erratum.status, 0, erratum.stderr);
     const corrected = await verifyVersions(fixture);
     assertArchiveHistory(after, corrected);
