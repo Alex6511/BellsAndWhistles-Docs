@@ -6,6 +6,20 @@ Fuel services were introduced in **Bells and Whistles 0.3.0** for Bunker-C and w
 
 These are development interfaces for Railroader **0.6.2 or later**. Require B&W in your pack. B&W does not discover or convert existing facilities by their names or by proximity.
 
+## Supplying your loader (unreleased follow-up)
+
+The development build adds Bunker-C to native interchange purchasing wherever an existing diesel supplier is present when B&W's map-data script runs. Use a compatible tank freight car (`TM`), choose the native **Buy Bunker C** destination, and let the interchange fill and return it. The default B&W load price is **$0.27/gallon**, matching the tested game's diesel price, plus the native handling charge (currently $30 per car). This is a definition default, not a live link to another pack's price changes. Native funds, partial fills, progression and return scheduling apply. An authored Bunker-C seller is preserved.
+
+Wood is ordinary **`rr/pulpwood`**. Collect it from any native or modded pulpwood provider in a compatible freight car, then deliver it to your wood shed. The native load uses pounds and the `FP,GB` car filter. Provider contracts, production and stock still apply.
+
+Waybill the loaded freight car to the facility's native receiving unloader. That unloader fills persistent industry storage; B&W's outlet draws from the same stock to refuel the locomotive. A pulpwood provider does not need a B&W declaration to supply freight. A locomotive servicing outlet does need an explicit B&W declaration and compatible target.
+
+Download the [receiving-industry map patch](/BellsAndWhistles-Docs/feature-examples/FuelLoaders.MapPatch.json), [Data.rl merge example](/BellsAndWhistles-Docs/feature-examples/Scripts/FuelLoaders.Data.rl.example), [oil/wood prop declarations](/BellsAndWhistles-Docs/feature-examples/Definitions.json), and [step-by-step adaptation notes](/BellsAndWhistles-Docs/feature-examples/README.md). Supply real track locations, models and placements before loading the example. It starts empty and does not recreate stock when a facility reloads.
+
+The example oil receiver has 16,000 gallons capacity and receives 32,000 gallons/game day; wood has 120,000 pounds capacity and receives 240,000 pounds/game day. **Native receiving rates are per game day; B&W outlet rates are per simulated second.** A storage-only receiver uses `sharedStorage: true`, `storageConsumptionRate: 0`, `orderLoads: false`, and `orderAwayEmpties: false`. Keep the facility registered so its scoped storage-only accounting applies.
+
+These supply additions are not in the published 0.3.0 ZIP. The [frozen release guide](/BellsAndWhistles-Docs/0.3.0/fuel-services/) remains unchanged. A pack adding diesel interchanges after B&W's pass can call `BWAuthoring.addBunkerCInterchanges(map)` after adding them; the helper is idempotent. Existing coal towers remain coal-only.
+
 ## Declare storage and an outlet
 
 Put enabled `Script` components on a **prop**. Fuel facilities attached to cars are rejected. This example contains two entries for the prop's `definition.components`:

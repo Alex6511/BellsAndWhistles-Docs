@@ -1,0 +1,7 @@
+import json
+
+// Replace the example area, track locations and prop placements in the JSON first.
+// Merge this handler into your existing Data.rl; do not replace other handlers.
+func modifyMap(map) {
+    map.merge(json.load("FuelLoaders.MapPatch.json"))
+}

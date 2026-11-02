@@ -31,6 +31,8 @@ The mechanical loop uses an author-supplied AudioClip; the original Geared Steam
 
 ## Unreleased runtime fixes
 
+The follow-up also adds Bunker-C purchase destinations alongside native diesel interchange suppliers, with a default $0.27/gallon price and native handling/return behavior. [Oil and wood loader examples](/BellsAndWhistles-Docs/fuel-services/#supplying-your-loader-unreleased-follow-up) show freight receiving, finite storage and locomotive outlets. Wood uses existing `rr/pulpwood` providers. New data-only Relay helpers support receiving declarations and later-authored interchanges.
+
 The development candidate fixes relocated-home geared settings, inline Relay imports in dependent packs, native fuel-target discovery, Driven Animation Script lifetime, and connector/bell detachment when couplers open. These fixes are not in the published 0.3.0 download. See [runtime validation](/BellsAndWhistles-Docs/runtime-validation/) before relying on that candidate's results.
 
 ## Upgrade content

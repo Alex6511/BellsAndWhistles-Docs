@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedOn": "2026-11-01",
+  "reviewedOn": "2026-11-02",
   "maxAgeDays": 30,
   "scope": [
     "Reviewed all current guides against the native B&W implementation and the active geared, firing, fuel-service and Relay integrations.",
@@ -16,13 +16,15 @@
     "Documented unreleased native-runtime fixes for relocated-home geared preferences, inline Script imports, static load-target discovery, Driven Animation model lifetime, and actual coupled-car connector/bell routing.",
     "Recorded native gameplay, editor, reload, Relay, firing, facility, off-screen and audio evidence for the development candidate separately from the published release and still-open multiplayer acceptance; corrected the outdated editor-guide claim that Driven Animation has no Script carrier.",
     "Reviewed current-build offline and native evidence: geared regressions, core behavior, actual native definition parsing, executed Relay consumers and data-only authoring, curve concurrency, immediate reload, and two-pack author audio cleanup/reload.",
-    "Clarified the valve gear proposal in response to author feedback: separate model parts can share a complete baked clip, all three cycles reuse the same driver rotation with different reverser settings, and the ordinary driver clip remains a fallback. Reviewed the bake steps and articulated-section wording against that intended workflow."
+    "Clarified the valve gear proposal in response to author feedback: separate model parts can share a complete baked clip, all three cycles reuse the same driver rotation with different reverser settings, and the ordinary driver clip remains a fallback. Reviewed the bake steps and articulated-section wording against that intended workflow.",
+    "Reviewed native Bunker-C purchasing, diesel-style default pricing, pulpwood sourcing, receiving-industry examples, data-only helpers, and day-versus-second rate units. These additions are unreleased; archived 0.3.0 content is unchanged."
   ],
   "runtimeStatus": "B&W 0.3.0 has been tested in-game, as confirmed by the maintainer on 2026-11-01. This audit does not assign invented per-feature test coverage. The valve gear proposal planned for 0.4.0 makes no claim of implemented runtime behavior, ADK acceptance or in-game validation. The steam-plant proposal planned for 0.4.0 is an author-review document, not a working example pack or a gameplay-validation claim. The published combined artifact retains its recorded offline/native fixture qualification. An unreleased follow-up candidate passed isolated native Climax operation/audio, world and model lifecycle, real Relay consumers, oil/wood operation and accounting, finite facilities with persistence, existing feature coupling/off-screen checks, and native editor presentation on Railroader 0.6.2 build 26335745 / Unity 6000.3.26f1. It also passed successor curve/reload/author-audio fixtures and 8,518 offline tests, with 16 existing skips. These results apply to that development candidate, not the published 0.3.0 DLL. The editor fixture's cross-pack animation-name picker logged a native bundle lookup error; preview, explicit animation controls and saving passed. Real multiplayer acceptance remains open because a second authenticated client was unavailable. See the runtime-validation page for scope and limitations.",
   "followUp": [
     "Reconcile the valve gear proposal with implemented behavior and author feedback before promoting it to release authoring documentation; the 0.4.0 target and interfaces remain subject to change.",
     "Reconcile the steam-plant proposal with modder feedback and the eventual implementation before publishing supported authoring examples or Railroader compatibility claims.",
-    "Review and release the unreleased runtime fixes with matching documentation. Complete real multiplayer permissions, client rejection, inventory authority and local-volume isolation when a second authenticated client is available; re-audit compatibility after game updates."
+    "Review and release the unreleased runtime fixes with matching documentation. Complete real multiplayer permissions, client rejection, inventory authority and local-volume isolation when a second authenticated client is available; re-audit compatibility after game updates.",
+    "Complete isolated end-to-end purchasing and freight-to-depot acceptance for the new supply additions. Native Relay execution and example serialization passed; these do not prove the full game supply chain."
   ],
   "reviewType": "Behavioral source audit, maintainer corrections, native runtime acceptance and development-fix documentation; preserved future-plan and frozen-release boundaries"
 }

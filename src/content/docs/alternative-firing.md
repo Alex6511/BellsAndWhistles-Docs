@@ -2,9 +2,11 @@
 title: Oil and wood firing
 ---
 
-Bunker-C oil and wood firing are being integrated into **Bells and Whistles 0.3.0**. Authors choose the fuel in the locomotive definition. B&W uses the game's steam demand to consume that fuel and water from the appropriate car.
+Bunker-C oil and wood firing were introduced in **Bells and Whistles 0.3.0**. Authors choose the fuel in the locomotive definition. B&W uses the game's steam demand to consume that fuel and water from the appropriate car.
 
 This page describes the 0.3.0 interface. Require `alex6511/bells-and-whistles >=0.3.0` and `rr/game >=0.6.2`. See [migration](/BellsAndWhistles-Docs/migration/) for existing provider dependencies and saved loads.
+
+The unreleased follow-up adds native **Bunker-C interchange purchasing**, alongside diesel suppliers. Wood uses ordinary `rr/pulpwood` from any pulpwood provider. Haul either fuel to a finite receiving facility, then refuel through its authored outlet. See [fuel supply and loader examples](/BellsAndWhistles-Docs/fuel-services/#supplying-your-loader-unreleased-follow-up); the published 0.3.0 ZIP does not include the new oil sellers.
 
 ## Declare the firing type
 

@@ -95,3 +95,14 @@ The local geared settings document is readable as `snapshot.settings`. `Enabled`
 | HornSelector | `default` horn/whistle; omission uses engine type. Disabled carriers can still provide this default. | `BWHornWhistle.snapshot.config`; `BWAuthoring.hornSelector` |
 
 Author facility models, geometry, source industries and inventory separately. Coal towers do not supply alternative fuel. Shared storage is debited once, finite supply is the default, and incompatible nonempty saved loads are never relabeled.
+
+## Native fuel supply (unreleased follow-up)
+
+| Setting | Units / default | Mutability, persistence and authority | Relay surface |
+| --- | --- | --- | --- |
+| Bunker-C purchase price | $0.27/native gallon; native handling currently $30/car | Definition-time load price; native host purchasing debits company funds. B&W has no runtime price setter. | Native Buy destination; map setup through `BWAuthoring.addBunkerCInterchanges(map)` |
+| Receiver `maxStorage` / `carUnloadRate` | Required positive commodity capacity / units per game day | Map-time settings; native host unloading writes persistent industry stock. | `BWAuthoring.fuelReceiver(fuel, trackSpans, capacity, unloadPerDay)`; stock via `BWFuelService.getStorage` |
+| Receiver load and freight filter | Oil `toolshed/bunker-c`, `TM`; wood `rr/pulpwood`, `FP,GB` | Fixed native commodity identities; preserves existing supply providers. | `fuelReceiver`; facility `snapshot` / `getStorage` |
+| Receiver storage behavior | Shared storage; consumption 0; ordering and order-away false | Native persistent stock; no automatic replenishment. Scoped B&W accounting requires the explicitly authored facility. | `fuelReceiver`; servicing and observations through `BWFuelService` |
+
+These map settings are distinct from the outlet settings above. The [loader examples](/BellsAndWhistles-Docs/feature-examples/) cover both sides of the supply chain.
