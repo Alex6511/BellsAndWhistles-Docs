@@ -2,7 +2,7 @@
 title: Fuel storage and outlets
 ---
 
-Fuel services are being integrated into **Bells and Whistles 0.3.0** for Bunker-C and wood. A storage declaration identifies the supply; an outlet transfers it into a compatible nearby car. Authors supply the prop, placement, native industry storage and load targets.
+Fuel services were introduced in **Bells and Whistles 0.3.0** for Bunker-C and wood. A storage declaration identifies the supply; an outlet transfers it into a compatible nearby car. Authors supply the prop, placement, native industry storage and load targets.
 
 These are development interfaces for Railroader **0.6.2 or later**. Require B&W in your pack. B&W does not discover or convert existing facilities by their names or by proximity.
 
@@ -70,6 +70,8 @@ B&W suppresses freight-delivery receivables only for explicitly bound finite sto
 | `requireOwned` | `true` | Restrict service to player-owned cars. |
 
 An enabled outlet automatically chooses the nearest eligible fuel load target in reach. The car needs the matching load slot, matching units and spare capacity. A nonempty incompatible load is skipped. Transfer is limited by the rate, remaining capacity and available finite stock.
+
+The [unreleased target-discovery fix](/BellsAndWhistles-Docs/runtime-validation/) recognizes native load targets attached outside the car's visual model hierarchy. That correction is required for the native targets exercised by the facility acceptance run.
 
 The host performs transfers, approximately once per simulated second. A car does not need an AlternativeFiring carrier merely to receive a matching load: service eligibility is based on its load slot and target.
 

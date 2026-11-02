@@ -11,7 +11,7 @@ Railroader builds `Bell` components on any car. However, it wires only the locom
 ## How Tender Bells works
 
 - It looks for loaded cars whose car type is a tender. Each one needs real `RollingStock.Bell` components in its body, built from the definition.
-- It finds the locomotive next to the tender. This also works through a chain of coupled tenders.
+- It finds the locomotive next to the tender. This also works through a chain of coupled tenders. The [unreleased coupling fix](/BellsAndWhistles-Docs/runtime-validation/) stops routing when a coupler opens, including while the cars remain touching, and restores it after recoupling.
 - Every frame, it copies the locomotive's bell state to the tender bell. As a result, the bell hotkey, the cab controls and Auto Engineer all work for the tender bell.
 - Optionally, the locomotive's headlights choose which bell rings. [Routing with the TenderBell carrier](#routing-with-the-tenderbell-carrier) explains how.
 

@@ -1,8 +1,8 @@
 ---
-title: "What's new in 0.3.0"
+title: "0.3.0 and development fixes"
 ---
 
-Bells and Whistles 0.3.0 uses Railroader's native mod system for **Railroader 0.6.2 or later**. The maintainer has confirmed earlier in-game testing of 0.3.0. The combined build additionally passed offline and native engine fixtures; fresh combined gameplay, editor, save/reload and multiplayer acceptance remain separate.
+Bells and Whistles 0.3.0 uses Railroader's native mod system for **Railroader 0.6.2 or later**. The maintainer has confirmed earlier in-game testing of 0.3.0. An unreleased follow-up candidate has now passed native gameplay, editor, save/reload and audio checks; multiplayer acceptance remains open. [Runtime validation](/BellsAndWhistles-Docs/runtime-validation/) records the exact scope and limitations.
 
 If you play Railroader 2025.1, this version isn't for you. Bells and Whistles 0.3.0 has no Unity Mod Manager build.
 
@@ -20,7 +20,7 @@ If you play Railroader 2025.1, this version isn't for you. Bells and Whistles 0.
 - [Auxiliary Tenders](/BellsAndWhistles-Docs/aux-tender/) transfer water toward the locomotive, with host-owned transfers, player controls and train-strip status colors.
 - [Custom component kinds](/BellsAndWhistles-Docs/component-kinds/) give pack-owned Relay scripts typed fields and editor entries.
 
-## Integrations being completed for this release
+## Combined integrations in 0.3.0
 
 - [Geared Steam](/BellsAndWhistles-Docs/geared-steam/) adds definition-bound geared profiles, performance and response tuning, chuff timing, native mechanical-audio references and per-car local volume. Retained but inactive settings are identified in the guide.
 - [Oil and wood firing](/BellsAndWhistles-Docs/alternative-firing/) adds fixed Bunker-C or wood declarations, distinct fuel/water accounting and guarded migration of known compatible legacy load IDs.
@@ -28,6 +28,10 @@ If you play Railroader 2025.1, this version isn't for you. Bells and Whistles 0.
 - [Relay APIs](/BellsAndWhistles-Docs/relay-api/) provide definition helpers, state queries, disposable observers, local audio volume and supported car/facility controls.
 
 The mechanical loop uses an author-supplied AudioClip; the original Geared Steam recording is not bundled. Coal towers do not become oil or wood outlets. Runtime APIs do not switch profiles or firing types.
+
+## Unreleased runtime fixes
+
+The development candidate fixes relocated-home geared settings, inline Relay imports in dependent packs, native fuel-target discovery, Driven Animation Script lifetime, and connector/bell detachment when couplers open. These fixes are not in the published 0.3.0 download. See [runtime validation](/BellsAndWhistles-Docs/runtime-validation/) before relying on that candidate's results.
 
 ## Upgrade content
 

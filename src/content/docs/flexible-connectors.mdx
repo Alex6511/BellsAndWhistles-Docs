@@ -12,6 +12,8 @@ Connectors are visual only. They add no brake, steam, water or electrical simula
 
 When the car model loads, Bells and Whistles generates the connector between its two transforms. Then it simulates the connector as a chain of points, in every frame where the connector is in view.
 
+The [unreleased coupling fix](/BellsAndWhistles-Docs/runtime-validation/) removes a cross-car connector when its coupling chain opens, even while the cars are still touching. Recoupling rebuilds the attachment.
+
 Connectors use the game's air-hose culling. Bells and Whistles doesn't simulate or draw a connector while it is off screen or far away.
 
 With the `bezier` curve, Bells and Whistles samples the mesh along a Catmull-Rom path through the simulated points. This makes the tube look smooth. The rigid presets use this curve by default.

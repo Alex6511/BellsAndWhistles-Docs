@@ -2,7 +2,7 @@
 title: Versions and documentation audits
 ---
 
-Choose a version from the header to read guides for that B&W release. **B&W versions and Railroader versions are separate.** The development channel documents B&W 0.3.0, including the combined integrations being prepared for Railroader 0.6.2 or later. The maintainer has confirmed that 0.3.0 has been tested in-game.
+Choose a version from the header to read guides for that B&W release. **B&W versions and Railroader versions are separate.** The development channel documents B&W's unreleased follow-up fixes after 0.3.0, targeting Railroader 0.6.2 or later. [Runtime validation](/BellsAndWhistles-Docs/runtime-validation/) distinguishes this candidate from the frozen 0.3.0 release. The maintainer has confirmed that 0.3.0 has been tested in-game.
 
 B&W 0.2.1 and 0.2.0 were published as prereleases. Tender Bells 1.0.0 is a legacy predecessor, not a newer B&W release. The initial archives reproduce the player and author documentation available at each release tag; they preserve the documentation available for each historical release.
 

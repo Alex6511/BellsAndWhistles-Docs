@@ -2,7 +2,7 @@
 title: Relay authoring and runtime APIs
 ---
 
-The B&W Relay modules are being integrated into **0.3.0**. They separate definition construction from runtime queries and controls. These interfaces are documented against the current development code and will be frozen in the release snapshot.
+The B&W Relay modules separate definition construction from runtime queries and controls. This page documents the development code following **0.3.0**; the [frozen 0.3.0 guide](/BellsAndWhistles-Docs/0.3.0/relay-api/) matches that release. The [unreleased inline-script fix](/BellsAndWhistles-Docs/runtime-validation/) lets a native inline Script import B&W modules through its declaring pack's explicit required dependency, matching file-script resolution. An optional dependency alone does not enable that behavior.
 
 Require `alex6511/bells-and-whistles >=0.3.0` when importing these modules. An unconditional import does not become optional just because its functions are only called inside an `if`.
 

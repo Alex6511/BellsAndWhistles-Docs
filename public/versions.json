@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "current": {
     "version": "0.3.0",
-    "label": "0.3.0 (development)",
+    "label": "0.3.0 follow-up (development)",
     "status": "development",
     "path": "/BellsAndWhistles-Docs/",
-    "railroader": ">=0.6.2 (combined 0.3.0 integration target)",
-    "validation": "Tested in-game; confirmed by the maintainer on 2026-11-01."
+    "railroader": ">=0.6.2; development candidate tested on build 26335745",
+    "validation": "Earlier 0.3.0 in-game testing confirmed by the maintainer. Unreleased follow-up candidate passed isolated native gameplay, editor, reload, Relay and audio checks on 2026-11-01; real multiplayer acceptance remains open."
   },
   "releases": [
     {
