@@ -26,7 +26,11 @@ The proposed feature would let you animate valve gear from both **driver rotatio
 
 The model author confirmed in-game that variable valve gear worked on the **LLW 440-19 American** with a separate prototype for Railroader **0.6.2**, LLW Volume 2 **0.5.3** and B&W **0.3.0**. The add-on supplied the three baked clips and blended them at the locomotive’s existing driver animation input. Wheel position selected the point in each cycle. The reverser selected the blend. The ordinary driver clip remained available for fallback.
 
-The prototype used the exported rig for that one conventional locomotive. The reusable workflow under development for **0.4.0** reads a pack's own clip assignments. Its separate sections, optional activation and editor workflow need their own validation.
+### What the practice pack verified in the ADK
+
+An automated headless editor test in a clean official Railroader ADK (Unity **6000.3.26f1**) previewed one complete wheel turn on both original practice locomotives at full reverse, half reverse, neutral, half forward and full forward. It checked independent front and rear wheel speeds on the articulated engine and compared each section with its ordinary driver animation. The ADK built both locomotives into one player pack. The test reopened the pack and checked each section’s exported clips.
+
+The A-19 prototype remains the only model-author report from inside the game. The reusable 0.4.0 runtime still needs in-game testing, including whether the same exported pack plays its ordinary animation when B&W is disabled or absent. A first-time author walkthrough and a test on the actual Virginian AE also remain open.
 
 ## Starting with one wheel animation
 
@@ -165,7 +169,7 @@ With B&W unavailable the rear should play `Back-Drivers` and the front should pl
 
 ## 3. Configure the ADK companion
 
-The following steps describe the **0.4.0 development companion** for authors with a supplied build. The general workflow still needs hands-on validation in a clean ADK and in the game. The separate A-19 demonstration established the three-clip method on that locomotive.
+The following steps describe the **0.4.0 development companion** for authors with a supplied build.
 
 1. Open your Railroader ADK project. In Unity’s **Window → Package Management → Package Manager**, use **+ → Install package from tarball** and choose the supplied companion `.tgz`. Open **Railroader → Bells and Whistles → Valve Gear**.
 2. To practice first, use **Railroader → Bells and Whistles → Create Valve Gear Practice Pack**. In the Valve Gear window, click **Refresh packs**, choose the practice pack, and select **Valve Gear Practice – Single**. It already has an ordinary driver animation.
