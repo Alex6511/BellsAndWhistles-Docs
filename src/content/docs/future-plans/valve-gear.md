@@ -179,12 +179,14 @@ With B&W unavailable the rear should play `Back-Drivers` and the front should pl
 
 The following steps describe the **0.4.0 development companion** for authors with a supplied build.
 
+**Updating a pack you already have?** If you changed the locomotive in Railroader’s Definition Editor since the last ADK build, bring those edits into Unity first. Open **Railroader → Asset Packs**, select your pack and review the listed differences. Click **Pull** to bring the in-game edits into your project. Then open the valve gear window and click **Refresh packs** so you configure the latest locomotive definition. [Railroader’s pack workflow](https://docs.railroadergame.com/modding/adk/#asset-pack-workflow)
+
 1. Open your Railroader ADK project. In Unity’s **Window → Package Management → Package Manager**, use **+ → Install package from tarball** and choose the supplied companion `.tgz`. Open **Railroader → Bells and Whistles → Valve Gear**.
 2. To practice first, use **Railroader → Bells and Whistles → Create Valve Gear Practice Pack**. The creation dialog calls it **Valve Gear Practice**. In the Valve Gear window, click **Refresh packs**, choose its folder `bw-valve-gear-practice` under **Pack**, then select **Valve Gear Practice – Single** under **Locomotive**.
 3. Check **Configure Main body**. The window fills in **Ordinary driver** from the pack. In the **Project** window, open `Assets/AssetPacks/bw-valve-gear-practice` and drag `RearReverse` to **Reverse**, `RearNeutral` to **Neutral**, and `RearForward` to **Forward**. For your own engine, choose its pack and locomotive, check the model shown, then expand each imported FBX and drag its named clip into the matching slot.
 4. For **Valve Gear Practice – Articulated**, check both **Main body** and **low_pressure**. Use the three `Rear` clips for the main body and the three `Front` clips for the front. Test the two speeds independently as described above.
 5. Click **Validate and preview**. If the tool names a missing part, check that you chose the clip and model for the same section. Turn on **Compare ordinary driver** to see the ordinary animation at the same wheel position.
-6. Choose **Review and apply to pack**. Confirm the original driver and the three assignments shown for each selected section. Click **Apply** to write the map entries and pack configuration. Build the pack through the normal Railroader ADK workflow. **Save profile** stores your working selections in your project for later.
+6. Choose **Review and apply to pack**. Check the locomotive name, the ordinary driver and the three assignments for each selected section. Review the listed file changes, then click **Apply**. **Save profile** keeps your selections in the project for later. When the preview looks right, [build the player pack](#6-build-test-and-distribute).
 
 **If you received the optional Author Starter**, you can try the Blender model with its ordinary driver already connected. With the development companion installed:
 
@@ -219,9 +221,7 @@ At intermediate reverser settings, blending the three clips can pull a rod end a
 
 ## 5. Review the proposed exported configuration
 
-The companion is intended to prepare standard AnimationMap entries and Script components. You would review those changes before applying them, with existing wheel references preserved.
-
-**The following is a proposed example of entries inside `definition.components`. Its field names and behavior are subject to change; it is not a current-release configuration.**
+**Read-only example.** If you used **Apply**, you can skip this section. The companion writes the entries for you and keeps the ordinary driver assignment. The example shows what an articulated locomotive’s two engine sections look like inside `definition.components`. These fields are planned for 0.4.0 and may change.
 
 ```json
 {
@@ -258,9 +258,9 @@ A conventional locomotive would use only `valve-gear-main`. The articulated exam
 
 ### Optional activation and ordinary fallback
 
-The disabled state is intentional. The planned export would include optional B&W dependency/load-order information and a guarded `Data.rl` activation hook. The hook would enable the declarations only when compatible valve gear support is present.
+`Scripts/Data.rl` is a file Railroader reads as it loads your pack. **Apply** creates it if needed. If the pack already has a startup function, the companion adds a check there for compatible B&W support and keeps the pack’s other instructions. Players without that support get the ordinary driver animation.
 
-The development companion reviews the pack's existing activation script and adds the guarded hook when it can preserve the author's logic. If integration cannot be applied safely, the tool reports the file and reason before export.
+If **Apply** stops with a message about `Data.rl`, keep the original file. Send the exact message, the pack name and the locomotive name to whoever maintains your pack’s script or to the companion maintainer. The review stops before changing the pack when it cannot safely add the check.
 
 The intended results are:
 
@@ -274,9 +274,10 @@ The exact capability guard and minimum B&W requirement would be documented with 
 
 ## 6. Build, test, and distribute
 
-After review and export, use the normal [ADK pack workflow](https://docs.railroadergame.com/modding/adk/). Pull newer in-game definition edits from ModDev before building, because a build can overwrite them. Save the source pack and authoring profile as part of your own version-controlled project.
+1. After **Apply**, open **Railroader → Asset Packs**, select your pack and click **Build**. If this is your first build, set **Paths → ModDev** to `Documents/Railroader/ModDev` first. If Build reports that it would overwrite newer in-game work, cancel and follow the **Pull** step above. Refresh the pack and recheck your assignments before applying again.
+2. Open the ModDev folder you selected. Zip **only your pack’s built folder** there, with its contents together. Players extract that folder into `Documents/Railroader/Mods`. The editor companion, authoring profile and Blender project stay with the author. Players can install compatible B&W separately to turn on variable valve gear. [Railroader’s build and distribution instructions](https://docs.railroadergame.com/modding/adk/)
 
-The intended player pack would contain standard animation assets, maps, definitions, and Relay files. It would not require the editor companion or contain its editor DLL.
+Keep the editable source pack and authoring profile in your own project.
 
 For the planned general workflow, check the exported pack in-game as well as in the preview.
 
