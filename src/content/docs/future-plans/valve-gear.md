@@ -7,7 +7,7 @@ description: Review the proposed three-cycle valve gear workflow and Railroader 
 
 This is an **author-review proposal for Bells and Whistles 0.4.0**. All future plans are subject to change, including the target version, scope, field names, menu names, and timing.
 
-The valve gear runtime and companion ADK tool described here are planned features. These examples are not a working setup for current releases. This page records the intended authoring experience, not completed implementation, ADK validation, or in-game acceptance. It does not change the existing testing statements for B&W 0.3.0.
+The general B&W runtime, reusable pack configuration and companion ADK tool are planned. The configuration examples below describe that proposed interface.
 
 :::
 
@@ -21,6 +21,12 @@ The proposed feature would let you animate valve gear from both **driver rotatio
 | Model types | Conventional steam locomotives and separate engine sections on articulated locomotives |
 | Author input | Three baked cycles per engine section and its existing ordinary driver animation |
 | Players | The locomotive pack; B&W would enable variable valve gear when available. Players would not install the editor companion. |
+
+## What worked on the A-19
+
+The model author confirmed in-game that variable valve gear worked on the **LLW 440-19 American** with a separate prototype for Railroader **0.6.2**, LLW Volume 2 **0.5.3** and B&W **0.3.0**. The add-on supplied the three baked clips and blended them at the locomotive’s existing driver animation input. Wheel position selected the point in each cycle. The reverser selected the blend. The ordinary driver clip remained available for fallback.
+
+The prototype was built for that one conventional locomotive using its exported rig. The Blender steps below show how an author can prepare equivalent motion. Section-based configuration, articulated playback, the ADK preview and export tools, and general sample packs remain planned for **0.4.0**, subject to change.
 
 ## What the three cycles mean
 
@@ -58,20 +64,49 @@ While the feature is active, the blended cycles would animate the complete drive
 
 ## 1. Prepare and bake your model
 
-Keep your source rig and existing driver animation. That existing clip would remain the ordinary animation used when variable valve gear is unavailable.
+### Check the parenting in Blender
 
-For each engine section:
+Open a working copy of the `.blend`. In the Outliner, expand the engine section and trace two paths. Starting at a driving wheel, find the crank pins that turn with it. Starting at the exterior lift shaft, find the pins that carry the valve-gear hangers. Turning the reverser should lift or lower those hangers while the axle stays put. The rods that span moving pins usually need a constraint or a rigged joint to keep both ends connected.
 
-1. Start with the existing driver rotation. Choose a repeatable starting crank position and retain the model's left/right quartering.
-2. Hold the reverser at full forward, run one complete driver revolution, and bake **the drivers, rods, and valve gear together** into the forward clip.
-3. Reuse that same driver rotation with the reverser held centered and bake the complete assembly into the neutral clip.
-4. Repeat with the reverser held at full reverse for the reverse clip. Keep the same starting angle, rotation direction, timing, and hierarchy across all three.
-5. In each clip, bake the evaluated bone or transform motion so playback does not depend on the source application's constraints. Cover every animated property from the ordinary driver clip, together with the valve gear. Use matching animated properties in all three clips, including properties that remain constant in one setting.
-6. Check that each cycle closes without a visible jump. Compare the same phase across all three clips to confirm that the wheels stay aligned while the gear setting changes.
+Here is the relevant part of the **LLW 440-19 American** Outliner. Indentation means *is a child of*. The names identify parts on this model only.
 
-If you use Blender, follow Railroader's [Blender workflow](https://docs.railroadergame.com/modding/blender-workflow/) for the model export. The proposed tool would consume baked animation; it would not build a mechanism rig or derive the missing neutral/reverse cycles from a single forward clip.
+```text
+Main
+├── Driver1                      driving axle
+│   └── axle and eccentric pins  turn with the wheel
+├── Reverser                     control empty
+│   ├── Reversing Yoke.001
+│   └── Cylinder.094
+└── Cylinder.090                 exterior lift shaft
+    ├── Empty.019                hanger pivot on one side
+    │   └── Armature.002
+    └── Empty.032                hanger pivot on the other side
+        └── Armature.005
+```
 
-Equal clip lengths are the simplest authoring choice. The proposed runtime would also accept different durations by sampling the same normalized phase in each clip.
+On the A-19 the reverser empty and lift shaft are **siblings**. Their origins lie along the same transverse shaft axis at different positions across the locomotive. Rotating the empty carries its yoke with it. The hanger pivots inherit rotation from the other sibling. For the prototype we kept those parents and made the lift shaft take the chosen reverser angle during the bake. In the source rig, each hanger armature’s two eccentric rods already had inverse kinematics (IK) targets at pins on the driving axle. That gives a rod one end carried by the linkage and a target for its wheel end. We preserved this arrangement and baked the resulting rod poses.
+
+On a new object rig, put the shaft’s origin on its physical bearing. Place a hanger pivot at each lift-arm pin. To attach a loose pivot, select it first in Object Mode, Shift-select the shaft last, then use **Ctrl-P → Object (Keep Transform)**. Repeat on the other side. Locate each wheel-side target at its crank pin and parent it to the rotating wheel or eccentric. Aim or constrain the rod bones to those targets. If your rig already makes these parts follow the correct pins, keep its parents and constraints. [Blender object parenting](https://docs.blender.org/manual/en/4.5/scene_layout/object/editing/parent.html)
+
+**Check your own rig at a fixed wheel frame.** Move the reverser between its endpoints and watch a hanger pivot on each side. Then hold the reverser and scrub the drivers through a turn. The crank pins should orbit the axle, the hangers should carry the links, and the rod ends should meet their pins throughout. If only the cab handle or upper reversing arm responds, follow the Outliner to the parent that actually carries the exterior pivots.
+
+If that shaft needs a control, one Blender option for aligned local axes is a **Copy Rotation** constraint on the shaft. Target the reverser empty, enable the shaft axis only, and use **Local Space** for both target and owner and **Replace** for the driven angle. Check the pivot, neutral offset and direction on your rig before using those settings. A shaft already parented to a rotating control inherits its rotation. Adding the same rotation a second time can double its travel. Keep the established output hierarchy so the ordinary driver clip and all three new clips bind to the same paths. [Blender Copy Rotation options](https://docs.blender.org/manual/en/4.5/animation/constraints/transform/copy_rotation.html)
+
+### Bake one wheel revolution at each reverser setting
+
+1. **Protect the ordinary driver action.** Save a working copy for the bake. Find one complete revolution of the existing drivers, including the matching end pose. For a cycle on frames 0–60, frames 0 and 60 show the same crank position after one full turn. Keep the frame rate, range, starting crank angle, rotation direction and left/right quartering for all three passes.
+2. **Hold the reverser while the drivers play.** Use the rig’s full-forward position. If a separate action animates the reverser empty, sample its endpoint, then mute its rotation curve or strip in the working copy and set the empty to that local angle. Leave the driver action and linkage constraints active. Scrub from start to end and verify that the setting holds. On the A-19 the three local X settings were **+25° forward, 0° neutral and −25° reverse**. Determine direction from your own rig and control mapping.
+3. **Bake the moving parts.** Select the export objects and the mechanism bones that supply the original driver motion and the new gear motion on both sides. In Blender use **F3 → Bake Action**. Set the revolution’s start and end frames, **Frame Step 1** and **Visual Keying**. Choose **Pose** for bones, **Object** for animated objects or empties, or both for a mixed rig. Include the transform channels the rig uses, including scale for a stretching linkage. Leave **Clear Parents** and **Overwrite Current Action** off. Name or save the resulting take as forward. [Blender Bake Action](https://docs.blender.org/manual/en/4.5/editors/nla/editing/strip.html#bake-action)
+4. **Repeat from the same source rig.** Make fresh passes at neutral and full reverse. Starting each from the intact source keeps the previous bake from driving the next one. Bake every ordinary driver property and the same exterior gear properties in each pass, including properties held constant for that setting. Cab controls and brakes keep their own tracks.
+5. **Play each bake by itself.** In a disposable export copy, isolate the baked actions and disable source drivers, constraints or NLA tracks that would apply the same motion again. Scrub through a full turn and across the loop seam. Compare forward, neutral and reverse at the same quarter-turn frame. The crank pins should coincide across the three takes, while the gear should show the three settings. In neutral the rods should still move through a revolution.
+
+### Export the three takes
+
+For a rig with several armatures or separately animated objects, a simple route is **one animation FBX per setting**. In each export copy, use the baked actions for that setting across all its animated objects. Export the same section root, parent chain and output names using the same FBX axis and unit settings as the ordinary model. Set the scene range to the single revolution. In **File → Export → FBX → Animation**, enable animation and turn off **NLA Strips** and **All Actions** so the scene exports as one take. A sampling step of 1 and simplification of 0 preserve the mechanical motion for the first comparison.
+
+If your rig stores each complete setting in a single armature action, you can instead export one FBX with three named NLA strips. Use Railroader’s multi-clip settings and keep each strip to the same revolution. [Railroader’s Blender and FBX workflow](https://docs.railroadergame.com/modding/blender-workflow/)
+
+On import, check that each take plays on the **original prefab** as a Generic looping clip. Watch both sides and check the clip’s animated properties. FBX export can add keys to uninvolved bones. Resolve overlaps with cab or brake tracks in the export setup before mapping the clips. For an articulated locomotive, repeat the process for each independently driven section.
 
 ### Keep control animations separate
 
@@ -141,7 +176,7 @@ Use these scenarios to inspect your work:
 
 :::note[Blending is an approximation]
 
-Blending three baked poses does not solve the linkage geometry at intermediate reverser settings. Even good endpoint clips can produce small gaps or intersections between them. Inspect the joints throughout the blend and report mechanisms that cannot be represented acceptably.
+At intermediate reverser settings, blending the three clips can pull a rod end away from its pin even when each baked cycle fits. On the A-19, offline sampling predicted a gap of up to about 8 mm at half gear. In preview, follow the same pin through a whole revolution at half forward and half reverse. Check the result in-game from both sides.
 
 :::
 
@@ -206,7 +241,7 @@ After review and export, use the normal [ADK pack workflow](https://docs.railroa
 
 The intended player pack would contain standard animation assets, maps, definitions, and Relay files. It would not require the editor companion or contain its editor DLL.
 
-Once an implementation is available, verify the exported pack in-game as well as in the preview:
+For the planned general workflow, check the exported pack in-game as well as in the preview.
 
 - Forward and reverse travel, coasting, wheelslip, and stationary reverser changes.
 - Both endpoint and intermediate reverser settings.
