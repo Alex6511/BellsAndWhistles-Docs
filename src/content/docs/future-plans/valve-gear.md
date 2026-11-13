@@ -188,7 +188,7 @@ The following steps describe the **0.4.0 development companion** for authors wit
 
 **If you received the optional Author Starter**, you can try the Blender model with its ordinary driver already connected. With the development companion installed:
 
-1. In File Explorer, open the starter’s `ADK` folder. Copy the entire `bw-blender-import-practice` folder **and** its adjacent `bw-blender-import-practice.meta` file into your ADK project’s `Assets/AssetPacks` folder. Keep the files and their `.meta` files together so Unity can find the existing clip references.
+1. In your ADK project, open `Assets`. If `AssetPacks` does not exist yet, create a folder named `AssetPacks` inside `Assets` first. In File Explorer, open the starter’s `ADK` folder. Copy the entire `bw-blender-import-practice` folder **and** its adjacent `bw-blender-import-practice.meta` file into your ADK project’s `Assets/AssetPacks` folder. Keep the files and their `.meta` files together so Unity can find the existing clip references.
 2. Return to Unity. Open **Railroader → Bells and Whistles → Valve Gear**, click **Refresh packs**, choose `bw-blender-import-practice` under **Pack** and **Blender Valve Gear Practice** under **Locomotive**. Check **Configure Main body**. **Ordinary driver** should show `OrdinaryDrivers`.
 3. In the **Project** window, open the pack’s `Takes` folder. Expand `Reverse.fbx`, `Neutral.fbx` and `Forward.fbx`. Drag the named clip inside each to the matching slot. Use **Validate and preview**, then **Review and apply to pack** when ready.
 
