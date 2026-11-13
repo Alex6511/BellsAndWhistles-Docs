@@ -30,6 +30,8 @@ The model author confirmed in-game that variable valve gear worked on the **LLW 
 
 An automated headless editor test in a clean official Railroader ADK (Unity **6000.3.26f1**) previewed one complete wheel turn on both original practice locomotives at full reverse, half reverse, neutral, half forward and full forward. It checked independent front and rear wheel speeds on the articulated engine and compared each section with its ordinary driver animation. The ADK built both locomotives into one player pack. The test reopened the pack and checked each section’s exported clips.
 
+A second test started with a one-sided Blender practice rig with one wheel action (`Drivers`) and one control empty (`Reverser`). Blender **4.5.16** reopened the ordinary, reverse, neutral and forward FBXs and checked every frame of the wheel turn. The same four FBXs went into a clean official ADK with Unity **6000.3.26f1**. The companion previewed **366 poses** without changing the source prefab. The ADK built the player pack and the test reopened its bundle to check the exported clips.
+
 The A-19 prototype remains the only model-author report from inside the game. The reusable 0.4.0 runtime still needs in-game testing, including whether the same exported pack plays its ordinary animation when B&W is disabled or absent. A first-time author walkthrough and a test on the actual Virginian AE also remain open.
 
 ## Starting with one wheel animation
@@ -109,7 +111,7 @@ On a new object rig, put the shaft’s origin on its physical bearing. Place a h
 
 **Check your own rig at a fixed wheel frame.** Move the reverser between its endpoints and watch a hanger pivot on each side. Then hold the reverser and scrub the drivers through a turn. The crank pins should orbit the axle, the hangers should carry the links, and the rod ends should meet their pins throughout. If only the cab handle or upper reversing arm responds, follow the Outliner to the parent that actually carries the exterior pivots.
 
-If that shaft needs a control, one Blender option for aligned local axes is a **Copy Rotation** constraint on the shaft. Target the reverser empty, enable the shaft axis only, and use **Local Space** for both target and owner and **Replace** for the driven angle. Check the pivot, neutral offset and direction on your rig before using those settings. A shaft already parented to a rotating control inherits its rotation. Adding the same rotation a second time can double its travel. Keep the established output hierarchy so the ordinary driver clip and all three new clips bind to the same paths. [Blender Copy Rotation options](https://docs.blender.org/manual/en/4.5/animation/constraints/transform/copy_rotation.html)
+If that shaft needs a control, one Blender option for aligned local axes is a **Copy Rotation** constraint on the shaft. Target the reverser empty, enable the shaft axis only, and choose **Replace**. Check the constraint at a fixed wheel frame. On the A-19, the parented reverser and shaft can use **Local Space** for both target and owner. On the axis-aligned Blender practice rig, the reverser empty has no parent. Using Local Space for both left the shaft still. **World Space** for that target and **Local Space** for the shaft made the hanger follow the reverser. Verify the pivot, neutral position and direction on your own rig. A shaft already parented to a rotating control inherits its rotation. Adding the same rotation a second time can double its travel. Keep the established output hierarchy so the ordinary driver clip and all three new clips bind to the same paths. [Blender Copy Rotation options](https://docs.blender.org/manual/en/4.5/animation/constraints/transform/copy_rotation.html)
 
 ### Bake one wheel revolution at each reverser setting
 
@@ -184,6 +186,12 @@ The following steps describe the **0.4.0 development companion** for authors wit
 5. Click **Validate and preview**. If the tool names a missing part, check that you chose the clip and model for the same section. Turn on **Compare ordinary driver** to see the ordinary animation at the same wheel position.
 6. Choose **Review and apply to pack**. Confirm the original driver and the three assignments shown for each selected section. Click **Apply** to write the map entries and pack configuration. Build the pack through the normal Railroader ADK workflow. **Save profile** stores your working selections in your project for later.
 
+**If you received the optional Author Starter**, you can try the Blender model with its ordinary driver already connected. With the development companion installed:
+
+1. In File Explorer, open the starter’s `ADK` folder. Copy the entire `bw-blender-import-practice` folder **and** its adjacent `bw-blender-import-practice.meta` file into your ADK project’s `Assets/AssetPacks` folder. Keep the files and their `.meta` files together so Unity can find the existing clip references.
+2. Return to Unity. Open **Railroader → Bells and Whistles → Valve Gear**, click **Refresh packs**, choose `bw-blender-import-practice` under **Pack** and **Blender Valve Gear Practice** under **Locomotive**. Check **Configure Main body**. **Ordinary driver** should show `OrdinaryDrivers`.
+3. In the **Project** window, open the pack’s `Takes` folder. Expand `Reverse.fbx`, `Neutral.fbx` and `Forward.fbx`. Drag the named clip inside each to the matching slot. Use **Validate and preview**, then **Review and apply to pack** when ready.
+
 For a second engine, select its definition and assign its recordings. If it shares the first model’s rig, preview its motion before reusing those clips. You can author another engine with the same B&W build.
 
 ## 4. Preview both inputs before exporting
@@ -205,7 +213,7 @@ Use these scenarios to inspect your work:
 
 :::note[Blending is an approximation]
 
-At intermediate reverser settings, blending the three clips can pull a rod end away from its pin even when each baked cycle fits. On the A-19, offline sampling predicted a gap of up to about 8 mm at half gear. In preview, follow the same pin through a whole revolution at half forward and half reverse. Check the result in-game from both sides.
+At intermediate reverser settings, blending the three clips can pull a rod end away from its pin even when each baked cycle fits. On the one-sided Blender practice mechanism, the link met both pins at reverse, neutral and forward. At half gear, the largest measured gap was **22.8 mm at the hanger** and **15.1 mm at the crank**. These measurements describe that practice rig only. On the separate A-19 prototype, offline sampling predicted a gap of up to about 8 mm at half gear. In your preview, follow **both ends** of each link through a full turn at half forward and half reverse, then check each side in-game.
 
 :::
 
