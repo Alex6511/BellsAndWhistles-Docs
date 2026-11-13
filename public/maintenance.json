@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedOn": "2026-11-01",
+  "reviewedOn": "2026-11-12",
   "maxAgeDays": 30,
   "scope": [
     "Reviewed all current guides against the native B&W implementation and the active geared, firing, fuel-service and Relay integrations.",
@@ -14,11 +14,12 @@
     "Reviewed the proposed 0.4.0 steam-plant authoring workflow, profile/circuit sketches, AE calibration references, optional activation and cab bindings. Marked the target, APIs and examples as subject to change and distinguished missing physical inputs from supported defaults.",
     "Matched all 0.3.0 exports, authoring templates and settings to the combined implementation; documented target/value validation, provider-conflict handling and persistent fuel controls.",
     "Reviewed current-build offline and native evidence: geared regressions, core behavior, actual native definition parsing, executed Relay consumers and data-only authoring, curve concurrency, immediate reload, and two-pack author audio cleanup/reload.",
-    "Clarified the valve gear proposal in response to author feedback: separate model parts can share a complete baked clip, all three cycles reuse the same driver rotation with different reverser settings, and the ordinary driver clip remains a fallback. Reviewed the bake steps and articulated-section wording against that intended workflow."
+    "Clarified the valve gear proposal in response to author feedback: separate model parts can share a complete baked clip, all three cycles reuse the same driver rotation with different reverser settings, and the ordinary driver clip remains a fallback. Reviewed the bake steps and articulated-section wording against that intended workflow.",
+    "Reviewed the A-19 prototype against the planned three-cycle workflow and its model author’s in-game report. Documented Blender parenting, endpoint holds, visual baking, FBX take export and playback checks, including rig-specific hinge axes and independent cab and driver tracks."
   ],
-  "runtimeStatus": "B&W 0.3.0 has been tested in-game, as confirmed by the maintainer on 2026-11-01. This audit does not assign invented per-feature test coverage. The valve gear proposal planned for 0.4.0 makes no claim of implemented runtime behavior, ADK acceptance or in-game validation. The steam-plant proposal planned for 0.4.0 is an author-review document, not a working example pack or a gameplay-validation claim. The final combined artifact passed these isolated checks on Railroader 0.6.2 build 26335745 / Unity 6000.3.26f1. Fresh combined gameplay, editor, save/reload and multiplayer acceptance remain separate; the earlier maintainer-confirmed in-game testing is retained without expanding its coverage.",
+  "runtimeStatus": "B&W 0.3.0 has been tested in-game, as confirmed by the maintainer on 2026-11-01. This audit does not assign invented per-feature test coverage. The LLW 440-19 model author confirmed the separate A-19 prototype worked in-game. Its three baked cycles and wheel-phase/reverser blend apply to that conventional model. The general 0.4.0 runtime and ADK workflow remain planned. The steam-plant proposal planned for 0.4.0 is an author-review document, not a working example pack or a gameplay-validation claim. The final combined artifact passed these isolated checks on Railroader 0.6.2 build 26335745 / Unity 6000.3.26f1. Fresh combined gameplay, editor, save/reload and multiplayer acceptance remain separate; the earlier maintainer-confirmed in-game testing is retained without expanding its coverage.",
   "followUp": [
-    "Reconcile the valve gear proposal with implemented behavior and author feedback before promoting it to release authoring documentation; the 0.4.0 target and interfaces remain subject to change.",
+    "Validate the documented Blender export paths on representative rigs, then qualify section configuration, ADK preview and export, articulated motion, fallback and reload, multiplayer and performance before promoting the 0.4.0 proposal.",
     "Reconcile the steam-plant proposal with modder feedback and the eventual implementation before publishing supported authoring examples or Railroader compatibility claims.",
     "Complete separately authorized combined gameplay, editor, save/reload and multiplayer acceptance; re-audit compatibility after game updates."
   ],
