@@ -15,7 +15,7 @@ These pages describe proposals for modders to review. Their examples are not ins
 
 | Proposal | Planned B&W version | What modders can review |
 | --- | --- | --- |
-| [Valve gear authoring and ADK preview](/BellsAndWhistles-Docs/future-plans/valve-gear/) | **0.4.0**, subject to change | Preparing forward, neutral, and reverse cycles; conventional and articulated setup; preview controls; export and fallback behavior. |
+| [Valve gear authoring and ADK preview](/BellsAndWhistles-Docs/future-plans/valve-gear/) | **0.4.0**, subject to change | Blender parenting and three-cycle baking on a conventional locomotive, plus proposed articulated setup, ADK preview, export and fallback. |
 | [Steam plants and realistic simpling](/BellsAndWhistles-Docs/future-plans/steam-plants/) | **0.4.0**, subject to change | Describing compound circuits and cylinder banks, binding cab controls, supplying physical data, and calibrating a locomotive with the AE as the first test bed. |
 
 The target B&W version is separate from the Railroader and Unity versions a proposal expects to support. Each proposal states those targets and its validation limits.
