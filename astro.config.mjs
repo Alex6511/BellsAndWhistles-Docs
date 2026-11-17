@@ -10,6 +10,8 @@ export default defineConfig({
   site: 'https://alex6511.github.io',
   base: '/BellsAndWhistles-Docs',
   trailingSlash: 'always',
+  // Keep the linked CommonJS matcher under node_modules for Vite's loader.
+  vite: { resolve: { preserveSymlinks: true } },
   integrations: [
     starlight({
       title: 'Bells and Whistles',

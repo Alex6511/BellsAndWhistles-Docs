@@ -19,9 +19,13 @@
     "@astrojs/markdown-remark": "7.3.9",
     "@astrojs/starlight": "0.43.1",
     "astro": "7.4.12",
-    "starlight-versions": "0.10.2"
+    "starlight-versions": "0.10.2",
+    "picomatch": "file:vendor/picomatch"
   },
   "devDependencies": {
     "parse5": "8.1.0"
+  },
+  "overrides": {
+    "picomatch": "$picomatch"
   }
 }
