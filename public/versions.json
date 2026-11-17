@@ -20,8 +20,16 @@
       "railroader": "Railroader >=0.6.2; qualified on 0.6.3 experimental build 26740326",
       "validation": "Final DLL: 8518 offline tests, 13 executable integration checks and 430 native assertions passed; 16 existing skips. Real multiplayer remains unqualified; see runtime-validation for scope.",
       "frozen": true,
-      "revision": 1,
-      "sha256": "8f1015fe3e275aa0a1b03bb4afa92871d604a5338a30e355910dd974e7d20b64"
+      "revision": 2,
+      "sha256": "2c3e4231ba327997a00d92f044f6560d6281bdef78eef13369688663de103493",
+      "errata": [
+        {
+          "revision": 2,
+          "date": "2026-11-17",
+          "reason": "Correct the author and home pages to identify the 0.3.1 snapshot and the existing native integrations.",
+          "previousSha256": "8f1015fe3e275aa0a1b03bb4afa92871d604a5338a30e355910dd974e7d20b64"
+        }
+      ]
     },
     {
       "version": "0.3.0",
