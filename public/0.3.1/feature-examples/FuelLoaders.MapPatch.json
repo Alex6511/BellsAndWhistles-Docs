@@ -1,0 +1,56 @@
+{
+  "ops": {
+    "areas": {
+      "bwexample/area": {
+        "industries": {
+          "bwexample/oil-depot": {
+            "name": "Bunker-C Depot",
+            "position": [0, 0, 0],
+            "usesContract": false,
+            "trackSpans": {
+              "receiving": ["YOUR-OIL-TRACK|a|0", "YOUR-OIL-TRACK|a|30"]
+            },
+            "components": {
+              "receiving": {
+                "kind": "IndustryUnloader",
+                "name": "Bunker-C receiving",
+                "loadId": "toolshed/bunker-c",
+                "carTypeFilter": "TM",
+                "trackSpans": ["receiving"],
+                "sharedStorage": true,
+                "maxStorage": 16000,
+                "carUnloadRate": 32000,
+                "storageConsumptionRate": 0,
+                "orderLoads": false,
+                "orderAwayEmpties": false
+              }
+            }
+          },
+          "bwexample/wood-depot": {
+            "name": "Wood Fuel Shed",
+            "position": [0, 0, 0],
+            "usesContract": false,
+            "trackSpans": {
+              "receiving": ["YOUR-WOOD-TRACK|a|0", "YOUR-WOOD-TRACK|a|30"]
+            },
+            "components": {
+              "receiving": {
+                "kind": "IndustryUnloader",
+                "name": "Wood fuel receiving",
+                "loadId": "rr/pulpwood",
+                "carTypeFilter": "FP,GB",
+                "trackSpans": ["receiving"],
+                "sharedStorage": true,
+                "maxStorage": 120000,
+                "carUnloadRate": 240000,
+                "storageConsumptionRate": 0,
+                "orderLoads": false,
+                "orderAwayEmpties": false
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

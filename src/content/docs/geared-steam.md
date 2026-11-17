@@ -95,7 +95,7 @@ This is the `audio` section inside `profile`.
 
 Additional audio defaults are `chuffRateMultiplier: 1`, `chuffSmoothness: 1`, `chuffVolumeMultiplier: 1`, `gearResponsiveness: 1`, `gearFullVolumeSpeedFraction: 0.85`, `gearMatchStockChuffAudio: true`, `gearSpatialBlend: 1`, `gearMinDistance: 12`, `gearMaxDistance: 220`, `gearDopplerLevel: 0.2` and `gearRolloffMode: "Linear"`. Distances are metres; pitch, gain and volume values are multipliers. Rolloff also accepts `Logarithmic`.
 
-Players have a local gear-noise volume per car: **0–3**, default **1**, outside the multiplayer save. In the [unreleased development fix](/BellsAndWhistles-Docs/runtime-validation/), it is stored in `ModSettings\bells-and-whistles-geared.json` under the selected native game home (normally `Documents\Railroader`). A relocated home uses its own settings and legacy import. When the new file does not yet exist, compatible preferences are imported from `geared-steam.json` in that home's ModSettings folder without rewriting the old file. Published 0.3.0 uses the normal Documents path; select its frozen guide for that behavior.
+Players have a local gear-noise volume per car: **0–3**, default **1**, outside the multiplayer save. In the [0.3.1 settings fix](/BellsAndWhistles-Docs/runtime-validation/), it is stored in `ModSettings\bells-and-whistles-geared.json` under the selected native game home (normally `Documents\Railroader`). A relocated home uses its own settings and legacy import. When the new file does not yet exist, compatible preferences are imported from `geared-steam.json` in that home's ModSettings folder without rewriting the old file. Published 0.3.0 uses the normal Documents path; select its frozen guide for that behavior.
 
 ## Existing profiles
 

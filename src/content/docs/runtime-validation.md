@@ -1,8 +1,36 @@
 ---
-title: Runtime validation and development fixes
+title: Runtime validation
 ---
 
-This record covers an **unreleased development candidate following 0.3.0**, tested on Railroader **0.6.2, build 26335745**, with Unity **6000.3.26f1** on 2026-11-01. These fixes have not been added to the published 0.3.0 download. Use the [frozen 0.3.0 guides](/BellsAndWhistles-Docs/0.3.0/) for that release. The maintainer's earlier in-game testing of 0.3.0 remains valid; this record adds specific coverage for the development candidate.
+This record distinguishes **B&W 0.3.1** qualification on **Railroader 0.6.3 experimental build 26740326 / Unity 6000.3.28f1** (2026-11-17) from earlier testing. The minimum declared game version remains 0.6.2. Later game builds need their own compatibility review. The maintainer's earlier in-game testing of 0.3.0 remains valid; its [frozen guides](/BellsAndWhistles-Docs/0.3.0/) describe that release.
+
+## Final 0.3.1 artifact
+
+The final DLL passed **7,962 core tests, 556 geared tests and 13 executable integration checks**, with 16 existing geared skips. Offline Unity adapters were applied only to copied test assemblies. The production DLL remained unchanged.
+
+Separate native player runs passed **430 assertions**:
+
+| Area | Assertions | Scope |
+| --- | ---: | --- |
+| Home isolation | 6 | Private native home, local preferences and save root. |
+| Supply chain | 52 | Native priced Bunker-C purchases, pulpwood pickup, finite receiving/servicing, conservation and save. |
+| Firing and Relay | 138 | Tender/tank/articulated oil and wood, invalid and partial loads, multipliers, real Relay consumers and two world reloads. |
+| Facilities and models | 94 | Shared stock, persistence, outlet validation, model culling and reload. |
+| Existing features | 63 | Connector/bell coupling, native controls, auxiliary-water transfer and off-screen operation. |
+| Editor | 18 | Tested native editor presentation and saved declarations. |
+| Native curve and diagnostic reload | 14 | Concurrent native callbacks, healthy synthesis, immediate destruction/reacquisition and cleanup. |
+| Moving SMR 1693 Climax | 27 | Two moving runs and immediate model reload, with native audio capture. |
+| Author audio | 18 | Two real native pack stores, relative/qualified assets, invalid inputs, cancellation, cleanup and reload. |
+
+All player jobs exited cleanly with no remaining owned processes and unchanged normal settings. They used a separate player, settings identity and disposable saves.
+
+The supply fixture verified all four native diesel suppliers also offer Bunker-C: a 100-gallon top-up cost $27 plus $30 handling, with native off-map waiting and return scheduling. Native pulpwood freight and oil freight filled finite depots and reached locomotive fuel slots without unintended delivery payout. Initial inventory was not recreated on facility reload.
+
+The curve fixture executed **240,000 native callbacks and 61,440,000 sample values**, peaking at **0.929472** with zero extreme samples and unchanged healthy synthesis. The Climax captured **4,802,560 sample values** across two moving runs above 7 mph, peaking at **0.705983** with zero extreme or nonfinite values. These are native sample measurements, not a subjective listening assessment.
+
+Author audio used generated tones rather than a borrowed recording. The corrected editor fixture built and loaded both bundles; the current game player independently loaded them through the final provider. Omitted audio stayed silent, bad inputs disabled only their loops, and cleanup/cancellation could not repopulate stale cache entries.
+
+The editor reported oil/wood fuel-slot validation for fixture definitions that add firing declarations through Data.rl. Data.rl does not run in the editor, so the 18 editor assertions do not qualify those declarations. Expected invalid-load and distant-model diagnostics remain distinct from failed assertions.
 
 ## Fixes found through native testing
 
@@ -12,11 +40,11 @@ This record covers an **unreleased development candidate following 0.3.0**, test
 - The Driven Animation Script carrier is created with the model's animation map and rebuilt when that model reloads.
 - Tender-chain connectors and bell routing follow actual coupled cars. Opening a coupler ends that attachment even while the cars are touching; recoupling restores it.
 
-The native package identity and API version remain unchanged during this validation. No new release version is assigned by this record.
+The package identity and API version remain unchanged in 0.3.1.
 
-## Completed checks
+## Historical candidate checks — 2026-11-01
 
-The game runs used a separate player copy, separate settings identity and newly created disposable saves. They exercised the actual native game, B&W DLL, component builders and Relay interpreters.
+These earlier candidate runs used Railroader 0.6.2 build 26335745 / Unity 6000.3.26f1, a separate player copy, separate settings identity and newly created disposable saves. They exercised the actual native game, B&W DLL, component builders and Relay interpreters.
 
 | Area | Evidence and scope |
 | --- | --- |
@@ -35,4 +63,4 @@ The editor fixture used a model from another pack. Its animation-name picker log
 
 A second authenticated Railroader client was unavailable. Multiplayer permission enforcement, rejection of client simulation commands, host/client inventory authority and per-player volume isolation still require a real multiplayer session. Offline host guards do not close those checks.
 
-The development candidate is not a new published release. Its fixes, matching release documentation and remaining acceptance decisions must be reviewed before publication. Later game builds need their own compatibility review.
+Real multiplayer remains an explicit prerelease limitation. These single-player results do not establish host/client behavior.

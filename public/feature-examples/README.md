@@ -1,4 +1,4 @@
-# Native authoring examples — development after 0.3.0
+# Native authoring examples — B&W 0.3.1
 
 These are declaration templates, not finished rolling stock or scenery. Copy the named components and matching load slots into definitions owned by your equipment pack. Supply models, locomotive physics, load targets, textures, placement, native industries and any audio assets. The example pack contains no art or recording and should not be installed as playable equipment.
 
@@ -14,7 +14,7 @@ Facilities bind existing native industry storage. Authors configure receiving un
 
 ## Build an oil loader or wood shed
 
-The new interchange supply patch and receiving helper belong to the unreleased follow-up, not the published 0.3.0 ZIP. Use the matching development build for these examples.
+The interchange supply patch and receiving helper require B&W 0.3.1 or later. They are not in the 0.3.0 ZIP.
 
 1. In your map pack, create a receiving siding and a locomotive servicing position. Give the map area and each industry stable IDs. A receiving track is where freight cars unload; the prop outlet is where a locomotive or tender refuels.
 2. Copy the oil and/or wood industry from `FuelLoaders.MapPatch.json`. Replace `bwexample/area` with an existing area ID, replace the two depot IDs consistently, set the industry's world position, and replace the `YOUR-...-TRACK` locations with real track locations in your map. Track locations use `segment|a-or-b|distance`. The spans must cover the receiving cars. Do not install the placeholder coordinates.

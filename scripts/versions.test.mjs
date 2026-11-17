@@ -22,6 +22,9 @@ test('release snapshots preserve old versions and assets, reject overwrite, and 
     before.current.version = version;
     before.current.label = version + ' (development)';
     await writeFile(path.join(fixture, 'public/versions.json'), JSON.stringify(before));
+    const historical = before.releases[0].slug;
+    const linksFile = path.join(fixture, 'src/content/docs/version-links.md');
+    await writeFile(linksFile, `---\ntitle: Link fixture\n---\n[Old](/BellsAndWhistles-Docs/${historical}/)\n[Proposal](/BellsAndWhistles-Docs/future-plans/valve-gear/)\n[Current](/BellsAndWhistles-Docs/installing/)\n`);
     const run = (script, args) => spawnSync(process.execPath, [path.join(fixture, 'scripts', script), ...args], {
       cwd: fixture, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'], encoding: 'utf8',
     });
@@ -35,6 +38,11 @@ test('release snapshots preserve old versions and assets, reject overwrite, and 
     const index = await readFile(path.join(fixture, 'src/content/docs', version, 'index.mdx'), 'utf8');
     assert.ok(index.includes(`/BellsAndWhistles-Docs/${version}/installing/`));
     assert.ok(index.includes('editUrl: false'));
+    const links = await readFile(path.join(fixture, 'src/content/docs', version, 'version-links.md'), 'utf8');
+    assert.ok(links.includes(`/BellsAndWhistles-Docs/${historical}/`));
+    assert.ok(!links.includes(`/BellsAndWhistles-Docs/${version}/${historical}/`));
+    assert.ok(links.includes('/BellsAndWhistles-Docs/future-plans/valve-gear/'));
+    assert.ok(links.includes(`/BellsAndWhistles-Docs/${version}/installing/`));
     // Review proposals stay available at the development root, not in a release.
     await access(path.join(fixture, 'src/content/docs/future-plans/valve-gear.md'));
     await assert.rejects(access(path.join(fixture, 'src/content/docs', version, 'future-plans')), { code: 'ENOENT' });

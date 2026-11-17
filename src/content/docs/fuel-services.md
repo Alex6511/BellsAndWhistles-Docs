@@ -4,11 +4,13 @@ title: Fuel storage and outlets
 
 Fuel services were introduced in **Bells and Whistles 0.3.0** for Bunker-C and wood. A storage declaration identifies the supply; an outlet transfers it into a compatible nearby car. Authors supply the prop, placement, native industry storage and load targets.
 
-These are development interfaces for Railroader **0.6.2 or later**. Require B&W in your pack. B&W does not discover or convert existing facilities by their names or by proximity.
+These interfaces support Railroader **0.6.2 or later**. Require B&W in your pack. B&W does not discover or convert existing facilities by their names or by proximity.
 
-## Supplying your loader (unreleased follow-up)
+<span id="supplying-your-loader-unreleased-follow-up"></span>
 
-The development build adds Bunker-C to native interchange purchasing wherever an existing diesel supplier is present when B&W's map-data script runs. Use a compatible tank freight car (`TM`), choose the native **Buy Bunker C** destination, and let the interchange fill and return it. The default B&W load price is **$0.27/gallon**, matching the tested game's diesel price, plus the native handling charge (currently $30 per car). This is a definition default, not a live link to another pack's price changes. Native funds, partial fills, progression and return scheduling apply. An authored Bunker-C seller is preserved.
+## Supplying your loader (0.3.1)
+
+B&W 0.3.1 adds Bunker-C to native interchange purchasing wherever an existing diesel supplier is present when B&W's map-data script runs. Use a compatible tank freight car (`TM`), choose the native **Buy Bunker C** destination, and let the interchange fill and return it. The default B&W load price is **$0.27/gallon**, matching the tested game's diesel price, plus the native handling charge (currently $30 per car). This is a definition default, not a live link to another pack's price changes. Native funds, partial fills, progression and return scheduling apply. An authored Bunker-C seller is preserved.
 
 Wood is ordinary **`rr/pulpwood`**. Collect it from any native or modded pulpwood provider in a compatible freight car, then deliver it to your wood shed. The native load uses pounds and the `FP,GB` car filter. Provider contracts, production and stock still apply.
 
@@ -85,7 +87,7 @@ B&W suppresses freight-delivery receivables only for explicitly bound finite sto
 
 An enabled outlet automatically chooses the nearest eligible fuel load target in reach. The car needs the matching load slot, matching units and spare capacity. A nonempty incompatible load is skipped. Transfer is limited by the rate, remaining capacity and available finite stock.
 
-The [unreleased target-discovery fix](/BellsAndWhistles-Docs/runtime-validation/) recognizes native load targets attached outside the car's visual model hierarchy. That correction is required for the native targets exercised by the facility acceptance run.
+The [0.3.1 target-discovery fix](/BellsAndWhistles-Docs/runtime-validation/) recognizes native load targets attached outside the car's visual model hierarchy. That correction is required for the native targets exercised by the facility acceptance run.
 
 The host performs transfers, approximately once per simulated second. A car does not need an AlternativeFiring carrier merely to receive a matching load: service eligibility is based on its load slot and target.
 

@@ -5,6 +5,6 @@
   "author": "Bells and Whistles contributors",
   "description": "Author templates requiring models and native industry setup; not playable equipment.",
   "scope": "unscoped",
-  "dependencies": { "required": ["rr/game >=0.6.2", "alex6511/bells-and-whistles >=0.3.0"] },
+  "dependencies": { "required": ["rr/game >=0.6.2", "alex6511/bells-and-whistles >=0.3.1"] },
   "exports": { "./Inspector": "Scripts/Inspector.rl" }
 }

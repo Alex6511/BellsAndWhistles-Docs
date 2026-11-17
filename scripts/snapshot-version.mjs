@@ -27,9 +27,15 @@ for (const file of files) {
   const dest = path.join(docsRoot, version, relative);
   await mkdir(path.dirname(dest), { recursive: true });
   const content = await readFile(file, 'utf8');
-  const archived = content.replaceAll(base, base + version + '/')
-    .replaceAll(base + version + '/versions.json', base + 'versions.json')
-    .replaceAll(base + version + '/maintenance.json', base + 'maintenance.json')
+  const archived = content.replaceAll(base, (match, offset) => {
+    const destination = content.slice(offset + base.length);
+    // Historical links and proposals belong to their existing destinations.
+    // Only links into current guides/assets should acquire this release prefix.
+    const preserve = ['versions.json', 'maintenance.json', 'future-plans/']
+      .some((route) => destination.startsWith(route))
+      || manifest.releases.some((release) => destination.startsWith(release.slug + '/'));
+    return preserve ? match : base + version + '/';
+  })
     .replace(/^---\r?\n([\s\S]*?)\r?\n---/, (_, header) =>
       '---\n' + header.replace(/^editUrl:.*\r?\n?/gm, '') + '\neditUrl: false\n---');
   await writeFile(dest, archived);

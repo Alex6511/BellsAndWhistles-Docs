@@ -15,7 +15,7 @@ These development templates following B&W 0.3.0 show native Script declarations,
 
 The definitions cover geared coal, geared oil with a separate tender, wood with a separate tender, an oil tank engine, finite oil and wood facilities, and author-supplied audio. The inspector covers geared, firing, connectors, bells, auxiliary tenders, Driven Animation and Horn/Whistle. Facility inspection uses `BWFuelService`; see the [complete settings/API coverage table](/BellsAndWhistles-Docs/settings-api-coverage/).
 
-The receiving examples connect interchange-bought `toolshed/bunker-c` and provider-sourced `rr/pulpwood` to finite native stock. The [adaptation notes](/BellsAndWhistles-Docs/feature-examples/README.md) cover track locations, freight waybills, separate prop placement, capacities, day-versus-second rates and outlet servicing. The new oil purchase path requires the unreleased follow-up build.
+The receiving examples connect interchange-bought `toolshed/bunker-c` and provider-sourced `rr/pulpwood` to finite native stock. The [adaptation notes](/BellsAndWhistles-Docs/feature-examples/README.md) cover track locations, freight waybills, separate prop placement, capacities, day-versus-second rates and outlet servicing. The new oil purchase path requires B&W 0.3.1 or later.
 
 The templates deserialize through the native definition reader, and their Relay scripts parse against the current interpreter. Separate consumer fixtures execute the exported APIs from Main, file and inline scripts and execute the authoring helpers in a data-only interpreter. These checks do not establish that an unfinished equipment template is playable.
 

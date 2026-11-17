@@ -1,0 +1,5 @@
+import "alex6511/BWAuthoring" as bw
+func modifyDefinitions(context) {
+    bw.add(context, "bwexample/wood-engine", "firing",
+        bw.firing("wood", "bwexample/wood-tender"))
+}

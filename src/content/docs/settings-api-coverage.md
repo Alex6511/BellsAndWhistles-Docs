@@ -96,7 +96,9 @@ The local geared settings document is readable as `snapshot.settings`. `Enabled`
 
 Author facility models, geometry, source industries and inventory separately. Coal towers do not supply alternative fuel. Shared storage is debited once, finite supply is the default, and incompatible nonempty saved loads are never relabeled.
 
-## Native fuel supply (unreleased follow-up)
+<span id="native-fuel-supply-unreleased-follow-up"></span>
+
+## Native fuel supply (0.3.1)
 
 | Setting | Units / default | Mutability, persistence and authority | Relay surface |
 | --- | --- | --- | --- |
