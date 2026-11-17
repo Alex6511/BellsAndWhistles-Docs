@@ -15,6 +15,7 @@
       "product": "BellsAndWhistles",
       "slug": "0.3.1",
       "label": "0.3.1 (prerelease)",
+      "releasedAt": "2026-11-17",
       "channel": "prerelease",
       "path": "/BellsAndWhistles-Docs/0.3.1/",
       "railroader": "Railroader >=0.6.2; qualified on 0.6.3 experimental build 26740326",
