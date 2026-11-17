@@ -2,7 +2,7 @@
 title: Versions and documentation audits
 ---
 
-Choose a version from the header to read guides for that B&W release. **B&W versions and Railroader versions are separate.** The development channel documents B&W 0.3.0, including the combined integrations being prepared for Railroader 0.6.2 or later. The maintainer has confirmed that 0.3.0 has been tested in-game.
+Choose a version from the header to read guides for that B&W release. **B&W versions and Railroader versions are separate.** These guides document B&W 0.3.1, targeting Railroader 0.6.2 or later. [Runtime validation](/BellsAndWhistles-Docs/runtime-validation/) distinguishes this candidate from the frozen 0.3.0 release. The maintainer has confirmed that 0.3.0 has been tested in-game.
 
 B&W 0.2.1 and 0.2.0 were published as prereleases. Tender Bells 1.0.0 is a legacy predecessor, not a newer B&W release. The initial archives reproduce the player and author documentation available at each release tag; they preserve the documentation available for each historical release.
 
@@ -19,7 +19,7 @@ The weekly Docs workflow checks the build, archive integrity, local links, searc
 
 ## Future plans
 
-The **Future plans** category contains author-review proposals. All future plans are always subject to change, including their scope, interfaces, timing, and target B&W version. A proposal planned for 0.4.0 does not become a 0.3.0 feature because it appears alongside the current development guides.
+The **Future plans** category contains author-review proposals. All future plans are always subject to change, including their scope, interfaces, timing, and target B&W version. A proposal planned for 0.4.0 does not become a 0.3.1 feature because it appears alongside the current development guides.
 
 The snapshot command excludes `future-plans/` content and its navigation from release archives. Before documenting a delivered feature, review its implemented behavior and validation evidence, then move the accepted guide into the appropriate authoring documentation. Preserve existing archived versions.
 

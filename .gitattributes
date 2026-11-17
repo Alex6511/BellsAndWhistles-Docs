@@ -1,2 +1,4 @@
 * text=auto eol=lf
 public/** -text
+# Vendored source is verified byte for byte on Windows and Linux.
+/vendor/picomatch/** -text

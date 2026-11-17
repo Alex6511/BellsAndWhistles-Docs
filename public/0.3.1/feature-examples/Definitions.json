@@ -1,0 +1,282 @@
+{
+  "objects": [
+    {
+      "identifier": "bwexample/geared-coal",
+      "definition": {
+        "kind": "SteamLocomotive",
+        "components": {
+          "geared": {
+            "kind": "Script",
+            "scriptAsset": "alex6511/GearedSteam",
+            "parameters": {
+              "profile": {
+                "schemaVersion": "1.1",
+                "identity": {
+                  "definitionId": "bwexample/geared-coal",
+                  "type": "Climax"
+                },
+                "historical": {
+                  "publishedStartingTractiveEffortLbf": 25830,
+                  "numberOfCylinders": 2,
+                  "maximumSpeedMph": 11
+                },
+                "chuffTiming": {
+                  "mode": "EngineBased",
+                  "gearRatioToWheels": 2.6,
+                  "beatsPerEngineRevolution": 4
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "identifier": "bwexample/geared-oil",
+      "definition": {
+        "kind": "SteamLocomotive",
+        "components": {
+          "geared": {
+            "kind": "Script",
+            "scriptAsset": "alex6511/GearedSteam",
+            "parameters": {
+              "profile": {
+                "schemaVersion": "1.1",
+                "identity": {
+                  "definitionId": "bwexample/geared-oil",
+                  "type": "Shay"
+                },
+                "historical": {
+                  "publishedStartingTractiveEffortLbf": 25830,
+                  "numberOfCylinders": 3,
+                  "maximumSpeedMph": 11
+                },
+                "consumption": {
+                  "coalConsumptionMultiplier": 1.1,
+                  "waterConsumptionMultiplier": 1.1
+                }
+              }
+            }
+          },
+          "firing": {
+            "kind": "Script",
+            "scriptAsset": "alex6511/AlternativeFiring",
+            "parameters": {
+              "fuel": "bunker-c",
+              "fuelCarDefinition": "bwexample/oil-tender"
+            }
+          }
+        }
+      }
+    },
+    {
+      "identifier": "bwexample/oil-tender",
+      "definition": {
+        "kind": "Car",
+        "loadSlots": [
+          {
+            "loadUnits": "Gallons",
+            "maximumCapacity": 1000,
+            "requiredLoadIdentifier": "toolshed/bunker-c"
+          },
+          {
+            "loadUnits": "Gallons",
+            "maximumCapacity": 4000,
+            "requiredLoadIdentifier": "rr/water"
+          }
+        ],
+        "components": {
+          "fuel-target": {
+            "kind": "LoadTarget",
+            "slotIndex": 0
+          },
+          "water-target": {
+            "kind": "LoadTarget",
+            "slotIndex": 1
+          }
+        }
+      }
+    },
+    {
+      "identifier": "bwexample/wood-engine",
+      "definition": {
+        "kind": "SteamLocomotive",
+        "components": {
+          "firing": {
+            "kind": "Script",
+            "scriptAsset": "alex6511/AlternativeFiring",
+            "parameters": {
+              "fuel": "wood",
+              "fuelCarDefinition": "bwexample/wood-tender"
+            }
+          }
+        }
+      }
+    },
+    {
+      "identifier": "bwexample/wood-tender",
+      "definition": {
+        "kind": "Car",
+        "loadSlots": [
+          {
+            "loadUnits": "Pounds",
+            "maximumCapacity": 1000,
+            "requiredLoadIdentifier": "rr/pulpwood"
+          },
+          {
+            "loadUnits": "Gallons",
+            "maximumCapacity": 4000,
+            "requiredLoadIdentifier": "rr/water"
+          }
+        ],
+        "components": {
+          "fuel-target": {
+            "kind": "LoadTarget",
+            "slotIndex": 0
+          },
+          "water-target": {
+            "kind": "LoadTarget",
+            "slotIndex": 1
+          }
+        }
+      }
+    },
+    {
+      "identifier": "bwexample/oil-tank-engine",
+      "definition": {
+        "kind": "SteamLocomotive",
+        "loadSlots": [
+          {
+            "loadUnits": "Gallons",
+            "maximumCapacity": 1000,
+            "requiredLoadIdentifier": "toolshed/bunker-c"
+          },
+          {
+            "loadUnits": "Gallons",
+            "maximumCapacity": 4000,
+            "requiredLoadIdentifier": "rr/water"
+          }
+        ],
+        "components": {
+          "firing": {
+            "kind": "Script",
+            "scriptAsset": "alex6511/AlternativeFiring",
+            "parameters": {
+              "fuel": "bunker-c"
+            }
+          },
+          "fuel-target": {
+            "kind": "LoadTarget",
+            "slotIndex": 0
+          },
+          "water-target": {
+            "kind": "LoadTarget",
+            "slotIndex": 1
+          }
+        }
+      }
+    },
+    {
+      "identifier": "bwexample/finite-oil-facility",
+      "definition": {
+        "kind": "Prop",
+        "components": {
+          "storage": {
+            "kind": "Script",
+            "scriptAsset": "alex6511/FuelStorage",
+            "parameters": {
+              "id": "bwexample/oil-stock",
+              "fuel": "bunker-c",
+              "industry": "bwexample/oil-depot",
+              "infinite": false
+            }
+          },
+          "outlet": {
+            "kind": "Script",
+            "scriptAsset": "alex6511/FuelOutlet",
+            "parameters": {
+              "id": "bwexample/oil-outlet",
+              "storage": "bwexample/oil-stock",
+              "rate": 60,
+              "radius": 3,
+              "maxSpeedMph": 0.5,
+              "position": [
+                0,
+                2,
+                0
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "identifier": "bwexample/finite-wood-facility",
+      "definition": {
+        "kind": "Prop",
+        "components": {
+          "storage": {
+            "kind": "Script",
+            "scriptAsset": "alex6511/FuelStorage",
+            "parameters": {
+              "id": "bwexample/wood-stock",
+              "fuel": "wood",
+              "industry": "bwexample/wood-depot",
+              "infinite": false
+            }
+          },
+          "outlet": {
+            "kind": "Script",
+            "scriptAsset": "alex6511/FuelOutlet",
+            "parameters": {
+              "id": "bwexample/wood-outlet",
+              "storage": "bwexample/wood-stock",
+              "rate": 60,
+              "radius": 3,
+              "maxSpeedMph": 0.5,
+              "position": [
+                0,
+                2,
+                0
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "identifier": "bwexample/custom-audio",
+      "definition": {
+        "kind": "SteamLocomotive",
+        "components": {
+          "geared": {
+            "kind": "Script",
+            "scriptAsset": "alex6511/GearedSteam",
+            "parameters": {
+              "profile": {
+                "schemaVersion": "1.1",
+                "identity": {
+                  "definitionId": "bwexample/custom-audio",
+                  "type": "Shay"
+                },
+                "historical": {
+                  "publishedStartingTractiveEffortLbf": 25830,
+                  "numberOfCylinders": 3,
+                  "maximumSpeedMph": 11
+                },
+                "audio": {
+                  "asset": "./author-gear",
+                  "gearOutputGain": 0.6
+                }
+              }
+            }
+          },
+          "inspector": {
+            "kind": "Script",
+            "scriptAsset": "bwexample/Inspector"
+          }
+        }
+      }
+    }
+  ]
+}

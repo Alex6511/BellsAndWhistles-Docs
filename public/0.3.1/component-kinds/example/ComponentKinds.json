@@ -1,0 +1,17 @@
+{
+  "kinds": [
+    {
+      "kind": "example.CarGreeting",
+      "displayName": "Car Greeting",
+      "script": "./CarGreeting",
+      "appliesTo": ["car"],
+      "settings": [
+        { "name": "greeting", "type": "text", "default": "Hello from", "description": "Written to the log before the car's name." },
+        { "name": "repeat", "type": "wholeNumber", "default": 1, "description": "How many times to write the greeting." },
+        { "name": "delaySeconds", "type": "decimal", "default": 2.5, "description": "Game seconds to wait after the car loads." },
+        { "name": "asWarning", "type": "trueFalse", "default": false, "description": "Log as a warning, which also shows in the Messages panel." },
+        { "name": "tags", "type": "textList", "default": ["example"], "description": "Words added after the car's name." }
+      ]
+    }
+  ]
+}

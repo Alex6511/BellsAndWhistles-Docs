@@ -1,14 +1,36 @@
 {
   "schemaVersion": 1,
   "current": {
-    "version": "0.3.0",
-    "label": "0.3.0 (development)",
+    "version": "0.3.1",
+    "label": "0.3.1 (development)",
     "status": "development",
     "path": "/BellsAndWhistles-Docs/",
-    "railroader": ">=0.6.2 (combined 0.3.0 integration target)",
-    "validation": "Tested in-game; confirmed by the maintainer on 2026-11-01."
+    "railroader": ">=0.6.2; current compatibility qualification on 0.6.3 experimental build 26740326",
+    "validation": "Final 0.3.1 DLL: 8,518 offline tests, 13 executable integration checks and 430 native assertions passed on 2026-11-17. Sixteen existing skips; real multiplayer remains unqualified. See runtime-validation for editor and other scope limits."
   },
   "releases": [
+    {
+      "version": "0.3.1",
+      "tag": "v0.3.1",
+      "product": "BellsAndWhistles",
+      "slug": "0.3.1",
+      "label": "0.3.1 (prerelease)",
+      "channel": "prerelease",
+      "path": "/BellsAndWhistles-Docs/0.3.1/",
+      "railroader": "Railroader >=0.6.2; qualified on 0.6.3 experimental build 26740326",
+      "validation": "Final DLL: 8518 offline tests, 13 executable integration checks and 430 native assertions passed; 16 existing skips. Real multiplayer remains unqualified; see runtime-validation for scope.",
+      "frozen": true,
+      "revision": 2,
+      "sha256": "2c3e4231ba327997a00d92f044f6560d6281bdef78eef13369688663de103493",
+      "errata": [
+        {
+          "revision": 2,
+          "date": "2026-11-17",
+          "reason": "Correct the author and home pages to identify the 0.3.1 snapshot and the existing native integrations.",
+          "previousSha256": "8f1015fe3e275aa0a1b03bb4afa92871d604a5338a30e355910dd974e7d20b64"
+        }
+      ]
+    },
     {
       "version": "0.3.0",
       "tag": "v0.3.0",

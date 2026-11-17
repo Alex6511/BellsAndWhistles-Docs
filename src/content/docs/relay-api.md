@@ -2,7 +2,7 @@
 title: Relay authoring and runtime APIs
 ---
 
-The B&W Relay modules are being integrated into **0.3.0**. They separate definition construction from runtime queries and controls. These interfaces are documented against the current development code and will be frozen in the release snapshot.
+The B&W Relay modules separate definition construction from runtime queries and controls. This page documents **B&W 0.3.1**; the [frozen 0.3.0 guide](/BellsAndWhistles-Docs/0.3.0/relay-api/) matches that release. The [0.3.1 inline-script fix](/BellsAndWhistles-Docs/runtime-validation/) lets a native inline Script import B&W modules through its declaring pack's explicit required dependency, matching file-script resolution. An optional dependency alone does not enable that behavior.
 
 Require `alex6511/bells-and-whistles >=0.3.0` when importing these modules. An unconditional import does not become optional just because its functions are only called inside an `if`.
 
@@ -34,8 +34,12 @@ The example changes a definition that your pack must supply or require. It does 
 | `drivenAnimation(parameters)` | A standard Script carrier for Driven Animation, using the same settings as its editor kind. |
 | `hornSelector(instrument)` | A HornSelector carrier; `instrument` is `horn` or `whistle`. |
 | `add(context, definitionId, componentId, declaration)` | Adds or replaces one named component in the definition's **object-form** component dictionary. Other component IDs are retained. |
+| `fuelReceiver(fuel, trackSpans, capacity, unloadPerDay)` | Unreleased: a native shared-storage `IndustryUnloader`, with consumption and automatic ordering off. Oil uses gallons and tank cars; wood uses pounds and the native pulpwood freight filters. Capacity and receiving rate must be positive; the span list must not be empty. |
+| `addBunkerCInterchanges(map)` | Unreleased: add oil purchase components alongside diesel suppliers in `modifyMap`. Preserves existing oil sellers and other map content; repeated calls add no duplicates. A conflicting generated component ID throws a diagnostic without applying that map modification. |
 
 These helpers do not replace the feature's validation. Their output still needs the required models, slots, IDs and settings described in the feature guides. `component` does not check that an export name exists.
+
+The supply helpers run in data-only contexts and require B&W 0.3.1 or later. Receiving capacity is in the commodity's native units; `unloadPerDay` is per game day, unlike a B&W outlet's per-second rate. They neither seed stock nor place a model. B&W adds sellers during its own map pass. Call `addBunkerCInterchanges` after adding a diesel supplier in a later consumer pack to opt that supplier into oil purchases. See [loader examples](/BellsAndWhistles-Docs/fuel-services/#supplying-your-loader-unreleased-follow-up).
 
 The helper-generated carriers are enabled by default. For the optional aux-tender pattern, use the [disabled declaration and marker check](/BellsAndWhistles-Docs/aux-tender/#opt-a-car-in) instead of an unconditional BWAuthoring import.
 

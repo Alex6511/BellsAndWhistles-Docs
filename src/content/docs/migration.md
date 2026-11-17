@@ -1,8 +1,12 @@
 ---
-title: Migrating content to 0.3.0
+title: Migrating content to 0.3.1
 ---
 
-The combined **0.3.0** release targets Railroader **0.6.2 or later**. It brings native B&W authoring together with Geared Steam, oil/wood firing, fuel services and Relay APIs. Use the frozen 0.3.0 snapshot for this package's authoring contract and recorded validation limits.
+Version **0.3.1** targets Railroader **0.6.2 or later** and preserves the combined native authoring contract introduced in 0.3.0. It adds fuel-supply integration and runtime fixes; use the matching frozen snapshot for each release.
+
+## Updating native 0.3.0 packs
+
+Replace the B&W package while preserving local settings. Existing definitions keep their declarations and saved fuel quantities. Require `alex6511/bells-and-whistles >=0.3.1` when using the new interchange/receiving helpers or relying on the runtime fixes described in [What's new](/BellsAndWhistles-Docs/whats-new/). Relocated native homes now use their own geared-volume preferences; a home with no new settings file imports compatible legacy settings from that same home's `ModSettings` without overwriting the legacy file. No save conversion is required.
 
 If you play Railroader 2025.1, this version isn't for you. Bells and Whistles 0.3.0 has no Unity Mod Manager build.
 
@@ -18,7 +22,7 @@ Use [the dependency table](/BellsAndWhistles-Docs/authors/#set-up-your-packs-inf
 
 ## Geared Steam and firing providers
 
-1. Update consumer packs to require `alex6511/bells-and-whistles >=0.3.0` and `rr/game >=0.6.2`.
+1. Update consumer packs to require `alex6511/bells-and-whistles >=0.3.1` and `rr/game >=0.6.2` for the current examples and fixes.
 2. Replace obsolete provider dependencies when nothing else in the pack uses them. B&W does not publish replacement packages under the old providers' IDs, so an old required ID can still block loading.
 3. Use [GearedSteam](/BellsAndWhistles-Docs/geared-steam/) and [AlternativeFiring](/BellsAndWhistles-Docs/alternative-firing/) carriers for new definitions. Existing geared sidecars and configured legacy oil bindings remain migration inputs.
 4. Supply your own native mechanical AudioClip if you want gear-loop audio. B&W does not distribute the original gear-noise recording.

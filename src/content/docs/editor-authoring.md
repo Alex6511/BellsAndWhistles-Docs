@@ -11,7 +11,7 @@ You can set up the bell, connector, horn and auxiliary-tender features below in 
 | Horn selector (which instrument a locomotive with a horn and a whistle starts on) | The locomotive | `alex6511/HornSelector` |
 | Aux tender (water car that keeps the tender topped up) | The aux car | `alex6511/AuxTender` |
 
-Driven Animation isn't a Script component. It plays an animation clip driven by a car's speed or a locomotive's throttle, reverser, fuel use or water use.
+Driven Animation plays an animation clip driven by a car's speed or a locomotive's throttle, reverser, fuel use or water use. It has both an editor component kind and a standard Script carrier (`alex6511/DrivenAnimation`).
 
 Add Driven Animation with **Add Component → Driven Animation**. [Driven Animation](/BellsAndWhistles-Docs/driven-animation/) explains its settings.
 

@@ -1,8 +1,8 @@
 ---
-title: "What's new in 0.3.0"
+title: "0.3.1 changes and native features"
 ---
 
-Bells and Whistles 0.3.0 uses Railroader's native mod system for **Railroader 0.6.2 or later**. The maintainer has confirmed earlier in-game testing of 0.3.0. The combined build additionally passed offline and native engine fixtures; fresh combined gameplay, editor, save/reload and multiplayer acceptance remain separate.
+Bells and Whistles 0.3.1 continues the native mod support introduced in 0.3.0 for **Railroader 0.6.2 or later**. It adds compatibility with the relocated home-directory API in 0.6.3 experimental build 26740326, runtime fixes and fuel-supply integration. The maintainer's earlier in-game testing of 0.3.0 remains valid. [Runtime validation](/BellsAndWhistles-Docs/runtime-validation/) separates final 0.3.1 qualification from historical results and still-open multiplayer acceptance.
 
 If you play Railroader 2025.1, this version isn't for you. Bells and Whistles 0.3.0 has no Unity Mod Manager build.
 
@@ -20,7 +20,7 @@ If you play Railroader 2025.1, this version isn't for you. Bells and Whistles 0.
 - [Auxiliary Tenders](/BellsAndWhistles-Docs/aux-tender/) transfer water toward the locomotive, with host-owned transfers, player controls and train-strip status colors.
 - [Custom component kinds](/BellsAndWhistles-Docs/component-kinds/) give pack-owned Relay scripts typed fields and editor entries.
 
-## Integrations being completed for this release
+## Combined integrations in 0.3.0
 
 - [Geared Steam](/BellsAndWhistles-Docs/geared-steam/) adds definition-bound geared profiles, performance and response tuning, chuff timing, native mechanical-audio references and per-car local volume. Retained but inactive settings are identified in the guide.
 - [Oil and wood firing](/BellsAndWhistles-Docs/alternative-firing/) adds fixed Bunker-C or wood declarations, distinct fuel/water accounting and guarded migration of known compatible legacy load IDs.
@@ -29,8 +29,16 @@ If you play Railroader 2025.1, this version isn't for you. Bells and Whistles 0.
 
 The mechanical loop uses an author-supplied AudioClip; the original Geared Steam recording is not bundled. Coal towers do not become oil or wood outlets. Runtime APIs do not switch profiles or firing types.
 
+## Changes in 0.3.1
+
+Geared preferences follow Railroader 0.6.3's native home-directory API, with the earlier API retained as a compatibility fallback. The final 0.3.1 DLL passed 8,518 offline tests, 13 executable integration checks and 430 native assertions on build 26740326. Sixteen existing offline skips remain. Native coverage includes moving Climax audio, author clips, world/model reload, Relay, firing, finite facilities, fuel supply and the tested editor paths. Real multiplayer remains unqualified.
+
+The follow-up also adds Bunker-C purchase destinations alongside native diesel interchange suppliers, with a default $0.27/gallon price and native handling/return behavior. [Oil and wood loader examples](/BellsAndWhistles-Docs/fuel-services/#supplying-your-loader-unreleased-follow-up) show freight receiving, finite storage and locomotive outlets. Wood uses existing `rr/pulpwood` providers. New data-only Relay helpers support receiving declarations and later-authored interchanges.
+
+Version 0.3.1 fixes relocated-home geared settings, inline Relay imports in dependent packs, native fuel-target discovery, Driven Animation Script lifetime, and connector/bell detachment when couplers open. These fixes are not in the 0.3.0 download. See [runtime validation](/BellsAndWhistles-Docs/runtime-validation/) for the scope and limits of these results.
+
 ## Upgrade content
 
-Follow [Migrating to 0.3.0](/BellsAndWhistles-Docs/migration/) for provider replacement, dependencies, saved loads and audio references. A native Script carrier may still require B&W for its intended gameplay behavior. Unconditional imports of B&W modules require it too.
+Follow [Migrating to 0.3.1](/BellsAndWhistles-Docs/migration/) for provider replacement, dependencies, saved loads and audio references. A native Script carrier may still require B&W for its intended gameplay behavior. Unconditional imports of B&W modules require it too.
 
 Use [Installing](/BellsAndWhistles-Docs/installing/) for player setup and [Versions and audits](/BellsAndWhistles-Docs/versions/) for the frozen documentation attached to a release.

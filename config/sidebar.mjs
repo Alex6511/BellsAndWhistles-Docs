@@ -34,6 +34,7 @@ const sidebar = [
   { label: 'Maintaining the docs', items: [
     { label: 'Contributing', slug: 'development' },
     { label: 'Versions and audits', slug: 'versions' },
+    { label: 'Runtime validation', slug: 'runtime-validation' },
   ] },
 ];
 
